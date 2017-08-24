@@ -1,0 +1,24 @@
+{
+  "name": "webtools",
+  "version": "1.0.0",
+  "description": "All Ah-Nuts Web Tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ianemcallister/AN_Web_Tools.git"
+  },
+  "keywords": [
+    "Square",
+    "Google",
+    "Sheets"
+  ],
+  "author": "Ian McAllister",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ianemcallister/AN_Web_Tools/issues"
+  },
+  "homepage": "https://github.com/ianemcallister/AN_Web_Tools#readme"
+}
