@@ -1,3 +1,9 @@
+/*
+*	Web Tools Server App
+*
+*	This script will run the server and all required endpoint functionality.
+*/
+
 
 // load all required modules
 var express = require('express');
