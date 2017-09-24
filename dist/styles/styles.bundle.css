@@ -21,14 +21,13 @@
   font-weight: bold;
   font-family: Arial !important;
   font-size: 11px !important;
-  line-height: 65px !important;
   text-transform: lowercase !important;
   color: #000 !important;
   background: url("../res/Top_icons.png");
   background-size: 108px auto !important;
-  background-position: 3px 0px !important;
+  background-position: 11px 0px !important;
   background-repeat: no-repeat !important;
-  width: 32px !important;
+  width: 40px !important;
   height: 40px !important;
 }
 
@@ -44,7 +43,7 @@
   color: #000 !important;
   background: url("../res/Top_icons.png");
   background-size: 112px auto !important;
-  background-position: -29px 2px !important;
+  background-position: -28px 2px !important;
   background-repeat: no-repeat !important;
   width: 27px !important;
   height: 45px !important;
@@ -57,7 +56,6 @@
   font-weight: bold;
   font-family: Arial !important;
   font-size: 11px !important;
-  line-height: 65px !important;
   text-transform: lowercase !important;
   color: #000 !important;
   background: url("../res/Top_icons.png");
