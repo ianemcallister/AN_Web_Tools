@@ -34,7 +34,16 @@ function passwordReset() {
 	    $log.info('in the passwordReset directive');
 
 	    //define viewmodel functions
+	    vm.email = '';
 
+	    //define local functions
+	    vm.back = function() {
+	    	$location.path('/login');
+	    };
+
+	    vm.submit = function() {
+	    	$log.info('submitting email', vm.email);
+	    }
 	}
 
 	return  directive;

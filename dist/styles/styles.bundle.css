@@ -1,0 +1,30 @@
+body {
+  display: block;
+}
+
+.center {
+  margin: auto;
+  width: 100%;
+}
+.social_icons a {
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  background-image: url("../res/sprite_rvamp_new.png");
+  height: 36px;
+  width: 32px;
+  margin: 2px;
+  -webkit-background-size: 243px auto;
+}
+
+.Facebook {
+  background-position: 0px -15px;
+}
+
+.Twitter {
+  background-position: -41px -15px;
+}
+
+.Insta {
+  background-position: -209px -15px;
+}

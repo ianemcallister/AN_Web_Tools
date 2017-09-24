@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var autoprefixer = require('gulp-autoprefixer');
 var eslint = require('gulp-eslint'); 
 var concat = require('gulp-concat');
+var concatCss = require('gulp-concat-css');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var ngAnnotate = require('gulp-ng-annotate');
@@ -28,6 +29,7 @@ gulp.task('styles-dist', function() {
 		.pipe(autoprefixer({
 			browsers: ['last 2 versions']
 		}))
+		.pipe(concatCss("styles.bundle.css"))
 		.pipe(gulp.dest('dist/styles'));
 });
 
