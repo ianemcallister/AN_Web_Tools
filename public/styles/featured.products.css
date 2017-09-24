@@ -1,0 +1,12 @@
+.circle {
+	display: inline-block;
+	width: 49%;
+	height: 150px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	background: #64d1db;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}

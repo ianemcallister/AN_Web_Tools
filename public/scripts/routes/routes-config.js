@@ -11,6 +11,12 @@ function config($routeProvider) {
         controllerAs: 'vm'
     })
     //define the locations route
+    .when('/all-products', {
+        templateUrl: 'views/allProductsPage.htm',
+        controller: 'allProductsController',
+        controllerAs: 'vm'
+    })
+    //define the locations route
     .when('/locations', {
         templateUrl: 'views/locationsPage.htm',
         controller: 'locationsController',

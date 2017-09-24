@@ -1,7 +1,7 @@
 <HEADER>
 
 	<!--This the navbar-->
-	<nav class="navbar">
+	<nav class="navbar" sytle='display: block; text-align: center;'>
 		
 		<!--The navbar is a fluid container-->
 		<div class="container-fluid">
@@ -10,27 +10,27 @@
 			<div class="navbar-header">
 				
 				<!--Our company Brand is a link back to the landing page-->
-				<a class="navbar-brand" href="#/" id='testing'>Ah-Nuts!</a>
+				<a href="#/" class="logo" title='Ah-Nuts! Logo - Home' id=''>Ah-Nuts!</a>
 
 				<!--Locations-->
-				<button class='glyphicon glyphicon-search' ng-click='vm.navbnt("locations")'>
-					<span>locations</span>
-				</button>
+				<a href="#/locations" class='mainHeaderLocations' sytle='display: block; text-align: center;'>
+					<span style='display: block'>find</span>
+				</a>
 
 				<!--Login-->
-				<button class='glyphicon glyphicon-user' ng-click='vm.navbnt("login")'>
+				<a href="#/login" class='mainHeaderUserAccount' >
 					<span>login</span>
-				</button>
+				</a>
 
 				<!--Cart-->
-				<button class='glyphicon glyphicon-shopping-cart' ng-click='vm.navbnt("cart")'>
+				<a href="#/cart" class='mainHeaderCart'>
 					<span>cart</span>
-				</button>
+				</a>
 
 				<!--Menu-->
-				<button class='glyphicon glyphicon-th-list' ng-click='vm.navbnt("menu")'>
+				<a href="" class='mainHeaderMenuBtn'>
 					<span>menu</span>
-				</button>
+				</a>
 
 			</div>
 

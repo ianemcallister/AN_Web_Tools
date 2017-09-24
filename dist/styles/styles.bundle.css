@@ -1,3 +1,94 @@
+.circle {
+  display: inline-block;
+  width: 49%;
+  height: 150px;
+  border-radius: 25px;
+  background: #64d1db;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.logo {
+  position: absolute;
+  top: 25px !important;
+  margin-left: 10px;
+}
+
+.mainHeaderLocations {
+  position: absolute;
+  top: 25px !important;
+  right: 125px !important;
+  font-weight: bold;
+  font-family: Arial !important;
+  font-size: 11px !important;
+  line-height: 65px !important;
+  text-transform: lowercase !important;
+  color: #000 !important;
+  background: url("../res/Top_icons.png");
+  background-size: 108px auto !important;
+  background-position: 3px 0px !important;
+  background-repeat: no-repeat !important;
+  width: 32px !important;
+  height: 40px !important;
+}
+
+.mainHeaderUserAccount {
+  top: 22px !important;
+  right: 87px !important;
+  position: absolute;
+  font-weight: bold;
+  font-family: Arial !important;
+  font-size: 11px !important;
+  line-height: 71px !important;
+  text-transform: lowercase !important;
+  color: #000 !important;
+  background: url("../res/Top_icons.png");
+  background-size: 112px auto !important;
+  background-position: -29px 2px !important;
+  background-repeat: no-repeat !important;
+  width: 27px !important;
+  height: 45px !important;
+}
+
+.mainHeaderCart {
+  top: 25px !important;
+  right: 46px !important;
+  position: absolute;
+  font-weight: bold;
+  font-family: Arial !important;
+  font-size: 11px !important;
+  line-height: 65px !important;
+  text-transform: lowercase !important;
+  color: #000 !important;
+  background: url("../res/Top_icons.png");
+  background-size: 122px auto !important;
+  background-position: -59px -4px !important;
+  background-repeat: no-repeat !important;
+  width: 33px !important;
+  height: 40px !important;
+}
+
+.mainHeaderMenuBtn {
+  top: 25px !important;
+  right: 8px !important;
+  position: absolute;
+  font-weight: bold;
+  font-family: Arial !important;
+  font-size: 11px !important;
+  line-height: 65px !important;
+  text-transform: lowercase !important;
+  color: #000 !important;
+  background: url("../res/Top_icons.png");
+  background-size: 114px auto !important;
+  background-position: -86px 0px !important;
+  background-repeat: no-repeat !important;
+  width: 30px !important;
+  height: 40px !important;
+}
+
+a:-webkit-any-link {
+  cursor: auto;
+}
 body {
   display: block;
 }
