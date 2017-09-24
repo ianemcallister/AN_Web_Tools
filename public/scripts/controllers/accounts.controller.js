@@ -12,6 +12,7 @@ function accountsController($log, $routeParams, $location) {
 
 	//define view model variable
 	vm.registeredUser = false;	//default to false
+	vm.forgotPassword = false;	//default to false
 
 	//notify us of the location
 	$log.info('in the accounts controller');	//TODO: TAKE THIS OUT LATER
@@ -20,8 +21,10 @@ function accountsController($log, $routeParams, $location) {
 	function userCheck(userId) {
 
 		//check the credentials
-		if(userId == 'CreateProfile') {
+		if(userId == 'CreateProfile' || userId == 'ForgotPassword') {
 
+			if(userId == 'ForgotPassword') vm.forgotPassword = true;
+			
 		} else {
 			//if they are not creating a new profile, check credentials
 
