@@ -1,0 +1,13 @@
+<div>
+	
+	<!--If this is a new account, let them create it-->
+	<div ng-if='!vm.registeredUser'>
+		<create-new-account></create-new-account>
+	</div>
+	
+	<!--If they're an existing user, access their dashboard-->
+	<div ng-if='vm.registeredUser'>
+		<user-dashboard></user-dashboard>
+	</div>
+
+</div>
