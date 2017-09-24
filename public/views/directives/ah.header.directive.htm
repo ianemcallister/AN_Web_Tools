@@ -13,13 +13,24 @@
 				<a class="navbar-brand" href="#/" id='testing'>Ah-Nuts!</a>
 
 				<!--Locations-->
-				<button>Locations</button>
+				<button class='glyphicon glyphicon-search' ng-click='vm.navbnt("locations")'>
+					<span>locations</span>
+				</button>
+
 				<!--Login-->
-				<button>Login</button>
+				<button class='glyphicon glyphicon-user' ng-click='vm.navbnt("login")'>
+					<span>login</span>
+				</button>
+
 				<!--Cart-->
-				<button>cart</button>
+				<button class='glyphicon glyphicon-shopping-cart' ng-click='vm.navbnt("cart")'>
+					<span>cart</span>
+				</button>
+
 				<!--Menu-->
-				<button>menu</button>
+				<button class='glyphicon glyphicon-th-list' ng-click='vm.navbnt("menu")'>
+					<span>menu</span>
+				</button>
 
 			</div>
 
