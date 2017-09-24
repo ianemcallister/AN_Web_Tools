@@ -1,7 +1,19 @@
 .logo {
 	position: absolute;
-	top: 25px !important;
-	margin-left: 10px;
+	top: 0px !important;
+	margin-left: 0px;
+	background: url('../res/logo_box.png');
+	width: 197px;
+	height: 106px;
+}
+
+.navbar {
+	
+	background: url('../res/banner_wood.png');
+	background-position: 0px -1px;
+	background-repeat: no-repeat !important;
+    height: 100px;
+    border: none;
 }
 
 .mainHeaderLocations {
