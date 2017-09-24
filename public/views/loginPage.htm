@@ -1,25 +1,47 @@
 <div>
 	
-	<!--PAGE HEADER-->
-	<div>LOGIN</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="container">
+				
+				<!--header-->
+				<h4 class='text-center'>Login To Your Account</h4>
 
-	<div>
-		Email:
-		<input type="email" ng-model='vm.email'>
-	</div>
+				<!--email-->
+				<div class="row" style='display: inline'>
+					
+					<div style='width: 70%; margin: auto;'>
+						
+						<span>Email:</span>
+						<input type="email" ng-model='vm.email' style="width: 250px">
+					
+					</div>
+					
+				</div>
 
-	<div>
-		Password:
-			<input type="password" ng-model='vm.password'>
-	</div>
+				<!--password-->
+				<div class="row" style='display: inline'>
+					
+					<div style='width: 70%; margin: auto;'>
+						<span>Password:</span>
+						<input type="password" ng-model='vm.password' style="width: 250px">
+						<a href="#/MyAccount/ForgotPassword">Forgot Your Password?</a>
+					</div>
+					
+				</div>
+	
+				<!--Sign In-->
+				<div style='width: 190px; margin: auto;'>
+					<button class='button btn-danger' ng-click='vm.login()' style="width: 180px;">Sign In</button>
+				</div>
+				
 
-	<div>
-		<a href="#/MyAccount/ForgotPassword">Forgot Your Password?</a>
-	</div>
+				<!--Create a new account-->
+				<div style='text-align: center; margin-top: 20px'>
+					Don't have an account? Register <a href="#/MyAccount/CreateProfile">Here</a>
+				</div>
 
-	<button class='button btn-danger' ng-click='vm.login()'>Sign In</button>
-
-	<div>
-		Don't have an account? Register <a href="#/MyAccount/CreateProfile">Here</a>
+			</div>
+		</div>
 	</div>
 </div>

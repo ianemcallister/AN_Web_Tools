@@ -1,3 +1,8 @@
+.social_icons {
+	width: 116px;
+	margin: auto;
+}
+
 .social_icons a {
 	text-align: center;
 	display: inline-block;

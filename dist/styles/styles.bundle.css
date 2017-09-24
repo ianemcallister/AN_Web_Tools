@@ -100,13 +100,19 @@ a:-webkit-any-link {
 }
 body {
   display: block;
-  background-color: black;
+  background-color: #2d2e33;
+  color: white;
 }
 
 .center {
   margin: auto;
   width: 100%;
 }
+.social_icons {
+  width: 116px;
+  margin: auto;
+}
+
 .social_icons a {
   text-align: center;
   display: inline-block;

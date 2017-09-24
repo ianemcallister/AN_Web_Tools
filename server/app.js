@@ -8,6 +8,7 @@
 // load all required modules
 var express = require('express');
 var bodyParser = require('body-parser');
+var api = require('./api/api.js');
 
 //return the express object
 var app = express();
@@ -47,6 +48,7 @@ app.post('/api/authenticate', function(req, res) {
 
 	console.log('got this request', req.body);
 
+	api.authUser(req.body);
 
 	res.send('sent this response from post');
 });
