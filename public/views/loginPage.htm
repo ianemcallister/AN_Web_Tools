@@ -3,14 +3,21 @@
 	<!--PAGE HEADER-->
 	<div>LOGIN</div>
 
-	<div>email</div>
-	<div>password</div>
+	<div>
+		Email:
+		<input type="email" ng-model='vm.email'>
+	</div>
+
+	<div>
+		Password:
+			<input type="password" ng-model='vm.password'>
+	</div>
 
 	<div>
 		<a href="#/MyAccount/ForgotPassword">Forgot Your Password?</a>
 	</div>
 
-	<button>Sign In</button>
+	<button class='button btn-danger' ng-click='vm.login()'>Sign In</button>
 
 	<div>
 		Don't have an account? Register <a href="#/MyAccount/CreateProfile">Here</a>

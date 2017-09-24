@@ -28,10 +28,25 @@ function config($routeProvider) {
         controller: 'cartController',
         controllerAs: 'vm'
     })
-    //define the myAccount route
+    //define the myAccount route for customers
     .when('/MyAccount/:param', {
         templateUrl: 'views/accountsPage.htm',
         controller: 'accountsController',
         controllerAs: 'vm'
+    })
+    //define the teamMember route
+	.when('/teamMember/:param', {
+        templateUrl: 'views/internalActtsPage.htm',
+        controller: 'internalActtsController',
+        controllerAs: 'vm',
+        resolve: { /* @ngInject */
+            authentication: authentication
+        }
     });
 }
+
+//Required functions
+function authentication() {
+
+    console.log('authenticating');	//TODO: TAKE THIS OUT LATER
+};

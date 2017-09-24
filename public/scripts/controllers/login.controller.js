@@ -11,4 +11,15 @@ function loginController($log, $routeParams, $location) {
 	var vm = this;
 
 	$log.info('in the login controller');	//TODO: TAKE THIS OUT LATER
+
+	//define view model variables
+	vm.email = '';
+	vm.password = '';
+
+	//define vm function
+	vm.login = function() {
+
+		//upon login, are the credentails good
+		
+	};
 }

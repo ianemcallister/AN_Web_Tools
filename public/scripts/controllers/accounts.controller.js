@@ -23,12 +23,14 @@ function accountsController($log, $routeParams, $location) {
 		//check the credentials
 		if(userId == 'CreateProfile' || userId == 'ForgotPassword') {
 
+			//if it's just a forgotten password go there
 			if(userId == 'ForgotPassword') vm.forgotPassword = true;
-			
-		} else {
-			//if they are not creating a new profile, check credentials
 
+		} else {
+
+			//if they are not creating a new profile, check credentials
 			vm.registeredUser = true;
+
 		};
 
 	};
