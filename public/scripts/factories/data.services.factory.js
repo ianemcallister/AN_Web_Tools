@@ -8,17 +8,27 @@ dataServices.$inject = ['$log', '$http'];
 function dataServices($log, $http) {
 
 	var dataServicesObject = {
-		test: test		
+		post: post	
 	};
 
 	//define all methods
-	function test() {
-			
-		return new Promise(function(resolve, reject) {
+	function post(url, data, config) {
 
-			resolve('a new form of testing');
+		//return a promise for async work
+		return new Promise(function(resolve, reject) {
+			
+			$http.post(url, data, config)
+			.then(function success(response) {
+
+				resolve(response.data);
+
+			}, function error(e) {
+
+				reject(e);
+			});
 
 		});
+
 	};
 
 	return dataServicesObject;

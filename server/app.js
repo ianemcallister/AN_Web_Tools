@@ -42,6 +42,15 @@ app.get('/', function(req, res) {
 
 });
 
+//handle HTTP rwquests, for POSTs only on Authentication
+app.post('/api/authenticate', function(req, res) {
+
+	console.log('got this request', req.body);
+
+
+	res.send('sent this response from post');
+});
+
 //open the port for local development
 app.listen(port,function() {
 	console.log('Express server is up and running on port ' + port);
