@@ -15,6 +15,7 @@ var headers = {
 };
 
 var squareup = {
+	_distillDateTime : _distillDateTime,
 	_unpackTxPages: _unpackTxPages,
 	_isAnotherPage: _isAnotherPage,
 	_collectMultiPages: _collectMultiPages,
@@ -23,9 +24,103 @@ var squareup = {
 	downloadDailySales: downloadDailySales
 };
 
-function _unpackTxPages(pagedResults) {
-	
+function _distillDateTime(aDate) {
+
+	//define return object
+	var returnObject = {
+		dateString: "",
+		timeString: ""
+	};
+
+	var newDate = new Date(aDate);
+
+	var year = newDate.getFullYear().toString();
+			
+	var month = '';
+	if((newDate.getMonth() + 1) < 10) {
+		month = "0" + (newDate.getMonth() + 1).toString();
+	} else {
+		month = (newDate.getMonth() + 1).toString();
+	}
+
+	var day = '';
+	if(newDate.getDate() < 10) {
+		day = '0' + newDate.getDate().toString();
+	} else {
+		day = newDate.getDate().toString();
+	}
+
+	var hour = '';
+	if(newDate.getHours() < 10) {
+		hour = '0' + newDate.getHours().toString();
+	} else {
+		hour = newDate.getHours().toString();
+	}
+
+	var minute = '';
+	if(newDate.getMinutes() < 10) {
+		minute = '0' + newDate.getMinutes().toString();
+	} else {
+		minute = newDate.getMinutes().toString();
+	}
+
+	var second = '';
+	if(newDate.getSeconds() < 10) {
+		second = '0' + newDate.getSeconds().toString();
+	} else {
+		second = newDate.getSeconds().toString();
+	}
+
+	returnObject.dateString = year + '-' + month + '-' + day;
+	returnObject.timeString = hour + "_" + minute + "_" + second;
+
+	return returnObject;
 }
+
+function _unpackTxPages(pagedResults) {
+
+	//define local variables
+	var returnObject = {};
+
+	//iterate through each page
+	pagedResults.forEach(function(page) {
+
+		//itrate through each tx
+		page.forEach(function(tx) {
+
+			var dateObject = _distillDateTime(tx.created_at);
+			
+			if(returnObject[dateObject.dateString] == undefined) returnObject[dateObject.dateString] = {};
+			if(returnObject[dateObject.dateString][dateObject.timeString] == undefined) {
+				returnObject[dateObject.dateString][dateObject.timeString] = {
+					device: tx.device.name,
+					inclusive_tax_money: tx.inclusive_tax_money.amount,
+					additive_tax_money: tx.additive_tax_money.amount,
+					tax_money: tx.tax_money.amount,
+					tip_money: tx.tip_money.amount,
+					discount_money: tx.discount_money.amount,
+					total_collected_money: tx.total_collected_money.amount,
+					processing_fee_money: tx.processing_fee_money.amount,
+					net_total_money: tx.net_total_money.amount,
+					refunded_money: tx.refunded_money.amount,
+					gross_sales_money: tx.gross_sales_money.amount,
+					net_sales_money: tx.net_sales_money.amount,
+					inclusive_tax: tx.inclusive_tax,
+					additive_tax: tx.additive_tax,
+					tender: tx.tender,
+					refunds: tx.refunds,
+					itemizations: tx.itemizations
+				}
+			}
+
+			//console.log(tx);
+
+		});
+		
+	});
+
+	return returnObject;
+};
 
 function _isAnotherPage(headers) {
 
@@ -48,7 +143,7 @@ function _isAnotherPage(headers) {
 	//console.log(returnObject);
 
 	return returnObject;
-}
+};
 
 function _collectMultiPages(url, options) {
 
@@ -118,7 +213,6 @@ function _collectMultiPages(url, options) {
 
 function _downloadDailySales(url, options) {
 
-	
 	//return async work
 	return new Promise(function(resolve, reject) {
 		
