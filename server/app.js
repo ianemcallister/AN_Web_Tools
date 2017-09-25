@@ -50,7 +50,32 @@ app.post('/api/authenticate', function(req, res) {
 
 	api.authUser(req.body);
 
-	res.send('sent this response from post');
+	res.send('gdisj@hs-1n2-nsi2');
+});
+
+//handle HTTP requets, for POSTs only on smart delivery
+app.post('/api/smartDelivery', function(req, res) {
+
+	//zip & Date
+	//pickup or delivery
+	//chose a location
+	//upgrade your gift
+	//pickup or delivery information
+	//add ons
+	//shopping cart
+	//checkout (back into angular)
+
+
+});
+
+app.post('/api/shiftEarnings', function(req, res) {
+
+	//reach out to the api
+	api.shiftEarnings(req.body)
+	.then(function(response) {
+		res.send(response);
+	});
+
 });
 
 //open the port for local development

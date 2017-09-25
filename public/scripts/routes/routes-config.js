@@ -6,14 +6,20 @@ function config($routeProvider) {
 	$routeProvider
 	//define the landing route
 	.when('/', {
-        templateUrl: 'views/landingPage.htm',
-        controller: 'landingController',
+        templateUrl: 'views/mainPage.htm',
+        controller: 'mainController',
         controllerAs: 'vm'
     })
     //define the locations route
     .when('/all-products', {
         templateUrl: 'views/allProductsPage.htm',
         controller: 'allProductsController',
+        controllerAs: 'vm'
+    })
+     //define the locations route
+    .when('/product/:item', {
+        templateUrl: 'views/aProductPage.htm',
+        controller: 'aProductController',
         controllerAs: 'vm'
     })
     //define the locations route

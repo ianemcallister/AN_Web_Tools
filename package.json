@@ -25,7 +25,8 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
-    "firebase-admin": "^5.2.1"
+    "firebase-admin": "^5.2.1",
+    "node-fetch": "^1.7.3"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

@@ -23,9 +23,13 @@ function loginController($log, $routeParams, $location, dataServices) {
 		//upon login, are the credentails good
 		data.post('/api/authenticate', { email: vm.email, pass: vm.password },'')
 		.then(function(token) {
+			
+			var path = '#/teamMember/' + token;
 
 			//show what returned
-			$log.info('got this token back', token);
+			$log.info('got this token back', path);
+
+			$location.path('/');	//TODO: WHY DOESN'T THIS WORK?
 
 		});
 		
