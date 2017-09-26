@@ -1,6 +1,7 @@
 var firebase = require('./firebase.js');
-var squareup = require('./squareup.js');
-var mailcenter = require('./mailcenter.js');
+//var squareup = require('./squareup.js');
+//var mailcenter = require('./mailcenter.js');
+var datacenter = require('./datacenter.js');
 
 /*firebase.read()
 .then(function(response) {
@@ -27,7 +28,7 @@ squareup.employeesList()
 	});
 
 });*/
-
+/*
 var allDates = [
 	{ year: "2017", month: "08", day: "01", next: "02"},
 	{ year: "2017", month: "08", day: "02", next: "03"},
@@ -59,7 +60,7 @@ var allDates = [
 	{ year: "2017", month: "08", day: "28", next: "29"},
 	{ year: "2017", month: "08", day: "29", next: "30"},
 	{ year: "2017", month: "08", day: "30", next: "31"}
-];
+];*/
 
 //iterate through all the dates
 /*allDates.forEach(function(date) {
@@ -83,9 +84,33 @@ var allDates = [
 
 });*/
 
+/*
 mailcenter.send('iemcallister@gmail.com', 'ian@ah-nuts.com', 'testing', {plainText: 'This is a test email', htmlText:"<strong>Test</strong>"})
 .then(function success(s) {
 	console.log("Success:", s);
 }).catch(function error(e) {
 	console.log("Error:", e);
-})
+})*/
+
+//console.log(datacenter._buildTimeObject('2017-09-23', '08_00_00'));
+
+firebase.read('/raw_sales_data/2017-09-23')
+.then(function success(s) {
+
+	//once we have the tx, run them through the data center
+	console.log(datacenter.calcEvntDyErnngs(
+		'2017-09-23', 
+		'06_00_00',
+		'14_30_00',
+		['Ah-Nuts03-Oregon'],
+		['lfRy4B4G-0lA_udwGgQr'],
+		s
+	));
+
+}).catch(function error(e){
+	console.log("Error:", e);
+});
+
+
+
+
