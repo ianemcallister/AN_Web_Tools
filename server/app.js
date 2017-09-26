@@ -43,6 +43,14 @@ app.get('/', function(req, res) {
 
 });
 
+//handles HTTP requests, for GET calls
+app.get('/api/dailySqrSalesDwnld', function(req, res) {
+
+	
+
+	res.send('success');
+});
+
 //handle HTTP rwquests, for POSTs only on Authentication
 app.post('/api/authenticate', function(req, res) {
 

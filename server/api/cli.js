@@ -1,5 +1,6 @@
 var firebase = require('./firebase.js');
 var squareup = require('./squareup.js');
+var mailcenter = require('./mailcenter.js');
 
 /*firebase.read()
 .then(function(response) {
@@ -61,7 +62,7 @@ var allDates = [
 ];
 
 //iterate through all the dates
-allDates.forEach(function(date) {
+/*allDates.forEach(function(date) {
 
 	squareup.downloadDailySales(date)
 	.then(function success(s) {
@@ -80,4 +81,11 @@ allDates.forEach(function(date) {
 		console.log('error', e);
 	});
 
-});
+});*/
+
+mailcenter.send('iemcallister@gmail.com', 'ian@ah-nuts.com', 'testing', {plainText: 'This is a test email', htmlText:"<strong>Test</strong>"})
+.then(function success(s) {
+	console.log("Success:", s);
+}).catch(function error(e) {
+	console.log("Error:", e);
+})
