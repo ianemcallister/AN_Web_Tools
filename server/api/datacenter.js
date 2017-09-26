@@ -36,7 +36,7 @@ function _check_shift_tx_values(shiftArray, txValue) {
 	//return the value. True if the devices or employee was one find in
 	//the list of expected devices or employees.  False if no matches
 	//were found
-	return matchFound;
+	return !matchFound;
 };
 
 /*
@@ -85,75 +85,28 @@ function _buildTimeObject(dateString, timeString) {
 *			devices AND one of the employees
 *
 */
-function calcEvntDyErnngs(date, startTime, endTime, devices, employees, txs) {
+function calcEvntDyErnngs(shift, txs, tests) {
 
-	//define local variables
-	var returnObject = { results: {}, errors: {} };
+	//
+	var returnObject = {};
 
 	//itrate through each of the txs
 	Object.keys(txs).forEach(function checkAllTx(txTime) {
 
-		//define local variables
-		var hasMismatch = false;	//each tx starts off with no mismatches, if one is found the flag is thrown;
-		var misMatchSections = [];	//each section that mismatches is logged int he error array
+		//add the time to the return object
+		returnObject[txTime] = {};
 
-		//turn all the dates/times into new date objects
-		var time_of_transaction = _buildTimeObject(date, txTime);
-		var time_of_shift_start = _buildTimeObject(date, startTime);
-		var time_of_shift_end = _buildTimeObject(date, endTime);
+		//iterate through tests
+		Object.keys(tests).forEach(function checkAllTests(testName) {
 
-		//1. check the start time, is the tx time after the shift start time?
-		if(time_of_transaction < time_of_shift_start) {
-			//if it occured before the shift started..
-			//throw the mismatch flag
-			hasMismatch = true;
+			returnObject[txTime][testName] = tests[testName](1, 2);
 
-			//note the mismatch in the array
-			misMatchSections.push('tx occured before shift started');
-		}
-		
-		//2. check the end time, is the tx end before the shift end time?
-		if(time_of_transaction > time_of_shift_end) {
-			//if it occured after the shift ended..
-			//throw the mismatch flag
-			hasMismatch = true;
-
-			//note the mismatch in the array
-			misMatchSections.push('tx occured after the shift ended');	
-		}
-		
-		//3. check the devices, is the tx device one of the shift devices?
-		if(_check_shift_tx_values(devices, txs[txTime].device)) {
-			//if the tx device could not be found in the list of approved devices...
-			//throw the mismatch flag
-			hasMismatch = true;
-
-			//note the mismatch in the array
-			misMatchSections.push('the tx device was not designated for this shift');
-		}
-
-		//4. check the employees, is the tx employee one of the shift employees?
-		if(_check_shift_tx_values(employees, txs[txTime].tender[0].employee_id)) {
-			//if the tx employee could not be found in the list of approved employees...
-			//throw the mismatch flag
-			hasMismatch = true;
-
-			//note the mismatch in the array
-			misMatchSections.push('the tx employee was not designated for this shift');
-		}
-
-		//once all the tests have been administered...
-		if(!hasMismatch) {
-			//if there are no mismatches, add the tx to the report
-			returnObject.results[txTime] = '';
-		} else {
-			//if mismatches were found, add the errors to the error log
-			returnObject.errors[txTime] = misMatchSections;
-		}
+		});
 
 	});
 
-	return returnObject;
+	console.log(returnObject);
+
 };
 
 //export the module
