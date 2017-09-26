@@ -6,8 +6,8 @@ function config($routeProvider) {
 	$routeProvider
 	//define the landing route
 	.when('/', {
-        templateUrl: 'views/mainPage.htm',
-        controller: 'mainController',
+        templateUrl: 'views/landingPage.htm',      //'views/mainPage.htm'
+        controller: 'landingController',           //'mainController'
         controllerAs: 'vm'
     })
     //define the locations route

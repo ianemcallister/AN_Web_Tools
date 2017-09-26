@@ -28,10 +28,20 @@
 
 	</head>
 
-	<body ng-controller="landingController as landing">
+	<body ng-controller="mainController as main">
+	
+		<!--Header-->
+		<div ng-if='!teamMember'>
+			<ah-header></ah-header>
+		</div>
+		
+		<!-- Primary Content -->
+		<div ng-view></div>
 
-		<!--Primary Content-->
-    	<div ng-view></div>
+		<!--Footer-->
+		<div ng-if='!teamMember'>
+			<ah-footer></ah-footer>
+		</div>
 
 	</body>
 </html>
