@@ -38,6 +38,11 @@ function featuredProducts() {
 	    	$location.path('/all-products');
 	    }
 
+	    vm.productSelectionBtn = function(productName) {
+	    	$log.info('hit the product selection button');
+	    	$location.path('/product/' + productName);
+	    }
+
 	}
 
 	return  directive;

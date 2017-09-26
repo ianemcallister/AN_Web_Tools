@@ -9,7 +9,11 @@ function aProductController($log, $routeParams, $location) {
 
 	//define view model variable
 	var vm = this;
-	vm.product = $routeParams.item;
+	vm.productId = $routeParams.itemId;
 
 	$log.info('in the a Product controller', vm.product);	//TODO: TAKE THIS OUT LATER
+
+	vm.returnHome = function() {
+		$location.path('/');
+	};
 }

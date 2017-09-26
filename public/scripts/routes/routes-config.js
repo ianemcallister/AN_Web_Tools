@@ -10,16 +10,22 @@ function config($routeProvider) {
         controller: 'landingController',           //'mainController'
         controllerAs: 'vm'
     })
-    //define the locations route
+    //define the all products route
     .when('/all-products', {
         templateUrl: 'views/allProductsPage.htm',
         controller: 'allProductsController',
         controllerAs: 'vm'
     })
-     //define the locations route
-    .when('/product/:item', {
+    //define the single product route
+    .when('/product/:itemId', {
         templateUrl: 'views/aProductPage.htm',
         controller: 'aProductController',
+        controllerAs: 'vm'
+    })
+    //define the delivery specifications route
+    .when('/getting-the-product/:itemId', {
+        templateUrl: 'views/productGettingPage.htm',
+        controller: 'productGettingController',
         controllerAs: 'vm'
     })
     //define the locations route

@@ -37,8 +37,8 @@ function fullProductProfile() {
 
 	    //define viewmodel functions
 	    vm.order = function() {
-	    	
-	    }
+	    	$location.path('/getting-the-product/' + vm.product);
+	    };
 
 	}
 
