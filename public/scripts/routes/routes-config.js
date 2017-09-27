@@ -46,6 +46,12 @@ function config($routeProvider) {
         controller: 'cartController',
         controllerAs: 'vm'
     })
+    //define the checkout route
+    .when('/checkout', {
+        templateUrl: 'views/checkoutPage.htm',
+        controller: 'checkoutController',
+        controllerAs: 'vm'
+    })
     //define the myAccount route for customers
     .when('/MyAccount/:param', {
         templateUrl: 'views/accountsPage.htm',

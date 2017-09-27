@@ -26,13 +26,19 @@ function cartNavigation() {
 	function linkFunc(scope, el, attr, ctrl) {
     }
 
-    cartNavigationController.$inject = ['$scope', '$log'];
+    cartNavigationController.$inject = ['$scope', '$log', '$location'];
     /* @ngInject */
-    function cartNavigationController($scope, $log) {
+    function cartNavigationController($scope, $log, $location) {
 	    var vm = this;
 
 	    $log.info('in the cart navigation directive');
 
+	    vm.shopMore = function() {
+	    	$location.path('/all-products');
+	    }
+	    vm.checkout = function() {
+	    	$location.path('/checkout');
+	    }
 	}
 
 	return  directive;
