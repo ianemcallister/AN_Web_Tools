@@ -11,4 +11,7 @@ function checkoutController($log, $routeParams, $location) {
 	var vm = this;
 
 	$log.info('in the checkout controller');	//TODO: TAKE THIS OUT LATER
+
+	vm.backBtn = function() { $location.path('/cart'); }
+	vm.submitOrder = function() { $location.path('/order-confirmation/' + "TESTING"); }
 }

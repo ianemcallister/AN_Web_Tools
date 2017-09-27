@@ -52,6 +52,12 @@ function config($routeProvider) {
         controller: 'checkoutController',
         controllerAs: 'vm'
     })
+    //define the checkout route
+    .when('/order-confirmation/:confId', {
+        templateUrl: 'views/orderConfirmationPage.htm',
+        controller: 'orderConfirmationController',
+        controllerAs: 'vm'
+    })
     //define the myAccount route for customers
     .when('/MyAccount/:param', {
         templateUrl: 'views/accountsPage.htm',

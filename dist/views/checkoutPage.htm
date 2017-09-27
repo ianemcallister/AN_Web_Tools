@@ -4,12 +4,6 @@
 			<div class="container">
 				
 				<cart-summary></cart-summary>
-
-				<div>
-					<div style='text-align: center;'>PAYMENT METHOD</div>
-
-					Secure payment with 128-bit SSL encryption technology
-				</div>
 				
 				<div>
 					<div style='text-align: center;'>PAYMENT INFORMATION</div>
@@ -53,8 +47,8 @@
 				</div>
 
 				<div style='width: 205px; margin: auto'>
-					<button class='btn btn-warning'>Back</button>
-					<button class='btn btn-danger'>Submit Order Now</button>
+					<button class='btn btn-warning' ng-click='vm.backBtn()'>Back</button>
+					<button class='btn btn-danger' ng-click='vm.submitOrder()'>Submit Order Now</button>
 				</div>
 
 				
