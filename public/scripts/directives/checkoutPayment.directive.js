@@ -28,13 +28,14 @@ function checkoutPayment() {
 	function linkFunc(scope, el, attr, ctrl) {
     }
 
-    checkoutPaymentController.$inject = ['$scope', '$log'];
+    checkoutPaymentController.$inject = ['$scope', '$log', 'dataServices'];
     /* @ngInject */
-    function checkoutPaymentController($scope, $log) {
+    function checkoutPaymentController($scope, $log, dataServices) {
 	    var vm = this;
+	    vm.data = dataServices;
 
-	    var applicationId = 'REPLACE ME'; // <-- Add your application's ID here
-		var locationId = 'REPLACE ME';    // <-- For Apple Pay, set your location ID here
+	    var applicationId = 'sandbox-sq0idp-yGc6DrklfJNBsc4MQ5fDDw'; // <-- Add your application's ID here
+		var locationId = '14E8S7P16JQDM';    // <-- For Apple Pay, set your location ID here
 
 		// Make sure the application ID is set before continuing.
 		// Note: checking locationId if using Apple Pay.
@@ -139,7 +140,7 @@ function checkoutPayment() {
 		        } else {
 
 		          // You can delete this line, it's provided for testing purposes
-		          alert('Nonce received: ' + nonce);
+		          //alert('Nonce received: ' + nonce);
 
 
 		          // Assign the nonce value to the hidden form field
@@ -147,7 +148,8 @@ function checkoutPayment() {
 		          document.getElementById('nonce-form').submit();
 
 		          // Let the form continue to the payment processing page
-		          submitPayment(nonce);
+		          //submitPayment(nonce);
+		          vm.data.post('/process-card', { nonce: nonce});
 		        }
 		      },
 

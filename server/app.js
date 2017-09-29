@@ -94,7 +94,7 @@ app.post('/process-card', function(req, res) {
 
 	console.log('got this nonce', req.body);
 
-	//res.send('it worked');
+	res.send('it worked');
 });
 
 //handles HTTP request, for shits
