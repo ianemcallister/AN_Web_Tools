@@ -5,46 +5,11 @@
 				
 				<cart-summary></cart-summary>
 				
-				<div>
-					<div style='text-align: center;'>PAYMENT INFORMATION</div>
-
-					Credit Card Number:
-					<br>Expiration Date:
-					<br>CVV2 Number: <a href="">What's this?</a>
-				</div>
+				<checkout-payment></checkout-payment>
 				
-				<div>
-					<div style='text-align: center;'>
-						BILLING INFORMATION
-						<br><a href="">Sign in to my account</a>
-					</div>
+				<checkout-billing></checkout-billing>
 
-					First Name:
-					<br>Last Name: 
-					<br>Address 1
-					<br>Address 2
-					<br>Country
-					<br>Zip/Postal Code:
-					<br>City/Town:
-					<br>State/Province: 
-					<br>Phone:
-					<br>P.O. Number
-					<br>Email:
-					<br>We will send this email address an Order Confirmation.
-				</div>
-
-				<div>
-					Become a Rewards Memeber Today! I agree to the Rewards <a href="">terms of use</a>
-					Join our loyalty program today and start earnign rewards including free birthday gifts and more <a href="">read more</a>
-				</div>
-
-				<div>
-					Sign up today to receive our emails for the best deals, exclusive promitions & more!
-				</div>
-
-				<div>
-					Please note: Delivery times cannot be guaranteed. <a href="">Click here </a> to view delivery policies.
-				</div>
+				<checkout-followup></checkout-followup>
 
 				<div style='width: 205px; margin: auto'>
 					<button class='btn btn-warning' ng-click='vm.backBtn()'>Back</button>

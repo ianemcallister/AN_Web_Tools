@@ -27,10 +27,13 @@
 					<pickup-or-delivery method='vm.cart.aquisitionMethod' details='vm.cart.aquisitionDetails'></pickup-or-delivery>
 					
 					<!--Item Summary, this is where we list all the items-->
-					{{vm.cart}}
 
+					Item, qty, price, total
 					<ul ng-repeat='item in vm.cart.items track by $index'>
-						<li>{{item}}</li>
+						<li>
+							(Photo)
+							{{item}}
+						</li>
 					</ul> 
 					
 					<coupon-submission></coupon-submission>
