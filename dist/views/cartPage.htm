@@ -4,7 +4,7 @@
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="container">
 				<!--If items haven't been selected yet-->
-				<div id="emptyCart" ng-if='!vm.cart.isEmpty' class='boldText fEmpty'>
+				<div id="emptyCart" ng-if='vm.cart.isEmpty' class='boldText fEmpty'>
 					<div class="message">
 						Your shopping cart is empty.
 
@@ -15,7 +15,7 @@
 				</div>
 
 				<!--If Items have been selected-->
-				<div ng-if='vm.cart.isEmpty'>
+				<div ng-if='!vm.cart.isEmpty'>
 					
 					<h4 class='text-center'>Shopping Cart</h4>
 
@@ -26,7 +26,12 @@
 
 					<pickup-or-delivery method='vm.cart.aquisitionMethod' details='vm.cart.aquisitionDetails'></pickup-or-delivery>
 					
-					Items 
+					<!--Item Summary, this is where we list all the items-->
+					{{vm.cart}}
+
+					<ul ng-repeat='item in vm.cart.items track by $index'>
+						<li>{{item}}</li>
+					</ul> 
 					
 					<coupon-submission></coupon-submission>
 					

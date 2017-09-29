@@ -27,7 +27,7 @@ function shoppingCart($log, $http) {
 		self.isEmpty = false;
 
 		//update the cost subtotal
-		self.subtotal = itemSelections.price;
+		self.subtotal = itemSelections.price * itemSelections.qty;
 
 		//update the item counter
 		self.noOfItems += itemSelections.qty;
