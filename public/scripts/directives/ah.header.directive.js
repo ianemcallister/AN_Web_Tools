@@ -26,10 +26,11 @@ function ahHeader() {
 	function linkFunc(scope, el, attr, ctrl) {
     }
 
-    ahHeaderController.$inject = ['$scope', '$log', '$location'];
+    ahHeaderController.$inject = ['$scope', '$log', '$location', 'shoppingCart'];
     /* @ngInject */
-    function ahHeaderController($scope, $log, $location) {
+    function ahHeaderController($scope, $log, $location, shoppingCart) {
 	    var vm = this;
+	    vm.cart = shoppingCart;
 
 	    $log.info('in the header directive');
 

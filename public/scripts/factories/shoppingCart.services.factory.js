@@ -10,16 +10,18 @@ function shoppingCart($log, $http) {
 	var shoppingCartObject = {
 		isEmpty: true,
 		aquisitionMethod: undefined,
-		noOfItems: 0,
+		noOfItems: 10,
 		subtotal: 1250,
 		aquisitionDetails: {},
 		items: [],
-		addItem: addItem
+		addItem: addItem,
+		removeItem: removeItem,
+		updateAquisitionMethod: updateAquisitionMethod
 	};
 
 	function addItem() {}
-
-
+	function removeItem() {}
+	function updateAquisitionMethod() {}
 
 	return shoppingCartObject;
 }

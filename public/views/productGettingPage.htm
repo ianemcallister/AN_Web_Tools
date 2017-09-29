@@ -4,15 +4,41 @@
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="container">
 
-				This is the product getting page
+				<div>
+					<h4>Tell us where it's going, or where you'd like to pick up.</h4>
 
-				<div>Zipcode Finder</div>
-				<div>Delivery Options</div>
-				<div>Pickup Location</div>
-				<div>Upsell</div>
-				<div>Pickup Information</div>
+					1. Enter a zip code and date
+					Click here for a country other than U.S.
+					<input type="text" placeholder='Zip Code'>
+					<input type="date" placeholder='Select Date'>
+					<button class="btn btn-danger">Go</button>
+					<a href="">Find a zip code</a>
+					<a href="">skip</a>
+				</div>
 
-				<button class='btn btn-danger' ng-click='vm.order()'>Submit Order</button>
+				<div>
+					2.Choose a service for 97005 on 09/30/2017
+					<div>Pickup At Your Local Store -  FREE- Over 1,200 local stores
+- Select your pickup time</div>
+					<div>Hand - delivered - $14.99- Refrigerated vans
+- No rush fees. Ever.</div>
+				</div>
+
+				<div>
+					Choose a serving store
+					Note: Distances below are approximate
+					<div>7329 SW Barnes Rd
+Portland, OR 97225
+503-297-4800	
+Monday-Friday	8:00 AM-7:00 PM
+Saturday	8:00 AM-5:00 PM
+Sunday	10:00 AM-3:00 PM
+1.00 MILES
+</div>
+				</div>
+	
+				<button class="btn">Go Back</button>
+				<button class='btn btn-danger' ng-click='vm.order()'>Continue</button>
 				
 			</div>
 		</div>

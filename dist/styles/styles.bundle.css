@@ -21,6 +21,11 @@
   margin-top: 5px;
   margin-bottom: 10px;
 }
+
+.fpLabel {
+  padding-top: 20px;
+  color: #333333;
+}
 .logo {
   position: absolute;
   top: 0px !important;
