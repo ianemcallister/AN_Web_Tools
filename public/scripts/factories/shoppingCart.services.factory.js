@@ -11,6 +11,7 @@ function shoppingCart($log, $http) {
 		isEmpty: true,
 		aquisitionMethod: undefined,
 		noOfItems: 0,
+		subtotal: 1250,
 		aquisitionDetails: {},
 		items: [],
 		addItem: addItem

@@ -15,7 +15,10 @@ function pickupOrDelivery() {
 		restrict: 'AECM',
 		templateUrl: 'views/directives/pickupOrDelivery.directive.htm',
 		replace: true,
-		scope: {},
+		scope: {
+			method: "=",
+			details: "="
+		},
 		link: linkFunc,
 		controller: pickupOrDeliveryController,
 		controllerAs: 'vm',
@@ -31,7 +34,7 @@ function pickupOrDelivery() {
     function pickupOrDeliveryController($scope, $log) {
 	    var vm = this;
 
-	    $log.info('in the pickup-or-delivery directive');
+	    $log.info('in the pickup-or-delivery directive', vm.method, vm.details);
 
 	}
 

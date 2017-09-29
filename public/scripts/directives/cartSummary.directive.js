@@ -15,7 +15,10 @@ function cartSummary() {
 		restrict: 'AECM',
 		templateUrl: 'views/directives/cartSummary.directive.htm',
 		replace: true,
-		scope: {},
+		scope: {
+			noItems: "=",
+			subtotal: "="
+		},
 		link: linkFunc,
 		controller: cartSummaryController,
 		controllerAs: 'vm',
