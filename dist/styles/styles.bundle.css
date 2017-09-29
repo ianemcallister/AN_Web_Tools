@@ -1,3 +1,16 @@
+#emptyCart {
+  border: solid 1px #aa0000;
+  background: #EBEBEB;
+  height: 300px;
+  position: relative;
+}
+
+.message {
+  color: #333333;
+  margin-top: 130px;
+  text-align: center;
+  line-height: 30px;
+}
 .circle {
   display: inline-block;
   width: 49%;
@@ -107,6 +120,10 @@ body {
 .center {
   margin: auto;
   width: 100%;
+}
+
+.boldText {
+  font-weight: bold;
 }
 .social_icons {
   width: 116px;

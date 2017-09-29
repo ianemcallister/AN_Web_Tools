@@ -3,23 +3,37 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="container">
-				<h4 class='text-center'>Shopping Cart</h4>
+				<!--If items haven't been selected yet-->
+				<div id="emptyCart" ng-if='vm.cart.isEmpty' class='boldText fEmpty'>
+					<div class="message">
+						Your shopping cart is empty.
 
-				<!-- -->
-				<cart-navigation></cart-navigation>
+						<br>
 
-				<cart-summary></cart-summary>
+						<a href="/">Please click here to view all products</a>
+					</div>
+				</div>
 
-				<pickup-or-delivery></pickup-or-delivery>
-				
-				Items 
-				
-				<coupon-submission></coupon-submission>
-				
-				<div style='text-align: right;'>Cart Total: $0.00</div>
+				<!--If Items have been selected-->
+				<div ng-if='!vm.cart.isEmpty'>
+					
+					<h4 class='text-center'>Shopping Cart</h4>
 
-				<cart-navigation></cart-navigation>
+					<!-- -->
+					<cart-navigation></cart-navigation>
 
+					<cart-summary></cart-summary>
+
+					<pickup-or-delivery></pickup-or-delivery>
+					
+					Items 
+					
+					<coupon-submission></coupon-submission>
+					
+					<div style='text-align: right;'>Cart Total: $0.00</div>
+
+					<cart-navigation></cart-navigation>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -8,3 +8,7 @@ body {
 	margin: auto;
 	width: 100%;
 }
+
+.boldText {
+    font-weight: bold;
+}
