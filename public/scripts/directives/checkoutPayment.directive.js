@@ -33,8 +33,8 @@ function checkoutPayment() {
     function checkoutPaymentController($scope, $log) {
 	    var vm = this;
 
-	    var applicationId = 'REPLACE_ME'; // <-- Add your application's ID here
-		var locationId = 'REPLACE_ME';    // <-- For Apple Pay, set your location ID here
+	    var applicationId = 'REPLACE ME'; // <-- Add your application's ID here
+		var locationId = 'REPLACE ME';    // <-- For Apple Pay, set your location ID here
 
 		// Make sure the application ID is set before continuing.
 		// Note: checking locationId if using Apple Pay.
@@ -43,7 +43,7 @@ function checkoutPayment() {
 		}
 	    $log.info('in the checkoutPayment directive');
 
-	   var paymentForm = new SqPaymentForm({
+	    var paymentForm = new SqPaymentForm({
 		    applicationId: applicationId,
 		    locationId: locationId,
 		    inputClass: 'sq-input',
@@ -190,7 +190,9 @@ function checkoutPayment() {
 
 		// This function is called when a buyer clicks the Submit button on the webpage
 		// to charge their card.
-		function requestCardNonce(event) {
+		vm.requestCardNonce = function(event) {
+
+			console.log('requestion card Nonce');
 
 		  // This prevents the Submit button from submitting its associated form.
 		  // Instead, clicking the Submit button should tell the SqPaymentForm to generate

@@ -94,7 +94,7 @@ app.post('/process-card', function(req, res) {
 
 	console.log('got this nonce', req.body);
 
-	res.send('it worked');
+	//res.send('it worked');
 });
 
 //handles HTTP request, for shits
@@ -103,6 +103,7 @@ app.post('/api/shiftEarnings', function(req, res) {
 	//reach out to the api
 	api.shiftEarnings(req.body)
 	.then(function(response) {
+		//console.log(response);
 		res.send(response);
 	});
 
