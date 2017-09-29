@@ -4,27 +4,53 @@
 	
 	<div>
 		
-		<div>Product Code</div>
+		{{vm.itemSelections}}
+
+		<div>Product Code: {{ vm.data.code }}</div>
 		
-		<div>Product Rating</div>
+		<!--<div>Product Rating</div> ADD A RATING SYSTEM LATER-->
 		
-		<div>Product Name</div>
-		
-		<div>Sizes</div>
-		
-		<div>Qty</div>
+		<div>{{ vm.data.name }}</div>
 		
 		<div>
-			<button class='btn btn-danger' ng-click='vm.order()'>Continue</button>
+			Please choose a size by clicking the box below:
+			<ul ng-repeat='size in vm.data.sizes track by $index'>
+				<li style='width:100px; display:block' ng-click='vm.selectSize($index)'>
+					<span>{{ size.title }}</span>
+					<span>({{ size.oz }}oz)</span>
+					<span>{{ size.price / 100 | currency }}</span>
+				</li>
+			</ul>
 		</div>
 		
-		<div>Description</div>
+		<div>
+			Quantity:
+			<input 	type="number" 
+					placeholder='0' 
+					min='1' 
+					max='100' 
+					style='color:black' 
+					ng-model='vm.itemSelections.qty' >
+		</div>
 		
-		<div>Ingredients</div>
+		<div>
+			Description
+			{{ vm.data.description }}
+		</div>
 		
-		<div>FAQs</div>
+		<div>
+			Ingredients
+			<ul ng-repeat='ingredient in vm.data.ingredients track by $index'>
+				<li>{{ingredient}}</li>
+			</ul>
+		</div>
 		
-		<div>Reviews</div>
+		<!--<div>FAQs</div>
+		
+		<div>Reviews</div> ADD THESE LATER IF TIME ALLOWS-->
+		<div>
+			<button class='btn btn-danger' ng-click='vm.addToCart(vm.itemSelections)'>Continue</button>
+		</div>
 	
 	</div>
 

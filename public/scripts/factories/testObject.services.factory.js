@@ -11,15 +11,14 @@ function testObject($log) {
 		image: undefined,
 		code: 1203,
 		rating: undefined,
-		name: "Cone"
-		Sizes: [
-			{ title: "Impressive", oz: 16, price: 1800 },
-			{ title: "Average", oz: 8, price: 1300 },
-			{ title: "Small", oz: 4, price: 700 }
+		name: "Specialty Cones",
+		sizes: [
+			{ code: 1203001, title: "Impressive", oz: 16, price: 1800 },
+			{ code: 1203002, title: "Average", oz: 8, price: 1300 },
+			{ code: 1203003, title: "Small", oz: 4, price: 700 }
 		],
-		Qty: undefined,
-		Description: "The most amazing pecans you've ever taste"
-		Ingredients: ['Pecans', 'Sugar', 'Vanilla', 'Salt']
+		description: "The most amazing pecans you've ever taste",
+		ingredients: ['Pecans', 'Sugar', 'Vanilla', 'Salt']
 	};
 
 
