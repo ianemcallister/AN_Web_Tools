@@ -50,7 +50,10 @@ function config($routeProvider) {
     .when('/checkout', {
         templateUrl: 'views/checkoutPage.htm',
         controller: 'checkoutController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: { /* @ngInject */
+            squareCreds: squareCreds
+        }
     })
     //define the checkout route
     .when('/order-confirmation/:confId', {
@@ -72,6 +75,8 @@ function config($routeProvider) {
         resolve: { /* @ngInject */
             authentication: authentication
         }
+    }).otherwise({
+        redirectTo: '/'
     });
 }
 
@@ -80,3 +85,26 @@ function authentication() {
 
     console.log('authenticating');	//TODO: TAKE THIS OUT LATER
 };
+
+function squareCreds(dataServices) {
+    //define local variables
+    var data = dataServices;
+
+    console.log('getting square creds');    //TODO: TAKE THIS OUT LATER
+
+    
+    //TODO: WHY DOES THIS RESOLVE SOMETIMES AND NOT OTHERS
+    return new Promise(function(resolve, reject) {
+
+        //reach out to endpoint
+        data.post('/api/square-creds', { key:'owine91n-sn#bsinwi#k'} )
+        .then(function success(s) {
+            console.log('got this', s);
+            resolve(s);
+        }).catch(function error(e) {
+            resolve(e);
+        });
+
+    });
+
+}

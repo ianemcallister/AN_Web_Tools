@@ -39,7 +39,7 @@ app.use('/', function(req, res, next) {
 app.get('/', function(req, res) {
 
 	//send back html
-	res.send('success');
+	//res.send('success');
 
 });
 
@@ -49,6 +49,19 @@ app.get('/api/dailySqrSalesDwnld', function(req, res) {
 	
 
 	res.send('success');
+});
+
+//handles HTTP request, for POST calls only on square credentials
+app.post('/api/square-creds', function(req, res) {
+
+	console.log("got this request", req.body);
+
+	//supply the needed creds
+	var squareCreds = api.supplySquareCreds(req.body.key);
+
+	//send them back to the browser
+	res.send(squareCreds);
+
 });
 
 //handle HTTP rwquests, for POSTs only on Authentication
@@ -76,6 +89,15 @@ app.post('/api/smartDelivery', function(req, res) {
 
 });
 
+//handles HTTP request, for POSTs only on process-card
+app.post('/process-card', function(req, res) {
+
+	console.log('got this nonce', req.body);
+
+	res.send('it worked');
+});
+
+//handles HTTP request, for shits
 app.post('/api/shiftEarnings', function(req, res) {
 
 	//reach out to the api

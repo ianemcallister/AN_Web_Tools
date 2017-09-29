@@ -2,13 +2,14 @@ angular
     .module('ahNuts')
     .controller('checkoutController', checkoutController);
 
-checkoutController.$inject = ['$log', '$routeParams', '$location'];
+checkoutController.$inject = ['$log', '$routeParams', '$location', 'squareCreds'];
 
 /* @ngInject */
-function checkoutController($log, $routeParams, $location) {
+function checkoutController($log, $routeParams, $location, squareCreds) {
 
 	//define view model variable
 	var vm = this;
+	vm.squareCreds = squareCreds;
 
 	$log.info('in the checkout controller');	//TODO: TAKE THIS OUT LATER
 
