@@ -34,6 +34,7 @@ function fullProductProfile() {
 	    var vm = this;
 	    vm.data = testObject;
 	    vm.cart = shoppingCart;
+	    vm.imageUrl = '/../assets/img/nut_cones.jpg';
 	    vm.itemSelections = {
 	    	code: vm.data.code,
 	    	size: undefined,
