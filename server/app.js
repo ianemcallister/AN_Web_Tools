@@ -43,6 +43,12 @@ app.get('/', function(req, res) {
 
 });
 
+//handle all HTTP request, for GET calls for assets
+app.get('/assets/:type/:filename', function(req, res) {
+
+	res.send(api.supplyAsset(req.params.type, req.params.filename))
+});
+
 //handles HTTP requests, for GET calls
 app.get('/api/dailySqrSalesDwnld', function(req, res) {
 

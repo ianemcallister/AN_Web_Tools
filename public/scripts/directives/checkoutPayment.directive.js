@@ -34,8 +34,8 @@ function checkoutPayment() {
 	    var vm = this;
 	    vm.data = dataServices;
 
-	    var applicationId = 'sandbox-sq0idp-yGc6DrklfJNBsc4MQ5fDDw'; // <-- Add your application's ID here
-		var locationId = '14E8S7P16JQDM';    // <-- For Apple Pay, set your location ID here
+	    var applicationId = 'REPLACE_ME'; // <-- Add your application's ID here
+		var locationId = 'REPLACE_ME';    // <-- For Apple Pay, set your location ID here
 
 		// Make sure the application ID is set before continuing.
 		// Note: checking locationId if using Apple Pay.

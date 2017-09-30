@@ -1,10 +1,24 @@
+/*
+*	AH-NUTS SERVER API
+*
+*	All the tools I need to run the backend.
+*
+*/
 
+//declare dependencies
+var fs = require('fs');
 
+//build object
 var api = {
+	supplyAsset: supplyAsset,
 	supplySquareCreds: supplySquareCreds,
 	shiftEarnings: shiftEarnings,
 	authUser: authUser
 };
+
+function supplyAsset(directory, filename) {
+	return fs.readFileSync(__dirname + '/../assets/' + directory + "/" + filename);
+}
 
 function supplySquareCreds(key) {
 

@@ -130,6 +130,13 @@ body {
 .boldText {
   font-weight: bold;
 }
+
+#testSquare {
+  width: 100px;
+  height: 100px;
+  background: url("/assets/img/nut_cones.jpg");
+  background-size: contain;
+}
 .social_icons {
   width: 116px;
   margin: auto;
