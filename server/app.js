@@ -49,6 +49,21 @@ app.get('/assets/:type/:filename', function(req, res) {
 	res.send(api.supplyAsset(req.params.type, req.params.filename))
 });
 
+//handle all HTTP requests, for GET calls for DB resources
+app.get('/api/productlist', function(req, res) {
+
+	//pass the params to the api for approriate resources
+	api.dbRequest(req.params)
+	.then(function success(s) {
+		//send the resources back
+		res.send(s);
+	}).catch(function error(e) {
+		//pass the error back
+		res.send(e);
+	});
+
+});
+
 //handles HTTP requests, for GET calls
 app.get('/api/dailySqrSalesDwnld', function(req, res) {
 

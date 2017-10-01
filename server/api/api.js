@@ -7,15 +7,49 @@
 
 //declare dependencies
 var fs = require('fs');
+var db = require('./db.js');
 
 //build object
 var api = {
+	dbRequest: dbRequest,
 	supplyAsset: supplyAsset,
 	supplySquareCreds: supplySquareCreds,
 	shiftEarnings: shiftEarnings,
 	authUser: authUser
 };
 
+/*
+*	DB Request
+*
+*	This is used to access the databse
+*/
+function dbRequest(params) {
+
+
+	//pass back async work
+	return new Promise(function(resolve, reject) {
+
+		//access the database asyncronously 
+		db.getProductList(params)
+		.then(function success(s) {
+
+			//pass back successful reqest
+			resolve(s);
+
+		}).catch(function error(e) {	
+
+			//or pass back the error
+			reject(e);
+
+		});
+
+	});
+
+};
+
+/*
+*
+*/
 function supplyAsset(directory, filename) {
 	return fs.readFileSync(__dirname + '/../assets/' + directory + "/" + filename);
 }
