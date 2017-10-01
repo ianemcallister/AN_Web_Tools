@@ -53,7 +53,7 @@ app.get('/assets/:type/:filename', function(req, res) {
 app.get('/api/productlist', function(req, res) {
 
 	//pass the params to the api for approriate resources
-	api.dbRequest(req.params)
+	api.dbRequest(req.query)
 	.then(function success(s) {
 		//send the resources back
 		res.send(s);

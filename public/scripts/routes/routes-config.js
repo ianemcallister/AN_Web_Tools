@@ -75,8 +75,8 @@ function config($routeProvider) {
         resolve: { /* @ngInject */
             authentication: authentication
         }
-    }).otherwise({
-        redirectTo: '/'
+    //}).otherwise({
+    //    redirectTo: '/'
     });
 }
 
