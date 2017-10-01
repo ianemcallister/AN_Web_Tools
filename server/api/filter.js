@@ -18,10 +18,12 @@ function productList(allProducts, filter) {
 	console.log('allProducts', allProducts.length);
 
 	//if there's a filter, use it, otherwise return the data passed in
-	if(filter != undefined) {
+	if(filter.filter != 'undefined') {
 	
 		//iterate through each of the objects,
 		allProducts.forEach(function(product) {
+
+			//console.log(product.type, filter.filter);
 
 			//if 
 			if(product.type == filter.filter) {

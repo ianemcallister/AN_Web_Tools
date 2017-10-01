@@ -7,10 +7,12 @@
 			<div class="container">
 				
 				<!--Filter bar-->
+				{{vm.selectedProducts}}
 
 				<!--Products Section-->
-				
-				All the products
+				<ul ng-repeat='product in vm.allProducts track by $index'>
+					<li>{{product.name}}</li>
+				</ul>
 
 			</div>
 

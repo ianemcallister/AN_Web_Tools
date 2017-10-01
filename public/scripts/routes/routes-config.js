@@ -14,7 +14,10 @@ function config($routeProvider) {
     .when('/all-products', {
         templateUrl: 'views/allProductsPage.htm',
         controller: 'allProductsController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: { /* @ngInject */
+            productList: productList
+        }
     })
     //define the single product route
     .when('/product/:itemId', {
@@ -107,4 +110,35 @@ function squareCreds(dataServices) {
 
     });
 
-}
+};
+
+/*
+*   PRODUCT LIST
+*
+*   This function loads a list of products
+*/
+function productList(dataServices, $route) {
+
+    //define local variables
+    var data = dataServices;
+    var path = '/api/productlist';
+
+    if($route.current.params != undefined) {
+        path += '?filter=' + $route.current.params.filter;
+    };
+
+    //alert('$route.current.params', $route.current.params);
+
+    //return the promise of async work
+    return new Promise(function(resolve, reject) {
+
+        //reach out to the endpoint
+        data.get(path)
+        .then(function success(s) {
+            resolve(s);
+        }).catch(function error(e) {
+            reject(e);
+        });
+
+    });
+};

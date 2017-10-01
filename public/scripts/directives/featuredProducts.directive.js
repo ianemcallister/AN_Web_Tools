@@ -40,7 +40,7 @@ function featuredProducts() {
 
 	    vm.productSelectionBtn = function(productName) {
 	    	$log.info('hit the product selection button');
-	    	$location.path('/product/' + productName);
+	    	$location.path('/all-products').search('filter',productName);
 	    }
 
 	}

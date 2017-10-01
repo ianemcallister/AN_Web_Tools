@@ -8,10 +8,30 @@ dataServices.$inject = ['$log', '$http'];
 function dataServices($log, $http) {
 
 	var dataServicesObject = {
-		post: post	
+		get: get,
+		post: post
 	};
 
 	//define all methods
+	function get(url, config) {
+
+		//return a promise for async work
+		return new Promise(function(resolve, reject) {
+			
+			$http.get(url, config)
+			.then(function success(s) {
+
+				resolve(s.data);
+
+			}, function error(e) {
+
+				reject(e);
+			});
+
+		});
+
+	};
+
 	function post(url, data, config) {
 
 		//return a promise for async work
