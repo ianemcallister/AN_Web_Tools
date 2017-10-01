@@ -11,7 +11,11 @@
 
 				<!--Products Section-->
 				<ul ng-repeat='product in vm.allProducts track by $index'>
-					<li>{{product.name}}</li>
+					<li>
+						<img ng-src='{{product.image}}' class='prdctThmb'>
+						{{product.name}}
+						<button class='btn btn-danger'>Oder Now</button>
+					</li>
 				</ul>
 
 			</div>

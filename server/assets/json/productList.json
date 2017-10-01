@@ -28,11 +28,11 @@
 		"ingredients": ["Cashews", "Sugar", "Vanilla", "Salt"]
 	},
 	{
-		"image": "/../assets/img/sr_pecans_cone.jpg",
+		"image": "/../assets/img/sr_almond_cone.jpg",
 		"code": "10294",
 		"type": "cone",
 		"rating": "undefined",
-		"name": "Secret Recipe Pecans Cone",
+		"name": "Secret Recipe Almonds Cone",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -42,11 +42,11 @@
 		"ingredients": ["Pecans", "Sugar", "Vanilla", "Salt"]
 	},
 	{
-		"image": "/../assets/img/sr_cashews_cone.jpg",
+		"image": "/../assets/img/sr_peanuts_cone.jpg",
 		"code": "10294",
 		"type": "cone",
 		"rating": "undefined",
-		"name": "Secret Recipe Cashews Cone",
+		"name": "Secret Recipe Peanuts Cone",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -56,11 +56,11 @@
 		"ingredients": ["Cashews", "Sugar", "Vanilla", "Salt"]
 	},
 	{
-		"image": "/../assets/img/sr_pecans_cone.jpg",
+		"image": "/../assets/img/cin_pecans_cone.jpg",
 		"code": "10294",
 		"type": "cone",
 		"rating": "undefined",
-		"name": "Secret Recipe Pecans Cone",
+		"name": "Cinnamon Pecans Cone",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -70,11 +70,11 @@
 		"ingredients": ["Pecans", "Sugar", "Vanilla", "Salt"]
 	},
 	{
-		"image": "/../assets/img/sr_cashews_cone.jpg",
+		"image": "/../assets/img/cin_almond_cone.jpg",
 		"code": "10294",
 		"type": "cone",
 		"rating": "undefined",
-		"name": "Secret Recipe Cashews Cone",
+		"name": "Cinnamon Almonds Cone",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -84,11 +84,11 @@
 		"ingredients": ["Cashews", "Sugar", "Vanilla", "Salt"]
 	},
 	{
-		"image": "/../assets/img/sr_pecans_cone.jpg",
+		"image": "/../assets/img/drnk_pecans_cone.jpg",
 		"code": "10294",
 		"type": "cone",
 		"rating": "undefined",
-		"name": "Secret Recipe Pecans Cone",
+		"name": "Drunken Pecans Cone",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -98,11 +98,11 @@
 		"ingredients": ["Pecans", "Sugar", "Vanilla", "Salt"]
 	},
 	{
-		"image": "/../assets/img/sr_cashews_cone.jpg",
+		"image": "/../assets/img/mix_cone.jpg",
 		"code": "10294",
 		"type": "cone",
 		"rating": "undefined",
-		"name": "Secret Recipe Cashews Cone",
+		"name": "Mixed Cone",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -116,7 +116,7 @@
 		"code": "10294",
 		"type": "tin",
 		"rating": "undefined",
-		"name": "Secret Recipe Pecans Cone",
+		"name": "Secret Recipe Pecans Tin",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -130,7 +130,7 @@
 		"code": "10294",
 		"type": "tin",
 		"rating": "undefined",
-		"name": "Secret Recipe Cashews Cone",
+		"name": "Secret Recipe Cashews Tin",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -144,7 +144,7 @@
 		"code": "10294",
 		"type": "tin",
 		"rating": "undefined",
-		"name": "Secret Recipe Pecans Cone",
+		"name": "Secret Recipe Almonds Tin",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -158,7 +158,7 @@
 		"code": "10294",
 		"type": "tin",
 		"rating": "undefined",
-		"name": "Secret Recipe Cashews Cone",
+		"name": "Secret Recipe Peanuts Tin",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -172,7 +172,7 @@
 		"code": "10294",
 		"type": "tin",
 		"rating": "undefined",
-		"name": "Secret Recipe Pecans Cone",
+		"name": "Cinnamon Pecans Tin",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -186,7 +186,7 @@
 		"code": "10294",
 		"type": "tin",
 		"rating": "undefined",
-		"name": "Secret Recipe Cashews Cone",
+		"name": "Cinnamon Almonds Tin",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -200,7 +200,7 @@
 		"code": "10294",
 		"type": "tin",
 		"rating": "undefined",
-		"name": "Secret Recipe Pecans Cone",
+		"name": "Drunken Pecans Tin",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -214,7 +214,7 @@
 		"code": "10294",
 		"type": "tin",
 		"rating": "undefined",
-		"name": "Secret Recipe Cashews Cone",
+		"name": "Mixed Tin",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -228,7 +228,7 @@
 		"code": "10294",
 		"type": "platter",
 		"rating": "undefined",
-		"name": "Secret Recipe Pecans Cone",
+		"name": "Secret Recipe Pecans Platter",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -242,7 +242,7 @@
 		"code": "10294",
 		"type": "platter",
 		"rating": "undefined",
-		"name": "Secret Recipe Cashews Cone",
+		"name": "Secret Recipe Cashews Platter",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -256,7 +256,7 @@
 		"code": "10294",
 		"type": "platter",
 		"rating": "undefined",
-		"name": "Secret Recipe Pecans Cone",
+		"name": "Secret Recipe Almonds Platter",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -270,7 +270,7 @@
 		"code": "10294",
 		"type": "platter",
 		"rating": "undefined",
-		"name": "Secret Recipe Cashews Cone",
+		"name": "Secret Recipe Peanuts Platter",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -284,7 +284,7 @@
 		"code": "10294",
 		"type": "platter",
 		"rating": "undefined",
-		"name": "Secret Recipe Pecans Cone",
+		"name": "Cinnamon Pecans Platter",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -298,7 +298,7 @@
 		"code": "10294",
 		"type": "platter",
 		"rating": "undefined",
-		"name": "Secret Recipe Cashews Cone",
+		"name": "Cinnamon Almonds Platter",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -312,7 +312,7 @@
 		"code": "10294",
 		"type": "platter",
 		"rating": "undefined",
-		"name": "Secret Recipe Pecans Cone",
+		"name": "Drunken Pecans Platter",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },
@@ -326,7 +326,7 @@
 		"code": "10294",
 		"type": "platter",
 		"rating": "undefined",
-		"name": "Secret Recipe Cashews Cone",
+		"name": "Mixed Nuts Platter",
 		"sizes": [
 			{ "code": 1203001, "title": "Impressive", "oz": 16, "price": 1800 },
 			{ "code": 1203002, "title": "Average", "oz": 8, "price": 1300 },

@@ -32,6 +32,12 @@
   height: auto;
   background-size: contain;
 }
+
+.prdctThmb {
+  max-width: 20%;
+  height: auto;
+  background-size: contain;
+}
 .logo {
   position: absolute;
   top: 0px !important;

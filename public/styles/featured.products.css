@@ -21,3 +21,9 @@
 	height: auto;
 	background-size: contain;
 }
+
+.prdctThmb {
+	max-width: 20%;
+	height: auto;
+	background-size: contain;
+}
