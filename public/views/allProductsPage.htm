@@ -10,13 +10,11 @@
 				{{vm.selectedProducts}}
 
 				<!--Products Section-->
-				<ul ng-repeat='product in vm.allProducts track by $index'>
-					<li>
-						<img ng-src='{{product.image}}' class='prdctThmb'>
-						{{product.name}}
-						<button class='btn btn-danger'>Oder Now</button>
-					</li>
-				</ul>
+				<div ng-repeat='product in vm.allProducts track by $index'>
+					
+					<prdct-thmbnl product='product' ng-click='vm.selectAProuct(product.code)'></prdct-thmbnl>
+
+				</div>
 
 			</div>
 

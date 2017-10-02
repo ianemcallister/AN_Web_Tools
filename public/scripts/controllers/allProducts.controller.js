@@ -15,4 +15,12 @@ function allProductsController($log, $routeParams, $location, productList) {
 
 	$log.info('in the all Products controller', $routeParams);	//TODO: TAKE THIS OUT LATER
 	$log.info('got this prduct list', productList);
+
+	//something
+	vm.selectAProuct = function(prdctCode) {
+		var path = '/product/' + prdctCode;
+
+		$location.path(path).search('filter', null);
+	};
+
 }

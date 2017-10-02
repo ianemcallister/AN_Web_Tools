@@ -27,8 +27,19 @@
   color: #333333;
 }
 
+.prdctList {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.prdctListItem {
+  display: inline;
+  width: 25%;
+  height: auto;
+}
+
 .prdctImg {
-  width: 70%;
+  /*width: 25%;*/
   height: auto;
   background-size: contain;
 }
