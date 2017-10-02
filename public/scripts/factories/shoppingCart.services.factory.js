@@ -9,6 +9,7 @@ function shoppingCart($log, $http) {
 
 	var shoppingCartObject = {
 		isEmpty: true,
+		orderNumber: undefined,
 		aquisitionMethod: undefined,
 		noOfItems: 0,
 		subtotal: 0,

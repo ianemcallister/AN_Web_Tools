@@ -1,0 +1,18 @@
+<div>
+	{{vm.cartItems}}
+	<table class="table">
+		<!--The header row-->
+		<tr>
+			<th>Item</th>
+			<th>Qty</th>
+			<th>Price</th>
+			<th>Total</th>
+		</tr>
+		<tr ng-repeat='item in vm.cartItems track by $index'>
+			<td>Name</td>
+			<td>Number</td>
+			<td>$</td>
+			<td>$</td>
+		</tr>
+	</table>
+</div>

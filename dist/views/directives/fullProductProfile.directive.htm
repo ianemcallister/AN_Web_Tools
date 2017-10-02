@@ -4,7 +4,7 @@
 	
 	<div>
 		
-		{{vm.itemSelections}}
+		<!--{{vm.itemSelections}}-->
 
 		<div>Product Code: {{ vm.product.code }}</div>
 		
@@ -12,26 +12,7 @@
 		
 		<div>{{ vm.product.name }}</div>
 		
-		<div>
-			Please choose a size by clicking the box below:
-			<ul ng-repeat='size in vm.product.sizes track by $index'>
-				<li style='width:100px; display:block' ng-click='vm.selectSize($index)'>
-					<span>{{ size.title }}</span>
-					<span>({{ size.oz }}oz)</span>
-					<span>{{ size.price / 100 | currency }}</span>
-				</li>
-			</ul>
-		</div>
-		
-		<div>
-			Quantity:
-			<input 	type="number" 
-					placeholder='0' 
-					min='1' 
-					max='100' 
-					style='color:black' 
-					ng-model='vm.itemSelections.qty' >
-		</div>
+		<product-size-picker sizes='vm.itemSelections'></product-size-picker>
 		
 		<div>
 			Description

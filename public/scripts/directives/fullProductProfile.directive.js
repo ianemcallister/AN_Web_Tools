@@ -33,36 +33,21 @@ function fullProductProfile() {
     function fullProductProfileController($scope, $log, $location, shoppingCart) {
 	    var vm = this;
 	    vm.cart = shoppingCart;
-	    
-	    //console.log('aProduct from fullProductProfileController', vm.product);
-	    //vm.product = aProduct;
+	    vm.itemSelections = vm.product.sizes;
 
-	    vm.imageUrl = '/../assets/img/nut_cones.jpg';
-	    vm.itemSelections = {
-	    	code: vm.product.code,
-	    	size: undefined,
-	    	qty: 1
-	    };
-
-	    //$log.info('in the fullProductProfileController directive', vm.product);
-
-	    //define viewmodel functions
-	    vm.selectSize = function(index) {
-
-	    	$log.info('got this size', index);
-
-	    	vm.itemSelections.code = vm.product.sizes[index].code;
-	    };
-
+	    //add selected items to cart
 	    vm.addToCart = function(itemSelections) {
 
 	    	console.log('vm.itemSelections', vm.itemSelections);
 
-	    	//add each of the elements to shopping cart object
-	    	vm.cart.addItem(itemSelections);
+	    	//iterate through each of the sizes, if the qty is greater than 0, add it
+	    	vm.itemSelections.forEach(function(size) {
+
+	    		if(size.qty > 0) vm.cart.addItem(size);
+	    	});
 
 	    	//then redirect
-	    	$location.path('/getting-the-product/' + vm.product);
+	    	$location.path('/getting-the-product/' + '10');
 	    };
 
 	}

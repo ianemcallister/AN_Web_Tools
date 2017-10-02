@@ -1,0 +1,13 @@
+<div>
+	Please choose a size by clicking the box below:
+	<table class='table'>
+		<tbody>
+			<tr class="row" ng-repeat='size in vm.sizes track by $index' style='width:100px; display:block' ng-click='vm.selectSize($index)'>
+				<td>{{ size.title }}</td>
+				<td>{{ size.oz}}</td>
+				<td>{{ size.price / 100 | currency}}</td>
+				<td><size-qty-selector size='size'></size-qty-selector></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
