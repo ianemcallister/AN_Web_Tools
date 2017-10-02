@@ -20,10 +20,13 @@ function config($routeProvider) {
         }
     })
     //define the single product route
-    .when('/product/:itemId', {
+    .when('/product/:prdctId', {
         templateUrl: 'views/aProductPage.htm',
         controller: 'aProductController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: { /* @ngInject */
+            aProduct: aProduct
+        }
     })
     //define the delivery specifications route
     .when('/getting-the-product/:itemId', {
@@ -141,4 +144,36 @@ function productList(dataServices, $route) {
         });
 
     });
+};
+
+/*
+*   A PRODUCT
+*
+*   This function loads a single product
+*/
+function aProduct(dataServices, $route) {
+
+    //define local variables
+    var data = dataServices;
+    var path = '/api/productlist?select=' + $route.current.params.prdctId;
+
+    console.log('path', path);
+
+
+    //alert('$route.current.params', $route.current.params);
+
+    //return the promise of async work
+    return new Promise(function(resolve, reject) {
+
+        //reach out to the endpoint
+        data.get(path)
+        .then(function success(s) {
+            //console.log('got this product', s);
+            resolve(s);
+        }).catch(function error(e) {
+            reject(e);
+        });
+
+    });
+
 };

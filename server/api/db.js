@@ -14,6 +14,7 @@ var db = {
 	_read: _read,
 	_update: _update,
 	_del: _del,
+	prdctDetails: prdctDetails,
 	getProductList: getProductList
 };
 
@@ -33,6 +34,32 @@ function _read(path, params) {
 
 function _update() {}
 function _del() {}
+
+function prdctDetails(params) {
+
+	//return async work
+	return new Promise(function(resolve, reject) {
+
+		//read from the database
+		_read('', params)
+		.then(function success(s) {
+
+			//when the data comes back, filter it appropriately
+			var filteredData = filter.prdctDetails(s, params);
+
+			//pass back successful reqest
+			resolve(filteredData);
+
+		}).catch(function error(e) {
+
+			//or pass back the error
+			reject(e);
+
+		});
+
+	});
+
+};
 
 function getProductList(params) {
 
@@ -58,6 +85,6 @@ function getProductList(params) {
 
 	});
 
-}
+};
 
 module.exports = db;

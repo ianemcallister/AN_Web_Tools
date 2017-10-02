@@ -28,20 +28,23 @@ function fullProductProfile() {
 	function linkFunc(scope, el, attr, ctrl) {
     }
 
-    fullProductProfileController.$inject = ['$scope', '$log', '$location', 'shoppingCart', 'testObject'];
+    fullProductProfileController.$inject = ['$scope', '$log', '$location', 'shoppingCart'];
     /* @ngInject */
-    function fullProductProfileController($scope, $log, $location, shoppingCart, testObject) {
+    function fullProductProfileController($scope, $log, $location, shoppingCart) {
 	    var vm = this;
-	    vm.data = testObject;
 	    vm.cart = shoppingCart;
+	    
+	    //console.log('aProduct from fullProductProfileController', vm.product);
+	    //vm.product = aProduct;
+
 	    vm.imageUrl = '/../assets/img/nut_cones.jpg';
 	    vm.itemSelections = {
-	    	code: vm.data.code,
+	    	code: vm.product.code,
 	    	size: undefined,
 	    	qty: undefined
 	    };
 
-	    $log.info('in the fullProductProfileController directive', vm.product);
+	    //$log.info('in the fullProductProfileController directive', vm.product);
 
 	    //define viewmodel functions
 	    vm.selectSize = function(index) {

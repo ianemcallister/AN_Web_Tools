@@ -1,20 +1,20 @@
 <div>
 	
-	<img ng-src='{{vm.imageUrl}}' class='prdctImg'/>
+	<img ng-src='{{vm.product.image}}' class='prdctImg'/>
 	
 	<div>
 		
 		{{vm.itemSelections}}
 
-		<div>Product Code: {{ vm.data.code }}</div>
+		<div>Product Code: {{ vm.product.code }}</div>
 		
 		<!--<div>Product Rating</div> ADD A RATING SYSTEM LATER-->
 		
-		<div>{{ vm.data.name }}</div>
+		<div>{{ vm.product.name }}</div>
 		
 		<div>
 			Please choose a size by clicking the box below:
-			<ul ng-repeat='size in vm.data.sizes track by $index'>
+			<ul ng-repeat='size in vm.product.sizes track by $index'>
 				<li style='width:100px; display:block' ng-click='vm.selectSize($index)'>
 					<span>{{ size.title }}</span>
 					<span>({{ size.oz }}oz)</span>

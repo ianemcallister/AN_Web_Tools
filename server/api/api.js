@@ -25,23 +25,60 @@ var api = {
 */
 function dbRequest(params) {
 
+	//define local variables
+	var key = '';
+	var options = {
+		"filter": 0,
+		"select": 1
+	};
 
+	Object.keys(params).forEach(function(aKey) {
+		key = aKey;
+	});
+
+	console.log(options[key]);
+	
 	//pass back async work
 	return new Promise(function(resolve, reject) {
 
-		//access the database asyncronously 
-		db.getProductList(params)
-		.then(function success(s) {
+		console.log('options[key]', options[key]);
 
-			//pass back successful reqest
-			resolve(s);
+		//switch based on the function
+		switch(options[key]) {
+			case 0: 
+					//access the database asyncronously 
+					db.getProductList(params)
+					.then(function success(s) {
 
-		}).catch(function error(e) {	
+						//pass back successful reqest
+						resolve(s);
 
-			//or pass back the error
-			reject(e);
+					}).catch(function error(e) {	
 
-		});
+						//or pass back the error
+						reject(e);
+
+					});
+
+				break;
+			case 1:
+					//access the database asyncronously 
+					db.prdctDetails(params)
+					.then(function success(s) {
+
+						//pass back successful reqest
+						resolve(s);
+
+					}).catch(function error(e) {	
+
+						//or pass back the error
+						reject(e);
+
+					});
+				break;
+			default:
+				break;
+		}
 
 	});
 
