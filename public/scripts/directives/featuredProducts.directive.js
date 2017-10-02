@@ -31,7 +31,7 @@ function featuredProducts() {
     function featuredProductsController($scope, $log, $location) {
 	    var vm = this;
 
-	    $log.info('in the featuredProductsController directive');
+	    //$log.info('in the featuredProductsController directive');
 
 	    //define viewmodel functions
 	    vm.mrPrdctsBtn = function() {
@@ -39,7 +39,7 @@ function featuredProducts() {
 	    }
 
 	    vm.productSelectionBtn = function(productName) {
-	    	$log.info('hit the product selection button');
+	    	//$log.info('hit the product selection button');
 	    	$location.path('/all-products').search('filter',productName);
 	    }
 

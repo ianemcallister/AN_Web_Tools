@@ -31,7 +31,7 @@ function ahFooter() {
     function ahFooterController($scope, $log) {
 	    var vm = this;
 
-	    $log.info('in the header directive');
+	    //$log.info('in the header directive');
 
 	}
 

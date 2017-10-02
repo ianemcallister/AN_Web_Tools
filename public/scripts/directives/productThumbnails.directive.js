@@ -33,7 +33,7 @@ function prdctThmbnl() {
     function prdctThmbnlController($scope, $log) {
 	    var vm = this;
 
-	    $log.info('in the prdctThmbnl directive');
+	    //$log.info('in the prdctThmbnl directive');
 
 	}
 

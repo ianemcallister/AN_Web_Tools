@@ -12,5 +12,5 @@ function mainController($scope, $log, $routeParams, $location) {
 	
 	$scope.teamMember = false;
 
-	$log.info('in the main controller');	//TODO: TAKE THIS OUT LATER
+	//$log.info('in the main controller');	//TODO: TAKE THIS OUT LATER
 }

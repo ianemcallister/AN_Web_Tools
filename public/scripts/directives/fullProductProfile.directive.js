@@ -41,7 +41,7 @@ function fullProductProfile() {
 	    vm.itemSelections = {
 	    	code: vm.product.code,
 	    	size: undefined,
-	    	qty: undefined
+	    	qty: 1
 	    };
 
 	    //$log.info('in the fullProductProfileController directive', vm.product);
@@ -51,10 +51,12 @@ function fullProductProfile() {
 
 	    	$log.info('got this size', index);
 
-	    	vm.itemSelections = vm.data.sizes[index]
+	    	vm.itemSelections.code = vm.product.sizes[index].code;
 	    };
 
 	    vm.addToCart = function(itemSelections) {
+
+	    	console.log('vm.itemSelections', vm.itemSelections);
 
 	    	//add each of the elements to shopping cart object
 	    	vm.cart.addItem(itemSelections);

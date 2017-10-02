@@ -31,7 +31,7 @@ function heroBanner() {
     function heroBannerController($scope, $log) {
 	    var vm = this;
 
-	    $log.info('in the hero banner directive');
+	    //$log.info('in the hero banner directive');
 
 	}
 

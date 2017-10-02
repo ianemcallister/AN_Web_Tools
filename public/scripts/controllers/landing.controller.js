@@ -11,7 +11,7 @@ function landingController($scope, $log, $routeParams, $location, dataServices) 
 	var vm = this;
 	var data = dataServices;
 
-	$log.info('in the landing controller');	//TODO: TAKE THIS OUT LATER
+	//$log.info('in the landing controller');	//TODO: TAKE THIS OUT LATER
 
 	//define local functions
 

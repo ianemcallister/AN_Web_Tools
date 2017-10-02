@@ -32,7 +32,7 @@ function ahHeader() {
 	    var vm = this;
 	    vm.cart = shoppingCart;
 
-	    $log.info('in the header directive');
+	    //$log.info('in the header directive');
 
 	    //define viewmodel functions
 	    vm.navbnt = function(button) {
