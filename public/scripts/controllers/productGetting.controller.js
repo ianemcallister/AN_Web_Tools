@@ -11,6 +11,16 @@ function productGettingController($log, $routeParams, $location, shoppingCart) {
 	var vm = this;
 	vm.product = $routeParams.item;
 	vm.cart = shoppingCart;
+	vm.acquisitionSteps = {
+		zipAndDateSelected: false,
+		shippedOrPUSelected: false,
+		willShippp: false,
+		willPU: false,
+		puLocSelected: false,
+		delMthSelected: false,
+		pickupLocation: {},
+		deliveryMethod: {}
+	}
 	
 	$log.info('in the product getting controller', vm.product);	//TODO: TAKE THIS OUT LATER
 

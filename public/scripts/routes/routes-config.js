@@ -68,6 +68,12 @@ function config($routeProvider) {
         controllerAs: 'vm'
     })
     //define the myAccount route for customers
+    .when('/registerUser', {
+        templateUrl: 'views/registrationPage.htm',
+        controller: 'registerAcctController',
+        controllerAs: 'vm'
+    })
+    //define the myAccount route for customers
     .when('/MyAccount/:param', {
         templateUrl: 'views/accountsPage.htm',
         controller: 'accountsController',

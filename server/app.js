@@ -72,6 +72,18 @@ app.get('/api/dailySqrSalesDwnld', function(req, res) {
 	res.send('success');
 });
 
+app.get('/api/profile/', function(req, res) {
+
+	console.log("Registering user: " + req.body.email);
+	
+	res.status(200);
+	
+	res.json({
+		"message" : "User registered: " + req.body.email
+	});
+
+});
+
 //handles HTTP request, for POST calls only on square credentials
 app.post('/api/square-creds', function(req, res) {
 
@@ -93,6 +105,30 @@ app.post('/api/authenticate', function(req, res) {
 	api.authUser(req.body);
 
 	res.send('gdisj@hs-1n2-nsi2');
+});
+
+//ADD THIS LATER
+app.post('/api/register', function(req, res) {
+	
+	console.log("Registering user: " + req.body.email);
+	
+	res.status(200);
+	res.json({
+		"message" : "User registered: " + req.body.email
+	});
+
+});
+
+//ADD THIS LATER
+app.post('/api/login', function(req, res) {
+
+	console.log("Registering user: " + req.body.email);
+	
+	res.status(200);
+	res.json({
+		"message" : "User registered: " + req.body.email
+	});
+
 });
 
 //handle HTTP requets, for POSTs only on smart delivery
