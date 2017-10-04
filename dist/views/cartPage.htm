@@ -3,29 +3,40 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="container">
+				
 				<!--If items haven't been selected yet-->
-				<div id="emptyCart" ng-if='vm.cart.isEmpty' class='boldText fEmpty'>
+				<div ng-if='vm.cart.isEmpty' id="emptyCart" class='boldText fEmpty'>
 					<div class="message">
 						Your shopping cart is empty.
 
 						<br>
 
-						<a href="/">Please click here to view all products</a>
+						<a href="#/all-products">Please click here to view all products</a>
 					</div>
 				</div>
+				
 
 				<!--If Items have been selected-->
 				<div ng-if='!vm.cart.isEmpty'>
 					
+					<!--CART HEADER-->
 					<h4 class='text-center'>Shopping Cart</h4>
 
-					<!-- -->
+					<!--CART NAVIGATION-->
 					<cart-navigation></cart-navigation>
-
+	
+					<!--CART SUMMARY-->
 					<cart-summary no-items="vm.cart.noOfItems" subtotal='vm.cart.subtotal'></cart-summary>
-
-					<pickup-or-delivery method='vm.cart.aquisitionMethod' details='vm.cart.aquisitionDetails'></pickup-or-delivery>
 					
+					<!--When Pickup and delivery were the same thing-->
+					<!--<pickup-or-delivery method='vm.cart.aquisitionMethod' details='vm.cart.aquisitionDetails'></pickup-or-delivery>-->
+					
+					<!--Details on how the package is being delivered-->
+					<delivery-details></delivery-details>
+
+					<!--Details on how the package is being picked up ADD THIS LATER
+					<pickup-details></pickup-details>-->
+
 					<!--Item Summary, this is where we list all the items-->
 					<cart-items-list cart-items='vm.cart.items'></cart-items-list>
 					
@@ -33,11 +44,24 @@
 					<coupon-submission></coupon-submission>
 					
 					<!--Totals here-->
-					<div style='text-align: right;'>Cart Total: {{vm.cart.subtotal / 100 | currency}}</div>
-
+					<div style='text-align: right;'>
+						Cart Total: {{ vm.cart.subtotal / 100 | currency }}
+						<br>
+						Shipping: {{ vm.cart.shippingPrice / 100 | currency }}
+						<br>
+						Discounts: {{ vm.cart.discounts / 100 | currency }}
+						<br>
+						Total: {{ vm.cart.totalCost / 100 | currency }}
+						
+					</div>
+					
+					<!--CART NAVIGATION-->
 					<cart-navigation></cart-navigation>
+
 				</div>
+
 			</div>
 		</div>
 	</div>
+
 </div>

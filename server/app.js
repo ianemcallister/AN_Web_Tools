@@ -7,8 +7,11 @@
 
 // load all required modules
 var express = require('express');
+var favicon = require('serve-favicon');				//COME BACK TO THIS TO ADD
+var cookieParser = require('cookie-parser');		//WILL THIS BE USED??
 var bodyParser = require('body-parser');
 var api = require('./api/api.js');
+var authentication = require('./api/authentication.controller.js');
 
 //return the express object
 var app = express();
@@ -73,6 +76,7 @@ app.get('/api/dailySqrSalesDwnld', function(req, res) {
 });
 
 app.get('/api/profile/', function(req, res) {
+	///api/profile/USERID (GET) – to return profile details when given a USERID
 
 	console.log("Registering user: " + req.body.email);
 	
@@ -107,11 +111,12 @@ app.post('/api/authenticate', function(req, res) {
 	res.send('gdisj@hs-1n2-nsi2');
 });
 
-//ADD THIS LATER
+//handles HTTP requests, for POST only on Authentication
 app.post('/api/register', function(req, res) {
 	
 	console.log("Registering user: " + req.body.email);
-	
+		
+	//
 	res.status(200);
 	res.json({
 		"message" : "User registered: " + req.body.email
