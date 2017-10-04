@@ -21,6 +21,9 @@ function shoppingCart($log, $http, $window) {
 		_saveToBrowser: _saveToBrowser,
 		_getCart: _getCart, 
 		_removeCart: _removeCart,
+		_addNewItem: _addNewItem,
+		_countNoItems: _countNoItems,
+		_calcSubtotal: _calcSubtotal,
 		init: init,
 		addItem: addItem,
 		removeItem: removeItem,
@@ -62,20 +65,79 @@ function shoppingCart($log, $http, $window) {
 		$window.sessionStorage.removeItem('ah-nuts-cart');
 	};
 
-	function addItem(newItems) {
-		var self = this;
+	function _addNewItem(newItem) {
+		//define local variables
+		var returnObject = {};
 
-		
-		console.log('got these Items', newItems);
+		//itrate through all the objects, and add them.
+		Object.keys(newItem).forEach(function(key) {
+			returnObject[key] = newItem[key];
+		});
+
+		return returnObject;
+	};
+
+	function _countNoItems(allItems) {
+		//define local variables
+		var newTotal = 0;
+
+		//iterate through the items list
+		Object.keys(allItems).forEach(function(key) {
+			//console.log(key, allItems[key])
+			newTotal += allItems[key].qty;
+		});
+
+		//console.log('_countNoItems', newTotal);
+
+		return newTotal;
+	};
+
+	function _calcSubtotal(allItems) {
+		//define local variables
+		var newTotal = 0;
+
+		//iterate through the items list
+		Object.keys(allItems).forEach(function(key) {
+			newTotal += (allItems[key].qty * allItems[key].price);
+		});
+
+		//console.log('_calcSubtotal', newTotal);
+
+		return newTotal;
+	};
+
+	function addItem(newItem) {
+		//define local variables
+		var self = this;
+		var itmCode = newItem.code;
+
+		//TODO: TAKE THIS OUT LATER
+		//console.log('got these Items', newItem, self);
 
 		//if we're adding something then the cart can't be empty
 		self.isEmpty = false;
 
+		//first, are we adding qty or new product codes
+		if(self.items[itmCode] == undefined) {
+			// this is an item code that has never been added
+			//intialize the object in items list
+			self.items[itmCode] = _addNewItem(newItem);
+
+			//update noOfItems
+			self.noOfItems = _countNoItems(self.items);
+
+			//update subTotal
+			self.subtotal = _calcSubtotal(self.items);
+
+		}  else {
+			// this item code has been added before, just update the qty
+		}
+
 		//update the cost subtotal
-		self.subtotal = newItems.price * newItems.qty;
+		//self.subtotal = newItems.price * newItems.qty;
 
 		//update the item counter
-		self.noOfItems += newItems.qty;
+		//self.noOfItems += newItems.qty;
 		
 		//add the item to the cart
 		//self.items.push(newItems);
