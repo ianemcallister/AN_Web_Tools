@@ -5,16 +5,19 @@
 			<div class="container">
 				
 				<!--First collect the zip and date-->
-				<to-zip-on-date ng-if='true'></to-zip-on-date>
+				<to-zip-on-date ng-if='true' zipcode='vm.acquisitionSteps.deliveryLocation.zip' completed='vm.zipAndDateSelected'></to-zip-on-date>
 			
 				<!--Second Determine if this is Pick-up or delivery IF DELIVERY IS AVAILABLE-->
-				<select-p-or-d ng-if='false'></select-p-or-d>
+				<select-p-or-d ng-if='vm.zipAndDateSelected'></select-p-or-d>
 
 				<!--Third if it's Pick-up select the location-->
 				<select-pickup-location ng-if='false'></select-pickup-location>
+				
+				<!--Third if it's delviery, define the delivery address-->
+				<define-delivery-address></define-delivery-address>
 
 				<!--Third if it's Delivery select the type (USPS, FedEx, UPS // Priority, Express, ground, etc)-->
-				<select-delivery-method ng-if='true'></select-delivery-method>
+				<select-delivery-method ng-if='false'></select-delivery-method>
 
 				<!--Finally, Navigate forward or backward-->
 				<button class="btn" style='color: black'>Go Back</button>

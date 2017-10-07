@@ -1,11 +1,27 @@
 <div>
-	<h4>Tell us where it's going, or where you'd like to pick up.</h4>
+	<h4>Tell us where it's going</h4>		<!--ADD THIS LATER: , or where you'd like to pick up.-->
 
-	1. Enter a zip code and date
-	Click here for a country other than U.S.
-	<input type="text" placeholder='Zip Code' style='color: black'>
-	<input type="date" placeholder='Select Date' style='color: black'>
-	<button class="btn btn-danger">Go</button>
-	<a href="">Find a zip code</a>
-	<a href="">skip</a>
+	
+	<!--ADD THIS LATER: Click here for a country other than U.S.-->
+	<form name='form'>
+		<label for="zipcode">1. Enter a zip code and date</label>
+		<input type="text" ng-model='vm.zipcode' id='zipcode' style='color: black' placeholder='Zip Code' name='zipcode' ng-pattern='/^\d{5}(?:[-\s]\d{4})?$/' />
+		<!--<hr>
+		input valid = <code>{{form.zipcode.$valid}}</code>
+		<br>
+		vm.zipcode = <code>{{vm.zipcode}}</code>
+		<br>
+		<code>{{form.zipcode}}</code>	-->
+	</form>
+	<!--<input type="text" placeholder='Zip Code' style='color: black' ng-model="vm.zipcode" >-->
+
+	<!--<input type="date" placeholder='Select Date' style='color: black'> ADD THIS LATER-->
+	
+	<button class="btn btn-danger" ng-click='vm.submitZip()'>Go</button>
+	
+	<a href="" ng-click='vm.zipcodeFinder()'>Find a zip code</a>
+	<a href="" ng-click=>skip</a>
+    
+  
+
 </div>

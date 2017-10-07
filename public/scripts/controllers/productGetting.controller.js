@@ -19,6 +19,18 @@ function productGettingController($log, $routeParams, $location, shoppingCart) {
 		puLocSelected: false,
 		delMthSelected: false,
 		pickupLocation: {},
+		deliveryLocation: {
+			receiver: {
+				first: "",
+				last: ""
+			},
+			street1: "",
+			street2: "",
+			street3: "",
+			city: "",
+			state: "",
+			zip: ""
+		},
 		deliveryMethod: {}
 	}
 	

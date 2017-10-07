@@ -15,7 +15,10 @@ function toZipOnDate() {
 		restrict: 'AECM',
 		templateUrl: 'views/directives/toZipOnDate.directive.htm',
 		replace: true,
-		scope: {},
+		scope: {
+			zipcode: "=",
+			completed: '='
+		},
 		link: linkFunc,
 		controller: toZipOnDateController,
 		controllerAs: 'vm',
@@ -24,6 +27,12 @@ function toZipOnDate() {
 
 	/* @ngInject */
 	function linkFunc(scope, el, attr, ctrl) {
+		scope.$watch("form.zipcode.$valid", function zipMonitor(newValue, oldValue) {
+			console.log('$valid', newValue);
+		});
+		scope.$watch("form.zipcode.$pristine", function pristineMonitor(newValue, oldValue) {
+			console.log('$pristine', newValue);
+		});
     }
 
     toZipOnDateController.$inject = ['$scope', '$log'];
@@ -32,7 +41,14 @@ function toZipOnDate() {
 	    var vm = this;
 
 	    //$log.info('in the header directive');
+	    vm.zipcodeFinder = function() {
+	    	alert('finding zipcode');
+	    };
 
+	    vm.submitZip = function() {
+	    	//check for a valid 
+
+	    }
 	}
 
 	return  directive;
