@@ -15,7 +15,9 @@ function defineDeliveryAddress() {
 		restrict: 'AECM',
 		templateUrl: 'views/directives/defineDeliveryAddress.directive.htm',
 		replace: true,
-		scope: {},
+		scope: {
+			deliverTo: "="
+		},
 		link: linkFunc,
 		controller: defineDeliveryAddressController,
 		controllerAs: 'vm',

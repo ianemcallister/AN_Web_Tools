@@ -14,7 +14,7 @@
 				<select-pickup-location ng-if='false'></select-pickup-location>
 				
 				<!--Third if it's delviery, define the delivery address-->
-				<define-delivery-address></define-delivery-address>
+				<define-delivery-address deliver-to="vm.acquisitionSteps.deliveryLocation"></define-delivery-address>
 
 				<!--Third if it's Delivery select the type (USPS, FedEx, UPS // Priority, Express, ground, etc)-->
 				<select-delivery-method ng-if='false'></select-delivery-method>

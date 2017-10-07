@@ -154,6 +154,10 @@ body {
 .boldText {
   font-weight: bold;
 }
+
+input {
+  color: black;
+}
 .social_icons {
   width: 116px;
   margin: auto;

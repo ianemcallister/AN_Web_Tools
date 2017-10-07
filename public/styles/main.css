@@ -12,3 +12,7 @@ body {
 .boldText {
     font-weight: bold;
 }
+
+input {
+	color: black;
+}
