@@ -17,7 +17,7 @@ function toZipOnDate() {
 		replace: true,
 		scope: {
 			zipcode: "=",
-			completed: '='
+			vipIdentified: '='
 		},
 		link: linkFunc,
 		controller: toZipOnDateController,
@@ -29,9 +29,8 @@ function toZipOnDate() {
 	function linkFunc(scope, el, attr, ctrl) {
 		scope.$watch("form.zipcode.$valid", function zipMonitor(newValue, oldValue) {
 			console.log('$valid', newValue);
-		});
-		scope.$watch("form.zipcode.$pristine", function pristineMonitor(newValue, oldValue) {
-			console.log('$pristine', newValue);
+			if(newValue && (scope.zipcode != "")) scope.completed = true;
+			else scope.completed = false;
 		});
     }
 

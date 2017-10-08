@@ -4,10 +4,8 @@
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="container">
 				
-				{{vm.cart.aquisitionDetails}}
-				
 				<!--First collect the zip and date-->
-				<to-zip-on-date ng-if='true' zipcode='vm.cart.aquisitionDetails.deliveryLocation.zip' completed='vm.zipAndDateSelected'></to-zip-on-date>
+				<to-zip-on-date ng-if='true' zipcode='vm.cart.aquisitionDetails.deliveryLocation.zip' zip-identified='vm.cart.aquisitionDetails.delZipIdentified'></to-zip-on-date>
 			
 				<!--Second Determine if this is Pick-up or delivery IF DELIVERY IS AVAILABLE-->
 				<select-p-or-d ng-if='vm.zipAndDateSelected'></select-p-or-d>

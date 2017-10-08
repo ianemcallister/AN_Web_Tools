@@ -16,7 +16,29 @@ function shoppingCart($log, $http, $window) {
 		shippingPrice: 0,
 		discounts: 0,
 		totalCost: 0,
-		aquisitionDetails: {},
+		aquisitionDetails: {
+			delZipIdentified: false,
+			delDateIdentified: false,
+			shippedOrPUSelected: false,
+			willShippp: false,
+			willPU: false,
+			puLocSelected: false,
+			delMthSelected: false,
+			pickupLocation: {},
+			deliveryLocation: {
+				receiver: {
+					first: "",
+					last: ""
+				},
+				street1: "",
+				street2: "",
+				street3: "",
+				city: "",
+				state: "",
+				zip: ""
+			},
+			deliveryMethod: {}
+		},
 		paymentDetails: {},
 		items: {},
 		_saveToBrowser: _saveToBrowser,
