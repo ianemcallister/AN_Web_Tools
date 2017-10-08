@@ -2,5 +2,14 @@
 	Delivery Details
 
 	<br>
-	{{ vm.deliverTo }}
+	{{ vm.deliverTo.deliveryLocation.receiver.first }}
+	{{ vm.deliverTo.deliveryLocation.receiver.last }}
+	<br>
+	{{ vm.deliverTo.deliveryLocation.street1 }}
+	{{ vm.deliverTo.deliveryLocation.street2 }}
+	{{ vm.deliverTo.deliveryLocation.street3 }}
+	<br>
+	{{ vm.deliverTo.deliveryLocation.city }}
+	{{ vm.deliverTo.deliveryLocation.state }},
+	{{ vm.deliverTo.deliveryLocation.zip }}
 </div>

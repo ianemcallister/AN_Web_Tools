@@ -1,19 +1,57 @@
 <div>
 	<div style='text-align: center;'>
 		BILLING INFORMATION
-		<br><a href="">Sign in to my account</a>
+		<br>
+		<!--<a href="">Sign in to my account</a>-->
+		<a href="" ng-click='vm.copyDelAdd()'>Same as Delivery</a>
 	</div>
 
-	First Name:
-	<br>Last Name: 
-	<br>Address 1
-	<br>Address 2
-	<br>Country
-	<br>Zip/Postal Code:
-	<br>City/Town:
-	<br>State/Province: 
-	<br>Phone:
-	<br>P.O. Number
-	<br>Email:
+	<!--Name: First-->
+	<label for="first">First Name:</label>
+	<input type="text" name='first' ng-model='vm.payDet.name.first'>
+	
+	<!--Name: Last-->
+	<label for="last">Last Name:</label>
+	<input type="text" name='last' ng-model='vm.payDet.name.last'>
+
+	<!--Address: Street1-->
+	<label for="street1">Address 1:</label>
+	<input type="text" name='street1' ng-model='vm.payDet.street1'>
+	
+	<!--Address: Street2-->
+	<label for="street2">Address 2</label>
+	<input type="text" name='street2' ng-model='vm.payDet.street2'>
+	
+	<!--Address: Street3-->
+	<label for="street3">Address 3</label>
+	<input type="text" name='street3' ng-model='vm.payDet.street3'>
+	
+	<!--Address: Country-->
+	<!--Add country at a later date-->
+
+	<!--Address: Zip-->
+	<label for="zip">Zip/Postal Code:</label>
+	<input type="text" name='zip' ng-model='vm.payDet.zip'>
+
+	<!--Address: City-->
+	<label for="city">City/Town:</label>
+	<input type="text" name='city' ng-model='vm.payDet.city'>
+	
+	<!--Address: State-->
+	<label for="state">State/Province:</label>
+	<input type="text" name='state' ng-model='vm.payDet.state'>
+	
+	<!--Phone-->
+	<label for="phone">Phone:</label>
+	<input type="text" name='phone' ng-model='vm.payDet.phone'>
+	
+	<!--P.O. Number-->
+	<label for="po">P.O. Number:</label>
+	<input type="text" name='po' ng-model='vm.payDet.po'>
+	
+	<!--Email-->
+	<label for="email">Email:</label>
+	<input type="email" name='email' ng-model='vm.payDet.email'>
+
 	<br>We will send this email address an Order Confirmation.
 </div>

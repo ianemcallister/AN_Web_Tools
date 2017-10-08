@@ -17,6 +17,7 @@ function shoppingCart($log, $http, $window) {
 		discounts: 0,
 		totalCost: 0,
 		aquisitionDetails: {},
+		paymentDetails: {},
 		items: {},
 		_saveToBrowser: _saveToBrowser,
 		_getCart: _getCart, 

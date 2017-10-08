@@ -3,11 +3,11 @@
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="container">
 				
-				<cart-summary></cart-summary>
+				<cart-summary no-items="vm.cart.noOfItems" subtotal='vm.cart.subtotal'></cart-summary>
 				
 				<checkout-payment square-creds='vm.squareCreds'></checkout-payment>
 				
-				<checkout-billing></checkout-billing>
+				<checkout-billing aqu-det='vm.cart.aquisitionDetails' pay-det='vm.cart.paymentDetails'></checkout-billing>
 
 				<checkout-followup></checkout-followup>
 
