@@ -28,9 +28,9 @@ function cartItemsList() {
 	function linkFunc(scope, el, attr, ctrl) {
     }
 
-    cartItemsListController.$inject = ['$scope', '$log', "$window", 'shoppingCart'];
+    cartItemsListController.$inject = ['$scope', '$log', 'shoppingCart'];
     /* @ngInject */
-    function cartItemsListController($scope, $log, $window, shoppingCart) {
+    function cartItemsListController($scope, $log, shoppingCart) {
 	    var vm = this;
 	    var cart = shoppingCart;
 
@@ -42,6 +42,12 @@ function cartItemsList() {
 	    	//remove the item from the cart
 	    	cart.removeItem(itemId);
 	    };
+
+	    vm.updateQty = function(itemId, qty) {
+	    	
+	    	//update the item qty
+	    	cart.updateItemQty(itemId, qty);
+	    }
 
 	}
 

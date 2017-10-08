@@ -15,7 +15,7 @@
 				<span><a href="" ng-click="vm.removeItem(item.code)">remove</a></span>
 			</td>
 			<td>
-				<input type="text" ng-model='item.qty'>
+				<input type="text" ng-model='item.qty' ng-blur='vm.updateQty(item.code, item.qty)'>
 			</td>
 			<td>{{ (item.price / 100) | currency }}</td>
 			<td>{{ (item.qty * (item.price / 100)) | currency }}</td>

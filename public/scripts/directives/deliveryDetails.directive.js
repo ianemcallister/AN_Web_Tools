@@ -28,13 +28,17 @@ function deliveryDetails() {
 	function linkFunc(scope, el, attr, ctrl) {
     }
 
-    deliveryDetailsController.$inject = ['$scope', '$log'];
+    deliveryDetailsController.$inject = ['$scope', '$log', '$location'];
     /* @ngInject */
-    function deliveryDetailsController($scope, $log) {
+    function deliveryDetailsController($scope, $log, $location) {
 	    var vm = this;
 
 	    $log.info('in the deliveryDetails directive', vm.deliverTo);
 
+	    //
+	    vm.changeDetails = function() {
+	    	$location.path('/getting-the-product/' + '10');
+	    };
 	}
 
 	return  directive;

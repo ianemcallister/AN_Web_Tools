@@ -10,7 +10,7 @@ function shoppingCart($log, $http, $window) {
 	var shoppingCartObject = {
 		isEmpty: true,
 		orderNumber: undefined,
-		aquisitionMethod: "delivery",
+		aquisitionMethod: undefined,
 		noOfItems: 0,
 		subtotal: 0,
 		shippingPrice: 0,
@@ -29,7 +29,9 @@ function shoppingCart($log, $http, $window) {
 		addItem: addItem,
 		removeItem: removeItem,
 		updateAquisitionMethod: updateAquisitionMethod,
-		calcTotalCost: calcTotalCost
+		calcTotalCost: calcTotalCost,
+		updateItemQty: updateItemQty,
+		acqMethIsDefined: acqMethIsDefined
 	};
 
 	function init() {
@@ -193,6 +195,7 @@ function shoppingCart($log, $http, $window) {
 		//define local variables
 		var self = this;
 
+		//save the changes
 		self._saveToBrowser();
 	};
 
@@ -201,6 +204,40 @@ function shoppingCart($log, $http, $window) {
 		var self = this;
 
 		self.totalCost = self.subtotal + self.shippingPrice + self.discounts;
+	};
+
+	function updateItemQty(itemId, qty) {
+		//define local variables
+		var self = this;
+
+		//if the qty is 0 just remove the item
+		if(parseInt(qty) == 0) {
+			self.removeItem(itemId);
+			return 0;
+		}
+
+		//update the value
+		self.items[itemId].qty = parseInt(qty);
+
+		//update the subtotal
+		self.noOfItems = self._countNoItems(self.items);
+
+		//update the item number
+		self.subtotal = self._calcSubtotal(self.items);
+
+		//update the total cost
+		self.calcTotalCost();
+
+		//save changes to the browser
+		self._saveToBrowser();	
+
+	};
+
+	function acqMethIsDefined() {
+		var self = this;
+
+		if(self.aquisitionMethod == undefined) return false;
+		else return true;
 	};
 
 	return shoppingCartObject;

@@ -40,6 +40,9 @@ function productGettingController($log, $routeParams, $location, shoppingCart) {
 		//save the address
 		vm.cart.updateAquisitionMethod();
 
+		//TODO: CHANGE THIS LATER
+		vm.cart.aquisitionMethod = 'delivery';
+
 		//then redirect
 		$location.path('/cart');
 	}

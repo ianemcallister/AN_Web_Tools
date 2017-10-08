@@ -38,7 +38,7 @@ function fullProductProfile() {
 	    //add selected items to cart
 	    vm.addToCart = function(itemSelections) {
 
-	    	console.log('vm.itemSelections', vm.itemSelections);
+	    	//console.log('vm.itemSelections', vm.itemSelections);
 
 	    	//iterate through each of the sizes, if the qty is greater than 0, add it
 	    	vm.itemSelections.forEach(function(size) {
@@ -46,8 +46,16 @@ function fullProductProfile() {
 	    		if(size.qty > 0) vm.cart.addItem(size);
 	    	});
 
-	    	//then redirect
-	    	$location.path('/getting-the-product/' + '10');
+	    	//if aquistion method is defined, go straight to shopping cart
+	    	if(vm.cart.acqMethIsDefined()) {
+
+	    		$location.path('/cart');
+
+	    	} else {
+	    		//otherwise direct to getting the product
+	    		$location.path('/getting-the-product/' + '10');
+	    	}
+	    	
 	    };
 
 	}
