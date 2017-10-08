@@ -16,7 +16,8 @@ function cartItemsList() {
 		templateUrl: 'views/directives/cartItemsList.directive.htm',
 		replace: true,
 		scope: {
-			cartItems: '='
+			cartItems: '=',
+			removeItemFn: '='
 		},
 		link: linkFunc,
 		controller: cartItemsListController,
@@ -32,8 +33,8 @@ function cartItemsList() {
     /* @ngInject */
     function cartItemsListController($scope, $log) {
 	    var vm = this;
-
-	    //$log.info('in the header directive');
+	    
+	    $log.info('in the cartItemsListController directive', vm.cartItems);
 
 	}
 

@@ -11,7 +11,6 @@ function cartController($log, $routeParams, $location, shoppingCart) {
 	var vm = this;
 	vm.cart = shoppingCart;
 
-	$log.info('in the cart controller');	//TODO: TAKE THIS OUT LATER
-
+	$log.info('in the cart controller', vm.cart);	//TODO: TAKE THIS OUT LATER
 
 }

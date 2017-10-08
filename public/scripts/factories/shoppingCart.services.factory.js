@@ -10,7 +10,7 @@ function shoppingCart($log, $http, $window) {
 	var shoppingCartObject = {
 		isEmpty: true,
 		orderNumber: undefined,
-		aquisitionMethod: undefined,
+		aquisitionMethod: "delivery",
 		noOfItems: 0,
 		subtotal: 0,
 		shippingPrice: 0,
@@ -47,13 +47,27 @@ function shoppingCart($log, $http, $window) {
 			self.discounts = savedCart.discounts;
 			self.totalCost = savedCart.totalCost;
 			self.aquisitionDetails = savedCart.aquisitionDetails;
+			self.items = savedCart.items;
 		}
 
 		console.log(self);
 
 	}
 
-	function _saveToBrowser(cart) {
+	function _saveToBrowser() {
+		var self = this;
+		var cart = {
+			isEmpty: self.isEmpty,
+			orderNumber: self.orderNumber,
+			aquisitionMethod: self.aquisitionMethod,
+			noOfItems: self.noOfItems,
+			subtotal: self.subtotal,
+			shippingPrice: self.shippingPrice,
+			discounts: self.discounts,
+			totalCost: self.totalCost,
+			aquisitionDetails: self.aquisitionDetails,
+			items: self.items
+		};
 		$window.sessionStorage.setItem('ah-nuts-cart', JSON.stringify(cart));
 	};
 
@@ -74,6 +88,8 @@ function shoppingCart($log, $http, $window) {
 			returnObject[key] = newItem[key];
 		});
 
+		console.log('adding this new item', returnObject);
+
 		return returnObject;
 	};
 
@@ -87,7 +103,7 @@ function shoppingCart($log, $http, $window) {
 			newTotal += allItems[key].qty;
 		});
 
-		//console.log('_countNoItems', newTotal);
+		console.log('_countNoItems', newTotal);
 
 		return newTotal;
 	};
@@ -111,15 +127,14 @@ function shoppingCart($log, $http, $window) {
 		var self = this;
 		var itmCode = newItem.code;
 
-		//TODO: TAKE THIS OUT LATER
-		//console.log('got these Items', newItem, self);
-
 		//if we're adding something then the cart can't be empty
 		self.isEmpty = false;
 
 		//first, are we adding qty or new product codes
 		if(self.items[itmCode] == undefined) {
 			// this is an item code that has never been added
+			console.log('adding a new item');
+
 			//intialize the object in items list
 			self.items[itmCode] = _addNewItem(newItem);
 
@@ -131,18 +146,25 @@ function shoppingCart($log, $http, $window) {
 
 		}  else {
 			// this item code has been added before, just update the qty
+			console.log('updating a new qty');
 		}
 
-		//update the cost subtotal
-		//self.subtotal = newItems.price * newItems.qty;
+		//after saving it to the cart, then save it to the browser session
+		self._saveToBrowser();
 
-		//update the item counter
-		//self.noOfItems += newItems.qty;
-		
-		//add the item to the cart
-		//self.items.push(newItems);
+		return true;
+	};
 
-		self._saveToBrowser({
+	function removeItem(productId) {
+		var self = this;
+
+		console.log('removing item', productId, self);
+
+		//remove the item
+		//self.items[productId] = undefined;
+
+		//update the browser file
+		/*self._saveToBrowser({
 			isEmpty: self.isEmpty,
 			orderNumber: self.orderNumber,
 			aquisitionMethod: self.aquisitionMethod,
@@ -152,13 +174,16 @@ function shoppingCart($log, $http, $window) {
 			discounts: self.discounts,
 			totalCost: self.totalCost,
 			aquisitionDetails: self.aquisitionDetails,
-		});
-
-		return true;
+			items: self.items
+		});*/
 	};
 
-	function removeItem() {}
-	function updateAquisitionMethod() {}
+	function updateAquisitionMethod() {
+		//define local variables
+		var self = this;
+
+		self._saveToBrowser();
+	};
 
 	return shoppingCartObject;
 }

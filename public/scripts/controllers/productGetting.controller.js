@@ -11,7 +11,7 @@ function productGettingController($log, $routeParams, $location, shoppingCart) {
 	var vm = this;
 	vm.product = $routeParams.item;
 	vm.cart = shoppingCart;
-	vm.acquisitionSteps = {
+	vm.cart.aquisitionDetails = {
 		zipAndDateSelected: false,
 		shippedOrPUSelected: false,
 		willShippp: false,
@@ -32,11 +32,15 @@ function productGettingController($log, $routeParams, $location, shoppingCart) {
 			zip: ""
 		},
 		deliveryMethod: {}
-	}
+	};
 	
 	$log.info('in the product getting controller', vm.product);	//TODO: TAKE THIS OUT LATER
 
 	vm.order = function() {
+		//save the address
+		vm.cart.updateAquisitionMethod();
+
+		//then redirect
 		$location.path('/cart');
 	}
 }

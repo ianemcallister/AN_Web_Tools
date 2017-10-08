@@ -6,9 +6,9 @@
 		"rating": "undefined",
 		"name": "Secret Recipe Pecans Cone",
 		"sizes": [
-			{ "code": 1001001, "title": "Impressive", "oz": 16, "price": 1800, "qty":0 },
-			{ "code": 1001002, "title": "Average", "oz": 8, "price": 1300, "qty":0 },
-			{ "code": 1001003, "title": "Small", "oz": 4, "price": 700, "qty":0 }
+			{ "code": 1001001, "title": "Impressive", "oz": 16, "price": 1800, "qty":0, "name": "Secret Recipe Pecans: Impressive Cone" },
+			{ "code": 1001002, "title": "Average", "oz": 8, "price": 1300, "qty":0, "name": "Secret Recipe Pecans: Average Cone" },
+			{ "code": 1001003, "title": "Small", "oz": 4, "price": 700, "qty":0, "name": "Secret Recipe Pecans: Small Cone" }
 		],
 		"description": "The most amazing pecans you've ever taste",
 		"ingredients": ["Pecans", "Sugar", "Vanilla", "Salt"]
@@ -20,9 +20,9 @@
 		"rating": "undefined",
 		"name": "Secret Recipe Cashews Cone",
 		"sizes": [
-			{ "code": 1001101, "title": "Impressive", "oz": 16, "price": 1800, "qty":0 },
-			{ "code": 1001102, "title": "Average", "oz": 8, "price": 1300, "qty":0 },
-			{ "code": 1001103, "title": "Small", "oz": 4, "price": 700, "qty":0 }
+			{ "code": 1001101, "title": "Impressive", "oz": 16, "price": 1800, "qty":0, "name": "Secret Recipe Cashews: Impressive Cone" },
+			{ "code": 1001102, "title": "Average", "oz": 8, "price": 1300, "qty":0, "name": "Secret Recipe Cashews: Average Cone" },
+			{ "code": 1001103, "title": "Small", "oz": 4, "price": 700, "qty":0, "name": "Secret Recipe Cashews: Small Cone" }
 		],
 		"description": "The most amazing pecans you've ever taste",
 		"ingredients": ["Cashews", "Sugar", "Vanilla", "Salt"]
