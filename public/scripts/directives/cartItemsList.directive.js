@@ -16,8 +16,7 @@ function cartItemsList() {
 		templateUrl: 'views/directives/cartItemsList.directive.htm',
 		replace: true,
 		scope: {
-			cartItems: '=',
-			removeItemFn: '='
+			cartItems: '='
 		},
 		link: linkFunc,
 		controller: cartItemsListController,
@@ -29,12 +28,20 @@ function cartItemsList() {
 	function linkFunc(scope, el, attr, ctrl) {
     }
 
-    cartItemsListController.$inject = ['$scope', '$log'];
+    cartItemsListController.$inject = ['$scope', '$log', "$window", 'shoppingCart'];
     /* @ngInject */
-    function cartItemsListController($scope, $log) {
+    function cartItemsListController($scope, $log, $window, shoppingCart) {
 	    var vm = this;
-	    
+	    var cart = shoppingCart;
+
 	    $log.info('in the cartItemsListController directive', vm.cartItems);
+
+	    vm.removeItem = function(itemId) {
+	    	console.log('removing itemId', itemId);
+
+	    	//remove the item from the cart
+	    	cart.removeItem(itemId);
+	    };
 
 	}
 

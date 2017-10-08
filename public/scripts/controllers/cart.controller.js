@@ -13,4 +13,7 @@ function cartController($log, $routeParams, $location, shoppingCart) {
 
 	$log.info('in the cart controller', vm.cart);	//TODO: TAKE THIS OUT LATER
 
+	//calculate the total cost when the controller is loaded
+	vm.cart.calcTotalCost();
+
 }

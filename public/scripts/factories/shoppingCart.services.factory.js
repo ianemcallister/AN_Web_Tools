@@ -28,7 +28,8 @@ function shoppingCart($log, $http, $window) {
 		init: init,
 		addItem: addItem,
 		removeItem: removeItem,
-		updateAquisitionMethod: updateAquisitionMethod
+		updateAquisitionMethod: updateAquisitionMethod,
+		calcTotalCost: calcTotalCost
 	};
 
 	function init() {
@@ -96,7 +97,10 @@ function shoppingCart($log, $http, $window) {
 
 	function _countNoItems(allItems) {
 		//define local variables
+		var self = this;
 		var newTotal = 0;
+
+		console.log('allItems', allItems);
 
 		//iterate through the items list
 		Object.keys(allItems).forEach(function(key) {
@@ -105,6 +109,9 @@ function shoppingCart($log, $http, $window) {
 		});
 
 		console.log('_countNoItems', newTotal);
+
+		//if no items where found, make sure cart is designated empty
+		if(newTotal == 0) self.isEmpty = true;
 
 		return newTotal;
 	};
@@ -159,24 +166,27 @@ function shoppingCart($log, $http, $window) {
 	function removeItem(productId) {
 		var self = this;
 
-		console.log('removing item', productId, self);
+		//iterate through the list of items
+		Object.keys(self.items).forEach(function keySearch(key) {
 
-		//remove the item
-		//self.items[productId] = undefined;
+			//if the key matches the productId, remove it
+			console.log(key, productId);
 
-		//update the browser file
-		/*self._saveToBrowser({
-			isEmpty: self.isEmpty,
-			orderNumber: self.orderNumber,
-			aquisitionMethod: self.aquisitionMethod,
-			noOfItems: self.noOfItems,
-			subtotal: self.subtotal,
-			shippingPrice: self.shippingPrice,
-			discounts: self.discounts,
-			totalCost: self.totalCost,
-			aquisitionDetails: self.aquisitionDetails,
-			items: self.items
-		});*/
+			if(key == productId) delete self.items[key];
+
+		});
+
+		//update the subtotal
+		self.noOfItems = self._countNoItems(self.items);
+
+		//update the item number
+		self.subtotal = self._calcSubtotal(self.items);
+
+		//update the total cost
+		self.calcTotalCost();
+
+		//save changes to the browser
+		self._saveToBrowser();	
 	};
 
 	function updateAquisitionMethod() {
@@ -184,6 +194,13 @@ function shoppingCart($log, $http, $window) {
 		var self = this;
 
 		self._saveToBrowser();
+	};
+
+	function calcTotalCost() {
+		//define local variables
+		var self = this;
+
+		self.totalCost = self.subtotal + self.shippingPrice + self.discounts;
 	};
 
 	return shoppingCartObject;

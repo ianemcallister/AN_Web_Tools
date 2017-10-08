@@ -12,7 +12,7 @@
 			<td>
 				{{ item.name }}<span ng-if='item.qty > 1'>s</span>
 				<br>
-				<span><a href="" ng-click="vm.removeItemFn(item.code)">remove</a></span>
+				<span><a href="" ng-click="vm.removeItem(item.code)">remove</a></span>
 			</td>
 			<td>
 				<input type="text" ng-model='item.qty'>
