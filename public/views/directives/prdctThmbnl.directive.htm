@@ -1,11 +1,25 @@
 <div>
 
 	<!--The Item Images Goes Here-->
-	<img ng-src='{{vm.product.image}}' class='prdctListItem'>
+	<div class="row">
+		
+		<img 	ng-src='{{vm.product.image}}' 
+				class='' 
+				class='col-xs-12 col-sm-12 col-md-12 col-lg-12'
+		/>
 	
-	<!--The Product Name Goes Here-->
-	{{vm.product.name}}
+	</div>
 
-	<button class='btn btn-danger'>Oder Now</button>
+	<!--The Product Name Goes Here-->
+	<div class="row">
+		<span>{{vm.product.name}}</span>
+	</div>
+	
+	<div class="row">
+		<button class='btn btn-danger col-xs-3 col-sm-3 col-md-3 col-lg-3'
+		>
+			Oder Now
+		</button>
+	</div>
 	
 </div>

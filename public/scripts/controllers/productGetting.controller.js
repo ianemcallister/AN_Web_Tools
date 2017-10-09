@@ -2,10 +2,10 @@ angular
     .module('ahNuts')
     .controller('productGettingController', productGettingController);
 
-productGettingController.$inject = ['$log', '$routeParams', '$location', 'shoppingCart'];
+productGettingController.$inject = ['$log', '$routeParams', '$location', 'shoppingCart', 'uspsServices'];
 
 /* @ngInject */
-function productGettingController($log, $routeParams, $location, shoppingCart) {
+function productGettingController($log, $routeParams, $location, shoppingCart, uspsServices) {
 
 	//define view model variable
 	var vm = this;
@@ -23,5 +23,29 @@ function productGettingController($log, $routeParams, $location, shoppingCart) {
 
 		//then redirect
 		$location.path('/cart');
-	}
+	};
+
+	/*
+	*	City State Lookup
+	*
+	*/
+	vm.cityStateLookup = function() {
+		//define local variables
+
+		uspsServices.cityStateLookup(vm.cart.aquisitionDetails.deliveryLocation.zip)
+		.then(function success(cityStateObject) {
+
+			//save the values
+			vm.cart.aquisitionDetails.deliveryLocation.city = cityStateObject.city;
+			vm.cart.aquisitionDetails.deliveryLocation.state = cityStateObject.state;
+
+		}).catch(function error(e) {
+
+			//display an error message
+			console.log('error:', e);
+			
+		});
+
+	};
+
 }

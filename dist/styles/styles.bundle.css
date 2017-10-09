@@ -34,8 +34,13 @@
 
 .prdctListItem {
   display: inline;
-  width: 25%;
   height: auto;
+  margin: auto;
+  margin-left: 15%;
+}
+
+.prdctListItem img {
+  width: 70%;
 }
 
 .prdctImg {
@@ -49,6 +54,11 @@
   max-width: 20%;
   height: auto;
   background-size: contain;
+}
+
+.productThumbnail {
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 .logo {
   position: absolute;

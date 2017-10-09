@@ -47,7 +47,11 @@ function toZipOnDate() {
 	    vm.submitZip = function() {
 	    	//check for a valid 
 
-	    }
+	    };
+
+	    vm.checkzipcode = function() {
+
+	    };
 	}
 
 	return  directive;

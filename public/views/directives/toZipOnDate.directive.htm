@@ -5,7 +5,15 @@
 	<!--ADD THIS LATER: Click here for a country other than U.S.-->
 	<form name='form'>
 		<label for="zipcode">1. Enter a zip code and date</label>
-		<input type="text" ng-model='vm.zipcode' id='zipcode' style='color: black' placeholder='Zip Code' name='zipcode' ng-pattern='/^\d{5}(?:[-\s]\d{4})?$/' />
+		<input 	type="text" 
+				ng-model='vm.zipcode' 
+				id='zipcode' 
+				style='color: black' 
+				placeholder='Zip Code' 
+				name='zipcode' 
+				ng-pattern='/^\d{5}(?:[-\s]\d{4})?$/'
+				ng-blur='' 
+		/>
 		<!--<hr>
 		input valid = <code>{{form.zipcode.$valid}}</code>
 		<br>

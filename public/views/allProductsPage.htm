@@ -12,7 +12,10 @@
 				<!--Products Section-->
 				<div ng-repeat='product in vm.allProducts track by $index'>
 					
-					<prdct-thmbnl product='product' ng-click='vm.selectAProuct(product.code)'></prdct-thmbnl>
+					<prdct-thmbnl 	product='product' 
+									ng-click='vm.selectAProuct(product.code)'
+									class='col-xs-12 col-sm-6 col-md-6 col-lg-4 prdctListItem'>
+					</prdct-thmbnl>
 
 				</div>
 
