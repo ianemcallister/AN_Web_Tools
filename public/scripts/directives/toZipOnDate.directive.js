@@ -16,7 +16,7 @@ function toZipOnDate() {
 		templateUrl: 'views/directives/toZipOnDate.directive.htm',
 		replace: true,
 		scope: {
-			zipcode: "=",
+			goingTo: "=",
 			vipIdentified: '='
 		},
 		link: linkFunc,
@@ -34,9 +34,9 @@ function toZipOnDate() {
 		});
     }
 
-    toZipOnDateController.$inject = ['$scope', '$log'];
+    toZipOnDateController.$inject = ['$scope', '$log', 'uspsServices'];
     /* @ngInject */
-    function toZipOnDateController($scope, $log) {
+    function toZipOnDateController($scope, $log, uspsServices) {
 	    var vm = this;
 
 	    //$log.info('in the header directive');
@@ -51,6 +51,18 @@ function toZipOnDate() {
 
 	    vm.checkzipcode = function() {
 
+	    	uspsServices.cityStateLookup(vm.goingTo.zip)
+	    	.then(function succes(s) {
+
+	    		//if the result comes back positive, update the values
+	    		vm.goingTo.city = s.city;
+	    		vm.goingTo.state = s.state;
+
+	    		$scope.$apply();
+	    		
+	    	}).catch(function error(e) {
+
+	    	});
 	    };
 	}
 

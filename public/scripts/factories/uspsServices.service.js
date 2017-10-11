@@ -8,6 +8,7 @@ uspsServices.$inject = ['$log', '$http'];
 function uspsServices($log, $http) {
 
 	var uspsServices = {
+		_uspsUsername: "",
 		_parseCityStateResponse: _parseCityStateResponse,
 		cityStateLookup: cityStateLookup
 	};
@@ -21,9 +22,16 @@ function uspsServices($log, $http) {
 	function _parseCityStateResponse(cityStateXML) {
 		//define local variable
 		var self = this;
+		
+		console.log(cityStateXML, typeof cityStateXML);
+
+		var citySplit = cityStateXML.split('<City>');
+		var endCitySplit = citySplit[1].split('</City>');
+		var stateSplit = cityStateXML.split('<State>');
+		var endStateSplit = stateSplit[1].split('</State>');
 		var cityStateObject = {
-			city: "",
-			state: ""
+			city: endCitySplit[0],
+			state: endStateSplit[0]
 		};
 
 		//return the returnObject
@@ -40,9 +48,11 @@ function uspsServices($log, $http) {
 	function cityStateLookup(zipcode) {
 		//define local variable
 		var self = this;
-		var urlBase = 'http://production.shippingapis.com/ShippingAPI.dll?API= CityStateLookup&XML=';
+		var url = 'http://production.shippingapis.com/ShippingAPI.dll?API= CityStateLookup&XML=<CityStateLookupRequest%20USERID="' + self._uspsUsername + '"><ZipCode ID= "0"><Zip5>' + zipcode + '</Zip5></ZipCode></CityStateLookupRequest>';
 		var config = '';
-		
+			
+		console.log(zipcode);
+
 		//return async work
 		return new Promise(function(resolve, reject) {
 
@@ -51,8 +61,11 @@ function uspsServices($log, $http) {
 			.then(function success(s) {
 
 				//define local variables
-				var cityStateObject = self._parseCityStateResponse(s);
+				var cityStateObject = self._parseCityStateResponse(s.data);
 				
+				//ADD IN ERROR HANDLING
+				console.log(cityStateObject);
+
 				//pass the value back
 				resolve(cityStateObject);
 

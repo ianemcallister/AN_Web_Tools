@@ -13,6 +13,7 @@ var db = require('./db.js');
 var api = {
 	dbRequest: dbRequest,
 	supplyAsset: supplyAsset,
+	supplyUspsCreds: supplyUspsCreds,
 	supplySquareCreds: supplySquareCreds,
 	shiftEarnings: shiftEarnings,
 	authUser: authUser
@@ -100,6 +101,15 @@ function supplySquareCreds(key) {
 	}
 
 	return returnVariables;
+}
+
+function supplyUspsCreds() {
+	
+	//for development this is fine
+	var secObjectString = fs.readFileSync(__dirname + '/../../config/usps.json');
+	var secObject = JSON.parse(secObjectString);
+
+	return secObject.Username;
 }
 
 function shiftEarnings(params) {

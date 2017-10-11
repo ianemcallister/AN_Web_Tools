@@ -32,7 +32,10 @@ function config($routeProvider) {
     .when('/getting-the-product/:itemId', {
         templateUrl: 'views/productGettingPage.htm',
         controller: 'productGettingController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: { /* @ngInject */
+            uspsUsername: uspsUsername
+        }
     })
     //define the locations route
     .when('/locations', {
@@ -183,3 +186,26 @@ function aProduct(dataServices, $route) {
     });
 
 };
+
+/*
+*   USPS USERNAME
+*
+*   This function gets the secret username for the angular module
+*/
+function uspsUsername(dataServices) {
+    //define local variables
+    var data = dataServices
+    var path = '/api/secrets/usps-username';
+
+    return new Promise(function(resolve, reject) {
+
+        data.get(path)
+        .then(function success(s) {
+            console.log('got this secret', s);
+            resolve(s);
+        }).catch(function error(e) {
+            reject(e);
+        });
+    });
+
+}

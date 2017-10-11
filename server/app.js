@@ -67,6 +67,13 @@ app.get('/api/productlist', function(req, res) {
 
 });
 
+app.get('/api/secrets/usps-username', function(req, res) {
+
+	var secret = api.supplyUspsCreds();
+
+	res.send(secret);
+});
+
 //handles HTTP requests, for GET calls
 app.get('/api/dailySqrSalesDwnld', function(req, res) {
 
