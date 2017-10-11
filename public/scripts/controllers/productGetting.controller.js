@@ -14,6 +14,15 @@ function productGettingController($log, $routeParams, $location, shoppingCart, u
 	vm.usps = uspsServices;
 	vm.usps._uspsUsername = uspsUsername;
 
+	vm.usps.priceCalculator({
+		l: 5,
+		w: 5,
+		h: 5,
+		zipcode: "49001",
+		pounds: 1,
+		ounces: 8,
+		container: "RECTANGULAR"
+	})
 	//$log.info('in the product getting controller', vm.product);	//TODO: TAKE THIS OUT LATER
 
 	vm.order = function() {

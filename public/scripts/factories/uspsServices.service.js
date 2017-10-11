@@ -7,10 +7,36 @@ uspsServices.$inject = ['$log', '$http'];
 /* @ngInject */
 function uspsServices($log, $http) {
 
+	//define the object
 	var uspsServices = {
+		_shippingRequest: {
+			PackageID: "",
+			Service: "",
+			ZipOrigination: "",
+			ZipDestination: "",
+			Pounds: 0,
+			Ounces: 0,
+			Container: "",
+			Size: "",
+			Width: 0.0,
+			Length: 0.0,
+			Height: 0.0,
+			Girth: 0.0,
+			Value: 0.0
+		},
+		_shippingOptions: {
+			zones: [],
+			postage: []
+		},
+		_postage: {
+			mailService: "",
+			rate: 0.0
+		},
 		_uspsUsername: "",
 		_parseCityStateResponse: _parseCityStateResponse,
-		cityStateLookup: cityStateLookup
+		getShippingRequest: getShippingRequest,
+		cityStateLookup: cityStateLookup,
+		priceCalculator: priceCalculator
 	};
 
 	/*
@@ -36,6 +62,17 @@ function uspsServices($log, $http) {
 
 		//return the returnObject
 		return cityStateObject;
+	};
+
+	/*
+	*	GET SHIPPING REQUEST
+	*	
+	*	This function takes no params and returns the shipping request object
+	*	@return _shippingRequest
+	*/
+	function getShippingRequest() {
+		var self = this;
+		return self._shippingRequest;
 	};
 
 	/*
@@ -75,8 +112,132 @@ function uspsServices($log, $http) {
 			});
 
 		});
+	};
+
+	/*
+	*	PRICE CALCULATOR
+	*
+	*	This function accepts the below parameters contained in a shippingRequest object
+	*
+	*	To make things more complicated this should try from both zip codes (97005 and 84015), it should choose whichever is cheeper
+	*
+	*	It should also give delivery options for PRIORITY and EXPRESS.
+	*
+	*	@param "ZipDestination" - required
+	*	@param "Pounds" - required
+	*	@param "Ounces" - required
+	*	@param "Container" - required (RECTANGULAR or NONRECTANGULAR must be indicated when <Size>LARGE</Size>)
+	*	@param "Size" - required (REGULAR: Package dimensions are 12’’ or less; LARGE: Any package dimension is larger than 12’’.)
+	*	@param "Width" - optional (Value must be numeric. Units are inches.)
+	*	@param "Length" - optional (Value must be numeric. Units are inches.)
+	*	@param "Height" - optional (Value must be numeric. Units are inches.)
+	*	@param "Girth" - optional (Value must be numeric. Units are inches.)
+	*	@param "Value" - optional (Package value.  Used to determine availability and cost of extra services.)
+	*	
+	*	@return Promise: "shippingOptions"{zone[0], postage[{mailService, rate}]}
+	*/
+	function priceCalculator(shippingRequest) {
+		//define local variables
+		var self = this;
+		var shippingOptions = self._shippingOptions;
+		var _postage = self._postage;
+		var ZipOrigination = ['97005', '84015'];
+		var Service = ['EXPRESS', 'PRIORITY'];
+		var packageSize = '';
+		var baseUrl = 'http://production.shippingapis.com/ShippingApi.dll?API=RateV4&XML=<RateV4Request USERID="' + self._uspsUsername + '">';
+		var closeRequest = '</RateV4Request> ';
+		var optionCount = 0;
+
+		//construct the url by adding to the string
+		var url = baseUrl;
+
+		//Determine the package size
+		if(shippingRequest.l + shippingRequest.w + shippingRequest.h < 12) packageSize = "REGULAR"
+		else packageSize = 'LARGE';
+
+		//start by iterating through the zipcodes
+		ZipOrigination.forEach(function(zipcode) {
+
+			//then iterate through each services type
+			Service.forEach(function(serviceType) {
+
+				//incriment the option counter
+				optionCount++;
+
+				//add the package tag
+				url += ('<Package ID="' + optionCount + '">');
+
+				//add the service type
+				url += ("<Service>" + serviceType + "</Service>");
+
+				//add the origin zip
+				url += ("<ZipOrigination>" + zipcode + "</ZipOrigination>");
+
+				//add the destination zip
+				url += ("<ZipDestination>" + shippingRequest.zipcode + "</ZipDestination>");
+
+				//add the pounds
+				url += ("<Pounds>" + shippingRequest.pounds + "</Pounds>");
+
+				//add the ounces
+				url += ("<Ounces>" + shippingRequest.ounces + "</Ounces>");
+
+				//add the container
+				url += ("<Container>" + shippingRequest.container + "</Container>");
+
+				//add the size
+				url += ("<Size>" + packageSize + "</Size>");
+
+				//add the width
+				url += ("<Width>" + shippingRequest.w + "</Width>");
+
+				//add the length
+				url += ("<Length>" + shippingRequest.l + "</Length>");
+
+				//add the height
+				url += ("<Height>" + shippingRequest.h + "</Height>");
+
+				//add the girth
+				//url += ("<Size>" + packageSize + "</Size>");
+
+				//close the package tag
+				url += '</Package>';
+
+			});
+
+		});
+
+		//when finished close the request
+		url += closeRequest;
+
+		//then pass the url to server
+		return new Promise(function(resolve, reject) {
+
+			//use the url resource
+			$http.get(url, config)
+			.then(function success(s) {
+
+
+				console.log('got this response back', s.data);
+
+				//pass the results back
+				resolve(s);
+
+			}, function error(e) {
+				//pass errors back
+				reject(e);
+			});
+
+		});
 
 	};
+
+	/*
+	*	ADDRESS VERIFICATION
+	*
+	*/
+	function addressVerification() {};
+
 
 	return uspsServices;
 }
