@@ -21,7 +21,7 @@ function productGettingController($log, $routeParams, $location, shoppingCart, u
 		zipcode: "49001",
 		pounds: 1,
 		ounces: 8,
-		container: "RECTANGULAR"
+		container: "VARIABLE"
 	})
 	//$log.info('in the product getting controller', vm.product);	//TODO: TAKE THIS OUT LATER
 

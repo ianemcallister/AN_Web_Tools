@@ -28,16 +28,66 @@ function uspsServices($log, $http) {
 			zones: [],
 			postage: []
 		},
-		_postage: {
-			mailService: "",
-			rate: 0.0
-		},
 		_uspsUsername: "",
+		_generalParse: _generalParse,
+		_filterPostageOptions: _filterPostageOptions,
 		_parseCityStateResponse: _parseCityStateResponse,
 		getShippingRequest: getShippingRequest,
 		cityStateLookup: cityStateLookup,
 		priceCalculator: priceCalculator
 	};
+
+	/*
+	*	GENERAL PARSE
+	*	
+	*	This function uses a 3rd party script to convert xml to json
+	*/
+	function _generalParse(xml) {
+		var x2js = new X2JS();
+		var afterCnv = x2js.xml_str2json(xml);
+		console.log(afterCnv);
+		return afterCnv;
+	};
+
+	/*
+	*	FILTER POSTAGE OPTIONS
+	*
+	*	This function selects the most cost effective shipping origin and returns
+	*	all the postage options from that location
+	*	@param "allOptions" - is all the response data from USPS
+	*	@return "filteredOptions" - [] is an array of the best options
+	*/
+	function _filterPostageOptions(allOptions) {
+		//define local variables
+		var self = this;
+		var filteredOptions = {};
+		var packageList = allOptions.RateV4Response.Package;
+
+		//iterate through the packages
+		Object.keys(packageList).forEach(function(key) {
+
+			//define the origination location
+			var ZipOrigination = packageList[key].ZipOrigination;
+
+			//if we haven't added this origination location the model, do so
+			if(filteredOptions[ZipOrigination] == undefined) filteredOptions[ZipOrigination] = { zone: 0, services: [] };
+
+			//define the zone
+			filteredOptions[ZipOrigination].zone = packageList[key].Zone;
+
+			var postage = {
+				mailService: packageList[key].Postage.MailService,
+				rate: packageList[key].Postage.Rate
+			};
+
+			//push the postage options for this package onto the location
+			filteredOptions[ZipOrigination].services.push(postage);
+
+		});
+
+
+		return filteredOptions
+	}
 
 	/*
 	*	PARSE CITY STATE RESPONSE
@@ -140,7 +190,7 @@ function uspsServices($log, $http) {
 		//define local variables
 		var self = this;
 		var shippingOptions = self._shippingOptions;
-		var _postage = self._postage;
+		var postageOption = self._postage;
 		var ZipOrigination = ['97005', '84015'];
 		var Service = ['EXPRESS', 'PRIORITY'];
 		var packageSize = '';
@@ -152,8 +202,8 @@ function uspsServices($log, $http) {
 		var url = baseUrl;
 
 		//Determine the package size
-		if(shippingRequest.l + shippingRequest.w + shippingRequest.h < 12) packageSize = "REGULAR"
-		else packageSize = 'LARGE';
+		if(shippingRequest.l > 12 || shippingRequest.w > 12 || shippingRequest.h > 12) packageSize = "LARGE"
+		else packageSize = 'REGULAR';
 
 		//start by iterating through the zipcodes
 		ZipOrigination.forEach(function(zipcode) {
@@ -217,11 +267,16 @@ function uspsServices($log, $http) {
 			$http.get(url, config)
 			.then(function success(s) {
 
+				//parse the xml response
+				var dataJsonObject = self._generalParse(s.data);
 
-				console.log('got this response back', s.data);
+				//distill the postage options down to most cost effective
+				var allPostageOptions = self._filterPostageOptions(dataJsonObject);
+
+				console.log('allPostageOptions', allPostageOptions);
 
 				//pass the results back
-				resolve(s);
+				resolve(allPostageOptions);
 
 			}, function error(e) {
 				//pass errors back
