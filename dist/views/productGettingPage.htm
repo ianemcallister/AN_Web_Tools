@@ -21,7 +21,7 @@
 				<define-delivery-address deliver-to="vm.cart.aquisitionDetails.deliveryLocation"></define-delivery-address>
 
 				<!--Third if it's Delivery select the type (USPS, FedEx, UPS // Priority, Express, ground, etc)-->
-				<select-delivery-method ng-if='false'></select-delivery-method>
+				<select-delivery-method ng-if='true' usps='vm.uspsOptions'></select-delivery-method>
 
 				<!--Finally, Navigate forward or backward-->
 				<button class="btn" style='color: black'>Go Back</button>

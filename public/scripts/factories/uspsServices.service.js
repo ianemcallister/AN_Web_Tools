@@ -103,9 +103,14 @@ function uspsServices($log, $http) {
 
 		});
 
+		//save the values outside the object
+		Object.keys(filteredOptions).forEach(function(key) {
+			filteredOptions = filteredOptions[key].services;
+		});
+
 
 		return filteredOptions
-	}
+	};
 
 	/*
 	*	PARSE CITY STATE RESPONSE
@@ -291,7 +296,7 @@ function uspsServices($log, $http) {
 				//distill the postage options down to most cost effective
 				var allPostageOptions = self._filterPostageOptions(dataJsonObject);
 
-				console.log('allPostageOptions', allPostageOptions);
+				//console.log('allPostageOptions', allPostageOptions);
 
 				//pass the results back
 				resolve(allPostageOptions);

@@ -15,7 +15,9 @@ function selectDeliveryMethod() {
 		restrict: 'AECM',
 		templateUrl: 'views/directives/selectDeliveryMethod.directive.htm',
 		replace: true,
-		scope: {},
+		scope: {
+			usps: "="
+		},
 		link: linkFunc,
 		controller: selectDeliveryMethodController,
 		controllerAs: 'vm',

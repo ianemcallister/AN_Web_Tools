@@ -1,3 +1,10 @@
 <div>
 	USPS Options
+	
+	<div ng-repeat='service in vm.options track by $index'>
+		<input type="radio" id="{{$index}}" name='shippingService'>
+		<label for="{{$index}}">
+			{{ service.rate | currency }} - {{ service.mailService }}
+		</label>
+	</div>
 </div>

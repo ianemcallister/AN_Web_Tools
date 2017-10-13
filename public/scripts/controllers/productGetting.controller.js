@@ -2,10 +2,10 @@ angular
     .module('ahNuts')
     .controller('productGettingController', productGettingController);
 
-productGettingController.$inject = ['$log', '$routeParams', '$location', 'shoppingCart', 'uspsServices', 'uspsUsername'];
+productGettingController.$inject = ['$scope', '$log', '$routeParams', '$location', 'shoppingCart', 'uspsServices', 'uspsUsername'];
 
 /* @ngInject */
-function productGettingController($log, $routeParams, $location, shoppingCart, uspsServices, uspsUsername) {
+function productGettingController($scope, $log, $routeParams, $location, shoppingCart, uspsServices, uspsUsername) {
 
 	//define view model variable
 	var vm = this;
@@ -22,7 +22,17 @@ function productGettingController($log, $routeParams, $location, shoppingCart, u
 		pounds: 1,
 		ounces: 8,
 		container: "VARIABLE"
-	})
+	}).then(function success(s) {
+		
+		console.log('got this back', s);
+		
+		vm.uspsOptions = s;
+		$scope.$apply();
+
+	}).catch(function error(e) {
+		console.log('error', e);
+	});
+
 	//$log.info('in the product getting controller', vm.product);	//TODO: TAKE THIS OUT LATER
 
 	vm.order = function() {

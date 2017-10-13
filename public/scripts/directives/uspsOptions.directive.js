@@ -15,7 +15,9 @@ function uspsOptions() {
 		restrict: 'AECM',
 		templateUrl: 'views/directives/uspsOptions.directive.htm',
 		replace: true,
-		scope: {},
+		scope: {
+			options: "="
+		},
 		link: linkFunc,
 		controller: uspsOptionsController,
 		controllerAs: 'vm',
@@ -31,7 +33,6 @@ function uspsOptions() {
     function uspsOptionsController($scope, $log) {
 	    var vm = this;
 
-	    //$log.info('in the header directive');
 
 	}
 
