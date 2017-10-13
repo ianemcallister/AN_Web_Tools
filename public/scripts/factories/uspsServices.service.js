@@ -62,6 +62,7 @@ function uspsServices($log, $http) {
 		var self = this;
 		var filteredOptions = {};
 		var packageList = allOptions.RateV4Response.Package;
+		var closestZip = {zip: "", zone:100 };
 
 		//iterate through the packages
 		Object.keys(packageList).forEach(function(key) {
@@ -82,6 +83,23 @@ function uspsServices($log, $http) {
 
 			//push the postage options for this package onto the location
 			filteredOptions[ZipOrigination].services.push(postage);
+
+		});
+
+		//check the zones to ship from the closest location
+		Object.keys(filteredOptions).forEach(function(key) {
+
+			//console.log(filteredOptions[key].zone, key, closestZip.zone, filteredOptions[key].zone < closestZip.zone)
+			//save the closest zone
+			if(filteredOptions[key].zone < closestZip.zone) closestZip = { zip: key, zone:filteredOptions[key].zone }
+
+		});	
+
+		//iterate through all the objects, delete all that aren't the closest
+		Object.keys(filteredOptions).forEach(function(key) {
+
+			//if it's not the smallest, delete it
+			if(key != closestZip.zip) delete filteredOptions[key];
 
 		});
 
