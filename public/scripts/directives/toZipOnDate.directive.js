@@ -17,7 +17,8 @@ function toZipOnDate() {
 		replace: true,
 		scope: {
 			goingTo: "=",
-			vipIdentified: '='
+			vipIdentified: '=',
+			goFn: '&'
 		},
 		link: linkFunc,
 		controller: toZipOnDateController,
@@ -39,6 +40,8 @@ function toZipOnDate() {
     function toZipOnDateController($scope, $log, uspsServices) {
 	    var vm = this;
 
+	    console.log(vm.goFn);
+
 	    //$log.info('in the header directive');
 	    vm.zipcodeFinder = function() {
 	    	alert('finding zipcode');
@@ -46,7 +49,8 @@ function toZipOnDate() {
 
 	    vm.submitZip = function() {
 	    	//check for a valid 
-
+	    	console.log('passed through here');
+	    	//vm.goFn();
 	    };
 
 	    vm.checkzipcode = function() {

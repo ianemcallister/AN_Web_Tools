@@ -14,36 +14,6 @@ function productGettingController($scope, $log, $routeParams, $location, shoppin
 	vm.usps = uspsServices;
 	vm.usps._uspsUsername = uspsUsername;
 
-	vm.usps.priceCalculator({
-		l: 5,
-		w: 5,
-		h: 5,
-		zipcode: "49001",
-		pounds: 1,
-		ounces: 8,
-		container: "VARIABLE"
-	}).then(function success(s) {
-		//define local variables
-		var originZip = '';
-
-		console.log('got this back', s);
-		
-		//pull out the key
-		Object.keys(s).forEach(function(shippingOrigin) {  originZip = shippingOrigin; });
-		
-		//save the origin to the model
-		vm.cart.aquisitionDetails.deliveryMethod.shippingOrigin = originZip;
-
-		//save the services to pass through to the model
-		vm.uspsOptions = s[originZip].services;
-
-		//apply the new data
-		$scope.$apply();
-
-	}).catch(function error(e) {
-		console.log('error', e);
-	});
-
 	//$log.info('in the product getting controller', vm.product);	//TODO: TAKE THIS OUT LATER
 
 	vm.order = function() {
@@ -76,6 +46,40 @@ function productGettingController($scope, $log, $routeParams, $location, shoppin
 			//display an error message
 			console.log('error:', e);
 			
+		});
+
+	};
+
+	vm.zipGo = function(value) {
+	
+		vm.usps.priceCalculator({
+			l: 5,
+			w: 5,
+			h: 5,
+			zipcode: vm.cart.aquisitionDetails.deliveryLocation.zip,
+			pounds: 1,
+			ounces: 8,
+			container: "VARIABLE"
+		}).then(function success(s) {
+			//define local variables
+			var originZip = '';
+
+			console.log('got this back', s);
+			
+			//pull out the key
+			Object.keys(s).forEach(function(shippingOrigin) {  originZip = shippingOrigin; });
+			
+			//save the origin to the model
+			vm.cart.aquisitionDetails.deliveryMethod.shippingOrigin = originZip;
+
+			//save the services to pass through to the model
+			vm.uspsOptions = s[originZip].services;
+
+			//apply the new data
+			$scope.$apply();
+
+		}).catch(function error(e) {
+			console.log('error', e);
 		});
 
 	};
