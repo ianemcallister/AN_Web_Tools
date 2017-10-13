@@ -103,10 +103,23 @@ function uspsServices($log, $http) {
 
 		});
 
-		//save the values outside the object
-		Object.keys(filteredOptions).forEach(function(key) {
-			filteredOptions = filteredOptions[key].services;
+		//clean excess characters from mailservice string
+		Object.keys(filteredOptions).forEach(function(zip) {
+
+			//address each service
+			Object.keys(filteredOptions[zip].services).forEach(function(service) {
+
+				//replace the trademark html with the equivilant string
+				filteredOptions[zip].services[service].mailService = filteredOptions[zip].services[service].mailService.replace("&lt;sup&gt;&#8482;&lt;/sup&gt;", '™');
+
+			});
+
 		});
+
+		//save the values outside the object
+		//Object.keys(filteredOptions).forEach(function(key) {
+		//	filteredOptions = filteredOptions[key].services;
+		//});
 
 
 		return filteredOptions

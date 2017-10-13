@@ -23,10 +23,21 @@ function productGettingController($scope, $log, $routeParams, $location, shoppin
 		ounces: 8,
 		container: "VARIABLE"
 	}).then(function success(s) {
-		
+		//define local variables
+		var originZip = '';
+
 		console.log('got this back', s);
 		
-		vm.uspsOptions = s;
+		//pull out the key
+		Object.keys(s).forEach(function(shippingOrigin) {  originZip = shippingOrigin; });
+		
+		//save the origin to the model
+		vm.cart.aquisitionDetails.deliveryMethod.shippingOrigin = originZip;
+
+		//save the services to pass through to the model
+		vm.uspsOptions = s[originZip].services;
+
+		//apply the new data
 		$scope.$apply();
 
 	}).catch(function error(e) {

@@ -37,7 +37,9 @@ function shoppingCart($log, $http, $window) {
 				state: "",
 				zip: ""
 			},
-			deliveryMethod: {}
+			deliveryMethod: {
+				shippingOrigin: ""
+			}
 		},
 		paymentDetails: {},
 		items: {},
