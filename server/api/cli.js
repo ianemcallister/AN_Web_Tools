@@ -1,6 +1,7 @@
 
 //console.log(__dirname);
 
-var api = require('./api.js');
+//var api = require('./api.js');
+var ahNuts = require('./ah-nuts_processes.js');
 
-console.log(api.supplyUspsCreds());
+ahNuts.dailyEarningsReportEmails(true);

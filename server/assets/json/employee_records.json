@@ -1,0 +1,38 @@
+[
+	{
+		"ah_nuts_id": "SY20130101_01",
+		"square_id": "NEED TO FILL THIS IN",
+		"name": {
+			"first": "Steve",
+			"middle": "Sherwood",
+			"last": "Young",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "steve@ah-nuts.com"
+		},
+		"supervisors": [],
+		"deal": {
+			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	},
+	{
+		"ah_nuts_id": "IM20160801_01",
+		"square_id": "NEED TO FILL THIS IN",
+		"name": {
+			"first": "Ian",
+			"middle": "Edward",
+			"last": "McAllister",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "ian@ah-Nuts.com"
+		},
+		"supervisors": [ "SY20130101_01" ],
+		"deal": {
+			"hourly_rate": 1125,
+			"commission_factor": 2752
+		}
+	}
+]

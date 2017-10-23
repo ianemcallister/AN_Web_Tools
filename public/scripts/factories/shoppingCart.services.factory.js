@@ -17,13 +17,6 @@ function shoppingCart($log, $http, $window) {
 		discounts: 0,
 		totalCost: 0,
 		aquisitionDetails: {
-			delZipIdentified: false,
-			delDateIdentified: false,
-			shippedOrPUSelected: false,
-			willShippp: false,
-			willPU: false,
-			puLocSelected: false,
-			delMthSelected: false,
 			pickupLocation: {},
 			deliveryLocation: {
 				receiver: {
@@ -38,6 +31,7 @@ function shoppingCart($log, $http, $window) {
 				zip: ""
 			},
 			deliveryMethod: {
+				shippingService: "",
 				shippingOrigin: ""
 			}
 		},

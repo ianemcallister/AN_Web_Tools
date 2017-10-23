@@ -26,14 +26,16 @@ function uspsOptions() {
 
 	/* @ngInject */
 	function linkFunc(scope, el, attr, ctrl) {
+	
     }
 
-    uspsOptionsController.$inject = ['$scope', '$log'];
+    uspsOptionsController.$inject = ['$scope', '$log', 'shoppingCart'];
     /* @ngInject */
-    function uspsOptionsController($scope, $log) {
+    function uspsOptionsController($scope, $log, shoppingCart) {
 	    var vm = this;
-
-
+	    vm.selectedOption = ''
+	    vm.uspsOptions = shoppingCart.aquisitionDetails.deliveryMethod;
+	    console.log($scope);
 	}
 
 	return  directive;

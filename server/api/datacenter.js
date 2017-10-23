@@ -5,7 +5,8 @@
 datacenter = {
 	_check_shift_tx_values: _check_shift_tx_values,
 	_buildTimeObject: _buildTimeObject,
-	calcEvntDyErnngs: calcEvntDyErnngs
+	calcEvntDyErnngs: calcEvntDyErnngs,
+	loadEmployeesList: loadEmployeesList
 };
 
 /*
@@ -108,6 +109,16 @@ function calcEvntDyErnngs(shift, txs, tests) {
 	console.log(returnObject);
 
 };
+
+function loadEmployeesList() {
+
+	//return async work
+	return new Promise(function(resolve, reject){ 
+		resolve(['done', 'done2']);
+	});
+
+};
+
 
 //export the module
 module.exports = datacenter;

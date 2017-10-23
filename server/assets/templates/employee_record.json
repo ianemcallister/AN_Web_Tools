@@ -1,0 +1,18 @@
+{
+	"ah_nuts_id": "IM20160801_01",
+	"square_id": "",
+	"name": {
+		"first": "",
+		"middle": "",
+		"last": "",
+		"nickname": ""
+	},
+	"contact": {
+		"email": ""
+	},
+	"supervisors": [ "SY20130101_01" ],
+	"deal": {
+		"hourly_rate": 1025,
+		"commission_factor": 2752
+	}
+}

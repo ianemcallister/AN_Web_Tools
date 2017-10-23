@@ -2,15 +2,16 @@ angular
     .module('ahNuts')
     .controller('productGettingController', productGettingController);
 
-productGettingController.$inject = ['$scope', '$log', '$routeParams', '$location', 'shoppingCart', 'uspsServices', 'uspsUsername'];
+productGettingController.$inject = ['$scope', '$log', '$routeParams', '$location', 'shoppingCart', 'stateService', 'uspsServices', 'uspsUsername'];
 
 /* @ngInject */
-function productGettingController($scope, $log, $routeParams, $location, shoppingCart, uspsServices, uspsUsername) {
+function productGettingController($scope, $log, $routeParams, $location, shoppingCart, stateService, uspsServices, uspsUsername) {
 
 	//define view model variable
 	var vm = this;
 	vm.product = $routeParams.item;
 	vm.cart = shoppingCart;
+	vm.state = stateService;
 	vm.usps = uspsServices;
 	vm.usps._uspsUsername = uspsUsername;
 
