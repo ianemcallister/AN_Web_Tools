@@ -1,6 +1,7 @@
 
-////define dependencies
-	
+//define dependencies
+var fs = require('fs');
+
 //define module
 datacenter = {
 	_check_shift_tx_values: _check_shift_tx_values,
@@ -114,7 +115,14 @@ function loadEmployeesList() {
 
 	//return async work
 	return new Promise(function(resolve, reject){ 
-		resolve(['done', 'done2']);
+		
+		//eventually this will pull from firebase or other databse, but for now
+		//this will just load a file
+		var path = __dirname + '/../assets/json/employee_records.json'
+		var jsonModel = fs.readFileSync(path, "utf8");
+
+		resolve(JSON.parse(jsonModel));
+
 	});
 
 };

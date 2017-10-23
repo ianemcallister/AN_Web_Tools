@@ -21,7 +21,8 @@ var squareup = {
 	_collectMultiPages: _collectMultiPages,
 	_downloadDailySales: _downloadDailySales,
 	employeesList: employeesList,
-	downloadDailySales: downloadDailySales
+	downloadDailySales: downloadDailySales,
+	aTest: aTest
 };
 
 function _distillDateTime(aDate) {
@@ -296,5 +297,7 @@ function downloadDailySales(date, employees, devices) {
 	});
 
 };
+
+function aTest() { return new Promise(function(resolve, reject) { resolve('testing square'); })}
 
 module.exports = squareup;
