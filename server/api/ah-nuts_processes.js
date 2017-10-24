@@ -95,7 +95,8 @@ function dailyEarningsReportEmails(employeeReportsNeeded, aDate) {
 	var allEmployeeReports = {};	//this will track all the reports generated
 
 	//if no date is provided, default to the current date
-	if(aDate == undefined) aDate = new Date();
+	if(aDate == undefined) aDate = new Date()
+	else aDate = new Date(aDate);
 
 	//load all async data at the same time, when all promises resolve the process
 	//the data
@@ -120,8 +121,8 @@ function dailyEarningsReportEmails(employeeReportsNeeded, aDate) {
 			var employeeWorkedToday = 0;	//TODO: ADD THIS TEST HERE
 			var Total_Shift_Hours = self._calcShiftHrs(employee.sling_id, allDailyShifts.data);	//Aquired from Sling API
 			var Total_Shift_Sales = 0; 				//Aquired from Square API	
-			var Base_Pay_Rate = 0; 					//Aquired from Ah-Nuts Database
-			var Commission_Factor = 0;				//(2,752) - Aquired from Ah-Nuts Databse
+			var Base_Pay_Rate = employee.deal.hourly_rate; 			//Aquired from Ah-Nuts Database
+			var Commission_Factor = employee.deal.commission_factor;	//(2,752) - Aquired from Ah-Nuts Databse
 			
 			//for each employee we must make the required calculations
 
