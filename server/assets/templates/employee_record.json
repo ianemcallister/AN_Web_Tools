@@ -1,6 +1,7 @@
 {
 	"ah_nuts_id": "IM20160801_01",
 	"square_id": "",
+	"sling_id": "",
 	"name": {
 		"first": "",
 		"middle": "",
@@ -10,6 +11,7 @@
 	"contact": {
 		"email": ""
 	},
+	"timezone": "America/Los_Angeles",
 	"supervisors": [ "SY20130101_01" ],
 	"deal": {
 		"hourly_rate": 1025,

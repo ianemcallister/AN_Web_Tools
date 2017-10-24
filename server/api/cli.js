@@ -3,5 +3,13 @@
 
 //var api = require('./api.js');
 var ahNuts = require('./ah-nuts_processes.js');
+//var sling = require('./sling.js');
 
-ahNuts.dailyEarningsReportEmails(true);
+/*sling.downloadTimecards(new Date())
+.then(function success(s) {
+	console.log('success', s);
+}).catch(function error(e) {
+	console.log('error', e);
+});*/
+
+ahNuts.dailyEarningsReportEmails(false);

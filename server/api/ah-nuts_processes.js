@@ -13,7 +13,49 @@ var sling = require('./sling.js');
 //define the current module
 var ahNuts = {
 	admin: "ian@ah-nuts.com",
+	_calcShiftHrs: _calcShiftHrs,
 	dailyEarningsReportEmails: dailyEarningsReportEmails
+};
+
+/*
+*	_CALCULATE SHIFT HOURS
+*	
+*	This function accepts an employee ID and the timecards form sling and returns
+*	the hours worked as a decimal.
+*
+*	@param - employeeId
+*	@param - timecards
+*	@return - hoursWorked (decimal)
+*/
+function _calcShiftHrs(employeeId, timecards) {
+
+	//define local variables
+	var self = this;
+	var hoursWorked = 0.00;
+
+	//console.log('calculating Shift Hours', employeeId, timecards);
+
+	//iterate through each of the timecards
+	timecards.forEach(function(tCard) {
+
+		//only assess timecards for selected employee
+		if(tCard.user.id == employeeId) {
+
+			//calculate the duration
+			var startTime = new Date(tCard.clockIn);
+			var endTime = new Date(tCard.clockOut);
+			var duration = (endTime - startTime) / 1000 / 60 / 60; // miliseconds->Seconds, seconds->minutes, minutes->hrs 
+
+			//console.log('duration', duration );
+
+			//add that duration to the hours Worked
+			hoursWorked += duration;
+		}
+
+	});
+
+	//return the value
+	return hoursWorked;
 };
 
 /*
@@ -75,7 +117,8 @@ function dailyEarningsReportEmails(employeeReportsNeeded, aDate) {
 		employeeList.forEach(function(employee) {
 
 			//define local variables
-			var Total_Shift_Hours = 0;				//Aquired from Sling API
+			var employeeWorkedToday = 0;	//TODO: ADD THIS TEST HERE
+			var Total_Shift_Hours = self._calcShiftHrs(employee.sling_id, allDailyShifts.data);	//Aquired from Sling API
 			var Total_Shift_Sales = 0; 				//Aquired from Square API	
 			var Base_Pay_Rate = 0; 					//Aquired from Ah-Nuts Database
 			var Commission_Factor = 0;				//(2,752) - Aquired from Ah-Nuts Databse
