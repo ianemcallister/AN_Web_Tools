@@ -14,6 +14,7 @@ var sling = require('./sling.js');
 var ahNuts = {
 	admin: "ian@ah-nuts.com",
 	_calcShiftHrs: _calcShiftHrs,
+	_calcShiftSales: _calcShiftSales,
 	dailyEarningsReportEmails: dailyEarningsReportEmails
 };
 
@@ -56,6 +57,38 @@ function _calcShiftHrs(employeeId, timecards) {
 
 	//return the value
 	return hoursWorked;
+};
+
+/*
+*	_CALC SHIFT SALES
+*
+*	This function looks through all of the shift sales and adds those attributed
+*	to the employee to their shift
+*
+*	@param - employeeId
+*	@param - allSales
+*	@return - Total_Shift_Sales
+*
+*/
+function _calcShiftSales(employeeId, allSales) {
+
+	//define local variables
+	var self = this;
+	var totalShiftSales = 0;
+
+	//iterate through the objects based on keys
+	Object.keys(allSales).forEach(function(txDate) {
+
+		//iterate through each of the tender transactions
+		Object.keys(allSales[txDate]).forEach(function(txTime) {
+
+			//
+		});
+
+	});
+
+	//return the shift sales
+	return totalShiftSales;
 };
 
 /*
@@ -102,8 +135,7 @@ function dailyEarningsReportEmails(employeeReportsNeeded, aDate) {
 	//the data
 	Promise.all([
 		dc.loadEmployeesList(),
-		//square.downloadDailySales(aDate),
-		square.aTest(),
+		square.downloadDailySales(aDate),
 		sling.downloadTimecards(aDate)
 	])
 	.then(function success(earningsRequiredData) {
@@ -120,7 +152,7 @@ function dailyEarningsReportEmails(employeeReportsNeeded, aDate) {
 			//define local variables
 			var employeeWorkedToday = 0;	//TODO: ADD THIS TEST HERE
 			var Total_Shift_Hours = self._calcShiftHrs(employee.sling_id, allDailyShifts.data);	//Aquired from Sling API
-			var Total_Shift_Sales = 0; 				//Aquired from Square API	
+			var Total_Shift_Sales = self._calcShiftSales(employee.square_id, allDailySales); 	//Aquired from Square API	
 			var Base_Pay_Rate = employee.deal.hourly_rate; 			//Aquired from Ah-Nuts Database
 			var Commission_Factor = employee.deal.commission_factor;	//(2,752) - Aquired from Ah-Nuts Databse
 			

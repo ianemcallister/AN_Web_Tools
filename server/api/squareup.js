@@ -20,6 +20,7 @@ var squareup = {
 	_isAnotherPage: _isAnotherPage,
 	_collectMultiPages: _collectMultiPages,
 	_downloadDailySales: _downloadDailySales,
+	_dateFormatter: _dateFormatter,
 	employeesList: employeesList,
 	downloadDailySales: downloadDailySales,
 	aTest: aTest
@@ -235,6 +236,29 @@ function _downloadDailySales(url, options) {
 
 }
 
+/*
+*	_DATE FORMATTER
+*	
+*	Date formatter is a function that takes a javasciprt date and returns the required date
+*	string for square to access a specifc date;
+*/
+function _dateFormatter(aDate) {
+
+	//define local variables
+	var self = this;
+	var theDate = new Date(aDate);
+
+	var year = aDate.getFullYear();
+	var month = parseInt(aDate.getMonth());
+	var day = parseInt(aDate.getDate());
+	var startTime = "T03:00:00-08:00";
+	var endTime = "T02:59:59-08:00";
+	var startString = 'begin_time=' + year + "-" + (month + 1) + "-" + (day - 1) + startTime;
+	var endString = '&end_time=' + year + "-" + (month + 1) + "-" + (day) + endTime;;
+
+	return startString + endString;
+};
+
 //Download Employees List
 function employeesList() {
 
@@ -273,9 +297,8 @@ function employeesList() {
 function downloadDailySales(date, employees, devices) {
 	
 	//local variables
-	var dateStart = date.year + '-' + date.month + '-' + date.day + 'T02:59:59-08:00';
-	var dateEnd = date.year + '-' + date.month + '-' + date.next + 'T03:00:00-08:00'
-	var sectionUrl = locationID + '/payments?begin_time=' + dateStart + '&end_time=' + dateEnd;
+	var self = this;
+	var sectionUrl = locationID + '/payments?' + self._dateFormatter(date);
 	var url = baseURL + sectionUrl;
 	var options = {
 		method: 'GET',

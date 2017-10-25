@@ -12,4 +12,4 @@ var ahNuts = require('./ah-nuts_processes.js');
 	console.log('error', e);
 });*/
 
-ahNuts.dailyEarningsReportEmails(false);
+ahNuts.dailyEarningsReportEmails(false, '2017-10-20');
