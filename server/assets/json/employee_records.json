@@ -1,7 +1,7 @@
 [
 	{
 		"ah_nuts_id": "SY20130101_01",
-		"square_id": "undefined",
+		"square_id": "mmIrwp5oGAYi_58pRFAh",
 		"sling_id": 648261,
 		"name": {
 			"first": "Steve",
@@ -21,7 +21,7 @@
 	},
 	{
 		"ah_nuts_id": "IM20160801_01",
-		"square_id": "undefined",
+		"square_id": "rUxLgAqsVklCN_14dfbE",
 		"sling_id": 615457,
 		"name": {
 			"first": "Ian",
@@ -59,7 +59,7 @@
 	},
 	{
 		"ah_nuts_id": "AY20160801_01",
-		"square_id": "undefined",
+		"square_id": "UJBeCCEokTlGWtrLRJ",
 		"sling_id": 751932,
 		"name": {
 			"first": "Ashlee",
@@ -173,7 +173,7 @@
 	},
 	{
 		"ah_nuts_id": "ES20171010_01",
-		"square_id": "undefined",
+		"square_id": "1F7a2TjJyH66sLBbz2Ga",
 		"sling_id": 725915,
 		"name": {
 			"first": "Elia",
@@ -192,7 +192,7 @@
 	},
 	{
 		"ah_nuts_id": "MT20170515_01",
-		"square_id": "undefined",
+		"square_id": "r3cN022u9Xxv7UN394O5",
 		"sling_id": 677501,
 		"name": {
 			"first": "Makayla",
@@ -211,7 +211,7 @@
 	},
 	{
 		"ah_nuts_id": "LN20170501_01",
-		"square_id": "undefined",
+		"square_id": "ONq0cDPusYNMsg3XBpRC",
 		"sling_id": 615455,
 		"name": {
 			"first": "Lindsey",
@@ -230,7 +230,7 @@
 	},
 	{
 		"ah_nuts_id": "CM20170730_01",
-		"square_id": "undefined",
+		"square_id": "4ISdMmC7SkAyDQL_DB87",
 		"sling_id": 615453,
 		"name": {
 			"first": "Caitlin",
@@ -249,7 +249,7 @@
 	},
 	{
 		"ah_nuts_id": "HB20170530_01",
-		"square_id": "undefined",
+		"square_id": "61_a_2vsUvpPUzE4Iide",
 		"sling_id": 615451,
 		"name": {
 			"first": "Hannah",
@@ -263,6 +263,44 @@
 		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
 		"deal": {
 			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	},
+	{
+		"ah_nuts_id": "LY20140530_01",
+		"square_id": "lfRy4B4G-0lA_udwGgQr",
+		"sling_id": 615456,
+		"name": {
+			"first": "Lacey",
+			"middle": "",
+			"last": "Young",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "lacey.young1992@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1350,
+			"commission_factor": 2752
+		}
+	},
+	{
+		"ah_nuts_id": "AB20161115_01",
+		"square_id": "jWHhpfKjHyEmzezPtJNM",
+		"sling_id": 621390,
+		"name": {
+			"first": "Aaron",
+			"middle": "",
+			"last": "Bettencourt",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "bett5020@pacificu.edu"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1125,
 			"commission_factor": 2752
 		}
 	}

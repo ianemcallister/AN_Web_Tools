@@ -3,6 +3,8 @@
 
 //var api = require('./api.js');
 var ahNuts = require('./ah-nuts_processes.js');
+//var square = require('./squareup.js');
+//var fs = require('fs');
 //var sling = require('./sling.js');
 
 /*sling.downloadTimecards(new Date())
@@ -12,4 +14,5 @@ var ahNuts = require('./ah-nuts_processes.js');
 	console.log('error', e);
 });*/
 
-ahNuts.dailyEarningsReportEmails(false, '2017-10-20');
+ahNuts.dailyEarningsReportEmails(false, '2017-10-26');
+

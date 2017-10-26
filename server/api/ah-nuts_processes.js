@@ -82,7 +82,14 @@ function _calcShiftSales(employeeId, allSales) {
 		//iterate through each of the tender transactions
 		Object.keys(allSales[txDate]).forEach(function(txTime) {
 
-			//
+			//TODO
+			//console.log(allSales[txDate][txTime].tender[0].employee_id, employeeId);
+			//console.log(allSales[txDate][txTime].tender[0]);
+			if(allSales[txDate][txTime].tender[0].employee_id == employeeId) {
+				//ad the sales to the employee
+				totalShiftSales += allSales[txDate][txTime].gross_sales_money;
+			};
+			
 		});
 
 	});
@@ -129,7 +136,19 @@ function dailyEarningsReportEmails(employeeReportsNeeded, aDate) {
 
 	//if no date is provided, default to the current date
 	if(aDate == undefined) aDate = new Date()
-	else aDate = new Date(aDate);
+	else {
+		var passedDate = aDate;
+		var splitDate = aDate.split('-');
+		var passedYear = splitDate[0];
+		var passedMonth = splitDate[1] - 1;
+		var passedDay = splitDate[2];
+		var currentTime = new Date();
+		//first set the date
+		aDate = new Date(passedYear, passedMonth, passedDay, currentTime.getHours(), currentTime.getMinutes());
+		//then make sure the times are updated
+	};
+
+	console.log('got this date:', aDate);
 
 	//load all async data at the same time, when all promises resolve the process
 	//the data
@@ -152,11 +171,12 @@ function dailyEarningsReportEmails(employeeReportsNeeded, aDate) {
 			//define local variables
 			var employeeWorkedToday = 0;	//TODO: ADD THIS TEST HERE
 			var Total_Shift_Hours = self._calcShiftHrs(employee.sling_id, allDailyShifts.data);	//Aquired from Sling API
-			var Total_Shift_Sales = self._calcShiftSales(employee.square_id, allDailySales); 	//Aquired from Square API	
-			var Base_Pay_Rate = employee.deal.hourly_rate; 			//Aquired from Ah-Nuts Database
+			var Total_Shift_Sales = self._calcShiftSales(employee.square_id, allDailySales) / 100; 	//Aquired from Square API	
+			var Base_Pay_Rate = employee.deal.hourly_rate / 100; 			//Aquired from Ah-Nuts Database
 			var Commission_Factor = employee.deal.commission_factor;	//(2,752) - Aquired from Ah-Nuts Databse
 			
 			//for each employee we must make the required calculations
+			console.log(employee.ah_nuts_id, Total_Shift_Sales);
 
 			//calculate the Average_Sales_Per_Hour
 			var Average_Sales_Per_Hour = Total_Shift_Sales / Total_Shift_Hours; 
