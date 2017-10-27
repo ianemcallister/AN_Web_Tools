@@ -211,7 +211,7 @@ function dailyEarningsReportEmails(employeeReportsNeeded, aDate) {
 
 			//send in email to employees if required
 			if(employeeReportsNeeded) {
-				
+
 				//report model must be compiled into an email report
 				var employeeSalesReportEmail = rc.employeeDailySalesReport(dailyEarningsReportModel);
 				

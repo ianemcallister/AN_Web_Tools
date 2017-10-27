@@ -7,7 +7,8 @@ datacenter = {
 	_check_shift_tx_values: _check_shift_tx_values,
 	_buildTimeObject: _buildTimeObject,
 	calcEvntDyErnngs: calcEvntDyErnngs,
-	loadEmployeesList: loadEmployeesList
+	loadEmployeesList: loadEmployeesList,
+	readFileSync: readFileSync
 };
 
 /*
@@ -128,6 +129,14 @@ function loadEmployeesList() {
 
 };
 
+/*
+*	readFileSync
+*
+*/
+function readFileSync(path) {
+
+	return fs.readFileSync(path, 'utf8');
+}
 
 //export the module
 module.exports = datacenter;

@@ -1,6 +1,8 @@
 
 
 //define dependencies
+var hb = require('handlebars');
+var dc = require('./datacenter.js');
 
 //define the module
 var reportCenter = {
@@ -20,8 +22,34 @@ var reportCenter = {
 */
 function _buildSubject(model) {
 
+	//define local variables
+	var wkdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday","Saturday"];
+	var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+	var theSubject = "Your Ah-Nuts! Daily Sales Report for ";	
+
+	//set the date back one day
+	var yesterday = new Date(model.TheDate.getTime());
+	yesterday.setDate(model.TheDate.getDate() - 1);
+
+	//add the day of the week
+	theSubject += wkdays[yesterday.getDay()] + ", ";
+
+	//add the month
+	theSubject += months[yesterday.getMonth()] + " ";
+
+	//add the day of the month
+	theSubject += yesterday.getDate();
+
+	//add the ending on the day
+	if(yesterday.getDate() == 1 || yesterday.getDate() == 21 || yesterday.getDate() == 31) theSubject += "st "
+	else if(yesterday.getDate() == 2 || yesterday.getDate() == 22) theSubject += "nd "
+	else theSubject += "th ";
+
+	//add the year
+	theSubject += yesterday.getFullYear();
+
 	//return the messsage
-	return "This is a Subject";
+	return theSubject;
 };
 
 /*
@@ -34,8 +62,11 @@ function _buildSubject(model) {
 */
 function _buildTextBody(model) {
 
+	//define the local variable
+	var plainText = "Just basic";
+
 	//return the text body
-	return "This is the text body";
+	return plainText;
 };
 
 /*
@@ -48,8 +79,20 @@ function _buildTextBody(model) {
 */
 function _buildHTMLBody(model) {
 
-	//return the html body
-	return "<h1>This is the html body</h1>"
+	//load the template source
+	var source = dc.readFileSync(__dirname + '/../assets/templates/employee_sales_report_text.htm')
+	
+	//compile the template source into an HB template
+	var template = hb.compile(source);
+	
+	//add the data to the template
+	var data = model;
+	
+	//render the results
+	var result = template(data);
+
+	//return the text body
+	return result;
 };
 
 /*
