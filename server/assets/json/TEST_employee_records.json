@@ -1,0 +1,21 @@
+[
+	{
+		"ah_nuts_id": "IM20160801_01",
+		"square_id": "rUxLgAqsVklCN_14dfbE",
+		"sling_id": 615457,
+		"name": {
+			"first": "Ian",
+			"middle": "Edward",
+			"last": "McAllister",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "ian@ah-Nuts.com"
+		},
+		"supervisors": [ "ian@ah-Nuts.com" ],
+		"deal": {
+			"hourly_rate": 1125,
+			"commission_factor": 2752
+		}
+	}
+]

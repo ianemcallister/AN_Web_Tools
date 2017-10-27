@@ -118,7 +118,8 @@ function loadEmployeesList() {
 		
 		//eventually this will pull from firebase or other databse, but for now
 		//this will just load a file
-		var path = __dirname + '/../assets/json/employee_records.json'
+		var path = __dirname + '/../assets/json/TEST_employee_records.json'
+		//var path = __dirname + '/../assets/json/employee_records.json'
 		var jsonModel = fs.readFileSync(path, "utf8");
 
 		resolve(JSON.parse(jsonModel));

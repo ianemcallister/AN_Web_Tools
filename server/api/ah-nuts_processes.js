@@ -9,6 +9,8 @@
 var dc = require('./datacenter.js');
 var square = require('./squareup.js');
 var sling = require('./sling.js');
+var mc = require('./mailcenter.js');
+var rc = require('./reportCenter.js');
 
 //define the current module
 var ahNuts = {
@@ -195,6 +197,7 @@ function dailyEarningsReportEmails(employeeReportsNeeded, aDate) {
 
 			//compile dailyEarningsReportModel
 			var dailyEarningsReportModel = {
+				TheDate: aDate,
 				Total_Shift_Hours: Total_Shift_Hours,
 				Total_Shift_Sales: Total_Shift_Sales,
 				Base_Pay_Rate: Base_Pay_Rate,
@@ -208,8 +211,20 @@ function dailyEarningsReportEmails(employeeReportsNeeded, aDate) {
 
 			//send in email to employees if required
 			if(employeeReportsNeeded) {
+				
 				//report model must be compiled into an email report
+				var employeeSalesReportEmail = rc.employeeDailySalesReport(dailyEarningsReportModel);
+				
+				console.log('employeeSalesReportEmail', employeeSalesReportEmail);
+
 				//email report must be sent to the employee
+				mc.send(employee.contact.email, 'info@ah-nuts.com', employee.supervisors, employeeSalesReportEmail.subject, employeeSalesReportEmail.msgBody)
+				.then(function success(s) {
+					console.log('success:', s);
+				}).catch(function error(e) {
+					console.log('error:', e);
+				});
+
 			};
 
 			//add the findings to a report for the manager

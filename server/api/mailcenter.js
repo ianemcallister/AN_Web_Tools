@@ -58,10 +58,11 @@ console.log(MAIL_CREDENTIALS);
 *
 *	This method comiles all the required information into a single object
 */
-function _defineMailOptions(to, from, subject, body, attch) {
+function _defineMailOptions(to, from, cc, subject, body, attch) {
 	return {
 		from: from,
 		to: to,
+		cc: cc,
 		subject: subject,
 		text: body.plainText,
 		html: body.htmlText
@@ -73,13 +74,15 @@ function _defineMailOptions(to, from, subject, body, attch) {
 *
 *	This method composes and sends an email
 */
-function send(to, from, subject, body, attch) {
+function send(to, from, cc, subject, body, attch) {
 
 	//build the mail options
-	var mailOptions = _defineMailOptions(to, from, subject, body, attch);
+	var mailOptions = _defineMailOptions(to, from, cc, subject, body, attch);
 
 	//return async work
 	return new Promise(function(resolve, reject) {
+
+		console.log('sending mail');
 
 		//send mail with the defined transport object
 		TRANSPORTER.sendMail(mailOptions, function results(error, info){
