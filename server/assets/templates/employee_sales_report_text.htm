@@ -1,20 +1,51 @@
-<div>
+<div style='margin-left: 20px; margin-right: 20px'>
 	<!--Add the Header-->
-	<h1>Great Work Yesterday!!</h1>
+	<h1>You Rock!</h1>
 	
-	<p>Here are some details on your performance today.  We hope this helps keep you aware of your sales and set your own goals.</p>
+	<!--Give them the background details-->
+	<p>
+		Yesterday we recorded the following hours and sales for you
+		<ul>
+			<li><strong>Scheduled Clock-In:</strong> {{}}</li>
+			<li><strong>Scheduled Clock-Out:</strong> {{}}</li>
+			<li><strong>Actual Clock-In:</strong> {{}}</li>
+			<li><strong>Actual Clock-Out:</strong> {{}}</li>
+			<li><strong>Total Hours Worked:</strong> {{}}</li>
+			<li><strong>Total Sales Hours Worked:</strong> {{}}</li>
+			<li><strong>Total Shift Sales:</strong> {{}}</li>
+		</ul>
+		With these numbers we calculated your earnings as follows:
+	</p>
 
-	<ul>
-		<li><strong>Total Shift Hours:</strong>	{{Total_Shift_Hours}}</li>
-		<li><strong>Total_Shift_Sales:</strong>	{{Total_Shift_Sales}}</li>
-		<li><strong>Base_Pay_Rate:</strong>	{{Base_Pay_Rate}}</li>
-		<li><strong>Commission_Factor:</strong>	{{Commission_Factor}}</li>
-		<li><strong>Average_Sales_Per_Hours:</strong>	{{Average_Sales_Per_Hour}}</li>
-		<li><strong>Shift_Commission_Multiplier:</strong>	{{Shift_Commission_Multiplier}}</li>
-		<li><strong>Hourly_Commission_Rate:</strong>	{{Hourly_Commission_Rate}}</li>
-		<li><strong>Average_Hourly_Earnings:</strong>	{{Average_Hourly_Earnings}}</li>
-		<li><strong>Total_Shift_Earnings:</strong>	{{Total_Shift_Earnings}}</li>
-	</ul>
+	<!--Display their sales per hour yesterday-->
+	<div>
+		<div style='margin:auto; width: 30%; text-align: center;'>
+			<h1 style='color: green; margin-bottom: -15px;'>${{Average_Sales_Per_Hour}} / hr</h1> <br>
+			Your Average Sales Per Hour Yesterday
+		</div>
+	</div>
+
+	<!--Display their Average Hourly Earnings-->
+	<div>
+		<div style='margin:auto; width: 30%; text-align: center;'>
+			<h1 style='color: green; margin-bottom: -15px;'>${{Average_Hourly_Earnings}} / hr</h1> <br>
+			Your Hourly Rate Yesterday
+		</div>
+	</div>
+
+	<!--Display their Total Shift Earnings-->
+	<div>
+		<div style='margin:auto; width: 30%; text-align: center;'>
+			<h1 style='color: green; margin-bottom: -15px;'>${{Total_Shift_Earnings}} / hr</h1> <br>
+			Yesterday You Earned
+		</div>
+	</div>
+	
+	<!--Give them a little closing message-->
+	<p>Thank you for everything you do!  These earnings will appear on your next paycheck (unless we're within 7 days of payday, then you'll see these funds on the following paycheck).</p>
+	
+	<!--Anything wrong prompt-->
+	<p><strong>Something Wrong?</strong> If you notice anything that doesn't seem right about these numbers please reply to this email and cc your supervisor so we can help you get it sorted out.</p>
 
 	<p>Yours Truely,</p>
 	<p>Steve & Ian</p>
