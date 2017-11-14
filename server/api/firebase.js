@@ -21,12 +21,14 @@ admin.initializeApp({
   });*/
 
 var firebase = {
-	read: read,
-  write: write
+	_read: _read,
+  _write: _write,
+  downloadEmployeesList: downloadEmployeesList,
+  downloadTimecards: downloadTimecards
 };
 
 //read from the database
-function read(path) {
+function _read(path) {
 
   //define local variable
   var ref = admin.database().ref(path);
@@ -48,7 +50,7 @@ function read(path) {
 };
 
 //write data to the database 
-function write(path, data) {
+function _write(path, data) {
 
    var ref = admin.database().ref(path);
 
@@ -65,6 +67,54 @@ function write(path, data) {
       });
 
    });
+
+};
+
+/*
+*   download Employees List
+*
+*/
+function downloadEmployeesList() {
+
+  //define local variables
+  var self = this;
+
+  //return async work
+  return new Promise(function(resolve, reject) {
+
+    //read employees list
+    self._read('employees')
+    .then(function success(s) {
+      resolve(s);
+    }).catch(function error(e) {
+      reject(e);
+    });
+
+  });
+
+};
+
+/*
+*   download Employees List
+*
+*/
+function downloadTimecards() {
+
+  //define local variables
+  var self = this;
+
+  //return async work
+  return new Promise(function(resolve, reject) {
+
+    //read employees list
+    self._read('timecards')
+    .then(function success(s) {
+      resolve(s);
+    }).catch(function error(e) {
+      reject(e);
+    });
+
+  });
 
 };
 

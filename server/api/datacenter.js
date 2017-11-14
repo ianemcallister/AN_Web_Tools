@@ -8,7 +8,8 @@ datacenter = {
 	_buildTimeObject: _buildTimeObject,
 	calcEvntDyErnngs: calcEvntDyErnngs,
 	loadEmployeesList: loadEmployeesList,
-	readFileSync: readFileSync
+	readFileSync: readFileSync,
+	cleanEmail: cleanEmail
 };
 
 /*
@@ -119,7 +120,7 @@ function loadEmployeesList() {
 		
 		//eventually this will pull from firebase or other databse, but for now
 		//this will just load a file
-		var path = __dirname + '/../assets/json/TEST_employee_records.json'
+		var path = __dirname + '/../assets/json/employee_records.json'
 		//var path = __dirname + '/../assets/json/employee_records.json'
 		var jsonModel = fs.readFileSync(path, "utf8");
 
@@ -137,6 +138,19 @@ function readFileSync(path) {
 
 	return fs.readFileSync(path, 'utf8');
 }
+
+/*
+*	cleanEmail
+*	
+*	This function takes an email address and returns the part before the .com.
+*/
+function cleanEmail(anEmail) {
+	//define local variables
+	var atSplit = anEmail.split('@');
+	var endSplit = atSplit[1].split('.');
+	
+	return atSplit[0] + "@" + endSplit[0];
+};
 
 //export the module
 module.exports = datacenter;

@@ -1,0 +1,489 @@
+{
+	"425-512-3969AARBET":{
+		"square_id": "jWHhpfKjHyEmzezPtJNM",
+		"sling_id": 621390,
+		"name": {
+			"first": "Aaron",
+			"middle": "",
+			"last": "Bettencourt",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "bett5020@pacificu.edu"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1125,
+			"commission_factor": 2752
+		}
+	},
+	"406-696-2891AMAGRU":{
+		"square_id": "",
+		"sling_id": 806049,
+		"name": {
+			"first": "Amanda",
+			"middle": "",
+			"last": "grubs",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "amandajeangrubbs@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1125,
+			"commission_factor": 2752
+		}
+	},
+	"406-208-2327ASHYOU":{
+		"square_id": "UJBeCCEokTlGWtrLRJ",
+		"sling_id": 751932,
+		"name": {
+			"first": "Ashlee",
+			"middle": "Jennifer",
+			"last": "Young",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "ashleejyoung@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1125,
+			"commission_factor": 2752
+		}
+	},
+	"385-383-5884BEXCHA":{
+		"square_id": "",
+		"sling_id": 773571,
+		"name": {
+			"first": "Bexley",
+			"middle": "",
+			"last": "Chapman",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "bexleyrocks@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1000,
+			"commission_factor": 2752
+		}
+	},
+	"541-543-9632BOBMAC":{
+		"square_id": "rjfWoKtCnoaTqMHIW1Yf",
+		"sling_id": 728584,
+		"name": {
+			"first": "Bobby",
+			"middle": "",
+			"last": "MacAdam",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "p2so4rrf@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	},
+	"562-310-7932BONKUS":{
+		"square_id": "",
+		"sling_id": 824021,
+		"name": {
+			"first": "Bonnie",
+			"middle": "",
+			"last": "Kuss",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "bonnie.kuss@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1125,
+			"commission_factor": 2752
+		}
+	},
+	"971-832-1002CAIMIL":{
+		"square_id": "4ISdMmC7SkAyDQL_DB87",
+		"sling_id": 615453,
+		"name": {
+			"first": "Caitlin",
+			"middle": "",
+			"last": "Miller",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "cn_miller15@yahoo.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	},
+	"541-420-7896COLHAR":{
+		"square_id": "",
+		"sling_id": 780116,
+		"name": {
+			"first": "Coleby",
+			"middle": "",
+			"last": "Hart",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "shaggy4721@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	},
+	"971-570-3229DAWMEN":{
+		"square_id": "",
+		"sling_id": 824022,
+		"name": {
+			"first": "Dawn",
+			"middle": "",
+			"last": "Mendenhall",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "dawnrmendenhall@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1125,
+			"commission_factor": 2752
+		}
+	},
+	"801-725-8069DEVRIC":{
+		"square_id": "",
+		"sling_id": 773567,
+		"name": {
+			"first": "Devon",
+			"middle": "",
+			"last": "Rice",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "devontr@hotmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1000,
+			"commission_factor": 2752
+		}
+	},
+	"253-468-2199ELISAM":{
+		"square_id": "1F7a2TjJyH66sLBbz2Ga",
+		"sling_id": 725915,
+		"name": {
+			"first": "Elia",
+			"middle": "",
+			"last": "Samms",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "e.a.samms@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1125,
+			"commission_factor": 2752
+		}
+	},
+	"503-758-3859GRADIR":{
+		"square_id": "undefined",
+		"sling_id": 728150,
+		"name": {
+			"first": "Grant",
+			"middle": "",
+			"last": "Director",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "grantd@uoregon.edu"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	},
+	"503-884-6013HANBAR":{
+		"square_id": "61_a_2vsUvpPUzE4Iide",
+		"sling_id": 615451,
+		"name": {
+			"first": "Hannah",
+			"middle": "",
+			"last": "Barischoff",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "hbarischoff@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	},
+	"323-788-4533IANMCA":{
+		"square_id": "rUxLgAqsVklCN_14dfbE",
+		"sling_id": 615457,
+		"name": {
+			"first": "Ian",
+			"middle": "Edward",
+			"last": "McAllister",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "ian@ah-Nuts.com"
+		},
+		"supervisors": [ "SY20130101_01" ],
+		"deal": {
+			"hourly_rate": 1125,
+			"commission_factor": 2752
+		}
+	},
+	"801-928-1887JOHLAY":{
+		"square_id": "",
+		"sling_id": 773563,
+		"name": {
+			"first": "John",
+			"middle": "",
+			"last": "Layton",
+			"nickname": ""
+		},
+		"contact": {
+			"email": ""
+		},
+		"supervisors": [ "SY20130101_01" ],
+		"deal": {
+			"hourly_rate": 1000,
+			"commission_factor": 2752
+		}
+	},
+	"541-913-7959KRISCH":{
+		"square_id": "TZDr8SCkbOU30asRpJJE",
+		"sling_id": 728591,
+		"name": {
+			"first": "Kristi",
+			"middle": "",
+			"last": "Schoolcraft",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "babybeet1@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	},
+	"406-545-9774LACYOU":{
+		"square_id": "lfRy4B4G-0lA_udwGgQr",
+		"sling_id": 615456,
+		"name": {
+			"first": "Lacey",
+			"middle": "",
+			"last": "Young",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "lacey.young1992@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1350,
+			"commission_factor": 2752
+		}
+	},
+	"503-928-1959LINNEW":{
+		"square_id": "ONq0cDPusYNMsg3XBpRC",
+		"sling_id": 615455,
+		"name": {
+			"first": "Lindsey",
+			"middle": "",
+			"last": "Newby",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "newb9836@pacificu.edu"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1125,
+			"commission_factor": 2752
+		}
+	},
+	"503-689-7861MAKTIN":{
+		"square_id": "r3cN022u9Xxv7UN394O5",
+		"sling_id": 677501,
+		"name": {
+			"first": "Makayla",
+			"middle": "",
+			"last": "Tingle",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "makatingle@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	},
+	"541-852-3631MICAND":{
+		"square_id": "",
+		"sling_id": 829679,
+		"name": {
+			"first": "Michael",
+			"middle": "",
+			"last": "Anderson",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "manderson496@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	},
+	"971-246-4899NARKUC":{
+		"square_id": "undefined",
+		"sling_id": 751936,
+		"name": {
+			"first": "Nary",
+			"middle": "",
+			"last": "Kuch",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "sovannary.hang.kuch@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1125,
+			"commission_factor": 2752
+		}
+	},
+	"541-915-9805NATLAW":{
+		"square_id": "_hPY0QhARO0QRovbL4At",
+		"sling_id": 728592,
+		"name": {
+			"first": "Natalin",
+			"middle": "",
+			"last": "Lawson",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "rainigirl65@yahoo.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	},
+	"810-877-8866PERTOR":{
+		"square_id": "",
+		"sling_id": 780099,
+		"name": {
+			"first": "Per-Erik",
+			"middle": "",
+			"last": "Torske",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "p.e.torske@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	},
+	"503-931-3043RACMOR":{
+		"square_id": "",
+		"sling_id": 780109,
+		"name": {
+			"first": "Rachelle",
+			"middle": "",
+			"last": "Morrison",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "rushphotos1@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	},
+	"971-246-4265ROAKUC":{
+		"square_id": "",
+		"sling_id": 627223,
+		"name": {
+			"first": "Roath",
+			"middle": "",
+			"last": "Kuch",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "sopheap.roath.kuch@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1125,
+			"commission_factor": 2752
+		}
+	},
+	"541-514-7962SARLER":{
+		"square_id": "SQy2Zs2OcuYWTK8E8089",
+		"sling_id": 728583,
+		"name": {
+			"first": "Sariah",
+			"middle": "",
+			"last": "LeRiger",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "riahmodeling@gmail.com"
+		},
+		"supervisors": [ "SY20130101_01", "IM20160801_01" ],
+		"deal": {
+			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	},
+	"406-860-2646STEYOU":{
+		"square_id": "mmIrwp5oGAYi_58pRFAh",
+		"sling_id": 648261,
+		"name": {
+			"first": "Steve",
+			"middle": "Sherwood",
+			"last": "Young",
+			"nickname": ""
+		},
+		"contact": {
+			"email": "steve@ah-nuts.com"
+		},
+		"timezone": "America/Los_Angeles",
+		"supervisors": [],
+		"deal": {
+			"hourly_rate": 1025,
+			"commission_factor": 2752
+		}
+	}
+}

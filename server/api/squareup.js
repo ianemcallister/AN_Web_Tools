@@ -2,6 +2,7 @@
 
 //define dependencies
 var fetch = require('node-fetch');
+var moment = require('moment');
 
 //define local variables
 var accessToken = process.env.SQUARE_APP_TOKEN;
@@ -21,6 +22,7 @@ var squareup = {
 	_collectMultiPages: _collectMultiPages,
 	_downloadDailySales: _downloadDailySales,
 	_dateFormatter: _dateFormatter,
+	_monthDayZeros: _monthDayZeros,
 	employeesList: employeesList,
 	downloadDailySales: downloadDailySales,
 	aTest: aTest
@@ -198,6 +200,8 @@ function _collectMultiPages(url, options) {
 					//convert to string
 					allResponses.push(JSON.parse(data.toString('utf8')));
 
+					//console.log(allResponses);
+
 					//then pass the array up
 					resolve(allResponses);
 
@@ -249,14 +253,70 @@ function _dateFormatter(aDate) {
 	var theDate = new Date(aDate);
 
 	var year = aDate.getFullYear();
-	var month = parseInt(aDate.getMonth());
-	var day = parseInt(aDate.getDate());
 	var startTime = "T03:00:00-08:00";
 	var endTime = "T02:59:59-08:00";
-	var startString = 'begin_time=' + year + "-" + (month + 1) + "-" + (day - 1) + startTime;
-	var endString = '&end_time=' + year + "-" + (month + 1) + "-" + (day) + endTime;;
+
+	//add zeros when applicable
+	var monthDay = self._monthDayZeros(theDate);
+
+	var startString = 'begin_time=' + year + "-" + monthDay.start.month + "-" + monthDay.start.day + startTime;
+	var endString = '&end_time=' + year + "-" + monthDay.end.month + "-" + monthDay.end.day + endTime;;
 
 	return startString + endString;
+};
+
+/*
+*	_month Day Zeros
+*
+*	calculates the proper start and end month and days and ads zeros if need be
+*
+*	@param theDate (a date object)
+*	@return monthDay {
+*		start: {
+*			month: string,
+*			day: string
+*		},
+*		end: {
+*			month: string,
+*			day: string
+*		},
+*	}
+*/
+function _monthDayZeros(theDate) {
+
+	//define local variables
+	var self = this;
+	var monthDay = {
+		start: {
+			month: "",
+			day: ""
+		},
+		end: {
+			month: "",
+			day: ""
+		}
+	};
+
+	//what is the date before?
+	var today = moment(theDate);
+	var yesterday = moment(today).subtract(1, "day");
+	var startDate = new Date(yesterday.format());
+	var endDate = new Date(today.format());
+
+	//add zeros if necessary
+	if((startDate.getMonth() + 1) < 10) monthDay.start.month = "0" + (startDate.getMonth() + 1);
+	else monthDay.start.month = (startDate.getMonth() + 1);
+
+	if((endDate.getMonth() + 1) < 10) monthDay.end.month = "0" + (endDate.getMonth() + 1);
+	else monthDay.end.month = (endDate.getMonth() + 1);
+
+	if(startDate.getDate() < 10) monthDay.start.day = "0" + startDate.getDate();
+	else monthDay.start.day = startDate.getDate();
+
+	if(endDate.getDate() < 10) monthDay.end.day = "0" + endDate.getDate();
+	else monthDay.end.day = endDate.getDate();
+
+	return monthDay;
 };
 
 //Download Employees List
@@ -280,8 +340,9 @@ function employeesList() {
 			//response comes as buffer
 			response.buffer().then(function(data) {
 				
+				//console.log('got this from square', data.toString('utf8'));
 				//convert to string
-				resolve(data.toString('utf8'));
+				resolve(JSON.parse(data.toString('utf8')));
 
 			});
 

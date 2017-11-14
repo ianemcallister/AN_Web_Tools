@@ -9,6 +9,7 @@
 var dc = require('./datacenter.js');
 var square = require('./squareup.js');
 var sling = require('./sling.js');
+var fb = require('./firebase.js');
 var mc = require('./mailcenter.js');
 var rc = require('./reportCenter.js');
 
@@ -17,7 +18,9 @@ var ahNuts = {
 	admin: "ian@ah-nuts.com",
 	_calcShiftHrs: _calcShiftHrs,
 	_calcShiftSales: _calcShiftSales,
-	dailyEarningsReportEmails: dailyEarningsReportEmails
+	dailyEarningsReportEmails: dailyEarningsReportEmails,
+	updateEmployeeList: updateEmployeeList,
+	addShiftsToEmployeeTimecards: addShiftsToEmployeeTimecards
 };
 
 /*
@@ -32,6 +35,7 @@ var ahNuts = {
 */
 function _calcShiftHrs(employeeId, timecards) {
 
+	console.log('_calcShiftHrs', employeeId);
 	//define local variables
 	var self = this;
 	var hoursWorked = 0.00;
@@ -73,6 +77,8 @@ function _calcShiftHrs(employeeId, timecards) {
 *
 */
 function _calcShiftSales(employeeId, allSales) {
+
+	console.log('_calcShiftSales');
 
 	//define local variables
 	var self = this;
@@ -167,12 +173,15 @@ function dailyEarningsReportEmails(employeeReportsNeeded, aDate) {
 		var allDailyShifts = earningsRequiredData[2];
 
 		//this function needs to execute for each employee, so we must iterate through
+		
 		//a list of employee objects with the required data
 		employeeList.forEach(function(employee) {
 
+			console.log('lookign at employee', employee.ah_nuts_id);
 			//define local variables
 			var employeeWorkedToday = 0;	//TODO: ADD THIS TEST HERE
 			var Total_Shift_Hours = self._calcShiftHrs(employee.sling_id, allDailyShifts.data);	//Aquired from Sling API
+			//var Total_Sales_Hours = //TODO: ADD THIS LATER
 			var Total_Shift_Sales = self._calcShiftSales(employee.square_id, allDailySales) / 100; 	//Aquired from Square API	
 			var Base_Pay_Rate = employee.deal.hourly_rate / 100; 			//Aquired from Ah-Nuts Database
 			var Commission_Factor = employee.deal.commission_factor;	//(2,752) - Aquired from Ah-Nuts Databse
@@ -199,6 +208,7 @@ function dailyEarningsReportEmails(employeeReportsNeeded, aDate) {
 			var dailyEarningsReportModel = {
 				TheDate: aDate,
 				Total_Shift_Hours: Total_Shift_Hours,
+				//Total_Sales_Hours: Total_Sales_Hours,	//TODO: ADD THIS LATER
 				Total_Shift_Sales: Total_Shift_Sales,
 				Base_Pay_Rate: Base_Pay_Rate,
 				Commission_Factor: Commission_Factor,
@@ -237,6 +247,164 @@ function dailyEarningsReportEmails(employeeReportsNeeded, aDate) {
 
 	}).catch(function error(e){
 		//error handling for employee list
+
+	});
+
+};
+
+/*
+*	
+*
+*	Daily Earnings Report Emails was getting too big so it's time to break it down
+*	into smaller component parts.  There are several components that go into calculating
+*	an employees dailyEarningsReportEmail.  They are as follows:
+*
+*	1. Download and process shift data.
+*	2. Download and process sales data.
+*	3. Calculate earnings from shift and sales data.
+*	4. Compile reports for employees and supervisors.
+*	5. Send reports to employees and supervisors.
+*
+*	By breaking the process into these component parts we can streamline each of these
+*	steps.  So here's where we'll start with the first one. Download and process shift data.
+*
+*	In order to download and process shift data we need a date.  If not date is provided
+*	We'll default to the previous day.  We'll be aquiring the shift data from sling.
+*	There are several elements we're looking for:
+*
+*	Shift location
+*	Shift scheduled start
+*	Shift scheduled end
+*	Shift actual start
+*	Shift actual end
+*	Break start
+*	Break End
+*	Sales Hours start
+*	Sales Hours End
+*	Sales Hours duration
+*	Non-sales Hours start
+*	Non-sales Hours end
+*	Non-sales Hours duration
+*	Total hours worked
+*	Total Sales hours worked
+*	Total Non-sales Hours worked
+*
+*	In order to 
+*
+*/
+
+/*
+*	Employee List Update
+*	
+*	The employee list is an important document. It keeps track of all the employee
+*	details across square, sling, and ah-nuts. All the information for these three
+*	services needs to be in sync.  All this info gets saved into firebase.
+*
+*	This function downloads employee lists from square and sling, then makes sure
+*	the data from each is stored in firebase.
+*	
+*	@return status
+*/
+function updateEmployeeList() {
+
+	//define local variables
+	var self = this;
+
+	return new Promise(function(resolve, reject) {
+		
+		//run all promises
+		Promise.all([
+			fb.downloadEmployeesList(),	//download firebase employee list
+			sling.downloadEmployeesList(),	//download sling employee list
+			square.employeesList() 	//download square employee list
+		])
+		.then(function success(allEmpLists) {
+			
+			//define local variables
+			var fbList = allEmpLists[0];
+			var slingList = allEmpLists[1].data;
+			var squareList = allEmpLists[2];
+
+			console.log('slingList');
+			slingList.forEach(function(slingEmp) {
+				console.log(slingEmp.lastname + slingEmp.name + slingEmp);
+			});
+			
+
+			//save list to firebase
+			resolve(true);
+
+		}).catch(function error(e){
+			//error handling for employee list
+			resolve("error: " + e);
+		});
+	
+	});
+
+};
+
+/*
+*	Add Shifts To Employee Timecards
+*
+*	This function does exactly what it sounds like. It accepts a date and checks
+*	shift information in sling.  Then adds any shifts found to the respective timecards
+*	of employees.
+*	
+*	1. Collect all the sling timecards for a given day
+*	2. Parse the timesheet (in sling module)
+*	3. Update Firebase with the new time sheet information	
+*	4. Return success or failure
+*
+*	@param aDate (string - "YYYY-MM-DD")
+*	@return success/fail (bool)
+*/
+function addShiftsToEmployeeTimecards(aDate) {
+
+	//define local variales
+	var self = this;
+
+	//if no date is provided, default to the current date
+	if(aDate == undefined) aDate = new Date()
+	else {
+		var passedDate = aDate;
+		var splitDate = aDate.split('-');
+		var passedYear = splitDate[0];
+		var passedMonth = splitDate[1] - 1;
+		var passedDay = splitDate[2];
+		var currentTime = new Date();
+		//first set the date
+		aDate = new Date(passedYear, passedMonth, passedDay, currentTime.getHours(), currentTime.getMinutes());
+		//then make sure the times are updated
+	};
+
+	//return async work
+	return new Promise(function(resolve, reject) {
+
+		Promise.all([
+			fb.downloadTimecards(),
+			fb.downloadEmployeesList(),
+			sling.downloadTimecards(aDate)
+		])
+		.then(function success(requiredTimecardData) {
+
+			//console.log('got this employee list', requiredTimecardData[0]);
+			//console.log('got these timecards', requiredTimecardData[1].data);
+
+			//upon success, parse the timesheet
+			var newTimecards = sling.parseTimecards(requiredTimecardData[2].data, requiredTimecardData[1], requiredTimecardData[0], aDate);
+
+			//when the newTimecards come back, save them
+			fb._write('timecards', newTimecards)
+			.then(function success(s) {
+				resolve(s);
+			}).catch(function error(e) {
+				reject(e);
+			});
+
+		}).catch(function error(e) {
+			//if there was an error pass it back
+			reject(e);
+		});
 
 	});
 
