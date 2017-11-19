@@ -28,9 +28,11 @@ var sling = {
 	_calcDuration: _calcDuration,
 	_calcDifference: _calcDifference,
 	_unpackFetchResponse: _unpackFetchResponse,
+	_parseShiftBlocks: _parseShiftBlocks,
 	downloadTimecards: downloadTimecards,
 	parseTimecards: parseTimecards,
-	downloadEmployeesList: downloadEmployeesList
+	downloadEmployeesList: downloadEmployeesList,
+	calcHrsWorked: calcHrsWorked
 };
 
 /*
@@ -104,7 +106,10 @@ function _formatCardsDate(aDate) {
 	//add zeros when applicable
 	var monthDay = self._monthDayZeros(aDate);
 
-	return year + "_" + monthDay.end.month + "_" + monthDay.end.day;
+	console.log('got this date', aDate);
+	console.log('returning this date',year + "_" + monthDay.end.month + "_" + monthDay.end.day);
+
+	return year + "_" + monthDay.start.month + "_" + monthDay.start.day;
 };
 
 /*
@@ -166,8 +171,11 @@ function _monthDayZeros(theDate) {
 *
 */
 function _calcDuration(start, end) {
+	
 	var theStart = new Date(start);
 	var theEnd = new Date(end);
+
+	console.log("duration_calculation", start, end, ((theEnd - theStart) / 1000 / 60 / 60));
 
 	return ((theEnd - theStart) / 1000 / 60 / 60);
 };
@@ -203,6 +211,50 @@ function _unpackFetchResponse(response) {
 };
 
 /*
+*	_Parse Shift Blocks 
+*
+*	This function identifies the varying nature of shifts. some hours are sales, others
+*	sales are not possible.  This deperates sales hours from non-sales hours, and
+*	lists them in chronological blocks 
+*
+*	@param {aTimecard} a sling timecard object
+*	@param {allLocations} all the firebase locations
+*	@param {aDate} date object
+*	@return [shift blocks]
+*/
+function _parseShiftBlocks(aTimecard, allLocations, aDate) {
+
+	//define local variables
+	var self = this;
+	
+	//set the clockin and out variables
+	var theClockin = new Date(aTimecard.clockIn);
+	var theClockout = new Date(aTimecard.clockOut);
+	var totalShiftHours = ((theClockout - theClockin) / 1000 / 60 / 60);
+
+	//set default flags
+	var isOvertime = false;
+	var salesStartBeforeShift = false;
+	var salesEndAfterShift = false;
+	var isScheduleException = false;
+	
+	//location Sales Open is determined by the day of the week, or if
+	//any schedule exceptions override the regular schedule
+	//first we much iterate through schedule exceptions for the location
+
+	var locationSalesOpen = new Date();
+	var locationSalesClose = new Date();
+	
+	//assign flag values
+	if(totalShiftHours > 8)	isOvertime = true;
+
+
+	//a shift will not be longer than the clock in and clock out, so those are the
+	//ultimate bounds.  Between those times, blocks of time can be sales, hours, non-sales
+	//hours, or a different rate because of overtime.
+};
+
+/*
 *	downloadTimecards
 *
 *	This function is used to downlooad time cards, according to the sling API.
@@ -222,6 +274,8 @@ function downloadTimecards(aDate) {
 	//define local variables
 	var self = this;
 	var urlPath = self.baseURL + 'v1/timesheets?dates=' + self._dateFormatter(aDate);
+
+	console.log('urlpath', urlPath);
 
 	//retur async work
 	return new Promise(function(resolve, reject) {
@@ -348,8 +402,12 @@ function parseTimecards(allTimecards, employeeList, tcDb, aDate) {
 			var ahNutsId = key;
 			var shiftId = timecard.id;
 
+			//console.log(ahNutsId, employeeList[key].sling_id, slingId);
+
 			//test the case
 			if(employeeList[key].sling_id == slingId) {
+
+				console.log('adding', ahNutsId, employeeList[key].sling_id, slingId);
 
 				//if no timecards exist for this employee, create the first 
 				if(tcDb[ahNutsId] == undefined) tcDb[ahNutsId] = {};
@@ -359,33 +417,15 @@ function parseTimecards(allTimecards, employeeList, tcDb, aDate) {
 
 				//add the timecard
 				tcDb[ahNutsId][cardsDate][shiftId] = {
-					"shift": {
-						"location": timecard.event.location.id,
-						"scheduledStart": timecard.event.dtstart,
-						"scheduledEnd": timecard.event.dtend,
-						"clockedIn": timecard.clockIn,
-						"clockedOut": timecard.clockOut,
-					},
-					"break": {
-						"duration": timecard.event.breakDuration
-					},
-					"salesHours": {
-						"start": "",
-						"end": "",
-						"duration": ""
-					},
-					"nonSalesHours": {
-						"start": "",
-						"end": "",
-						"duration": ""
-					},
-					"scheduledHrs": self._calcDuration(timecard.event.dtstart, timecard.event.dtend),
-					"workedHrs": self._calcDuration(timecard.clockIn, timecard.clockOut),
-					"difference": self._calcDifference(self._calcDuration(timecard.event.dtstart, timecard.event.dtend), self._calcDuration(timecard.clockIn, timecard.clockOut))
+					"location": timecard.event.location.id,
+					"scheduledStart": timecard.event.dtstart,
+					"scheduledEnd": timecard.event.dtend,
+					"clockedIn": timecard.clockIn,
+					"clockedOut": timecard.clockOut,
+					"breakDuration": timecard.event.breakDuration
 				};
 
-			}
-				
+			} 	
 
 		});
 
@@ -427,6 +467,35 @@ function downloadEmployeesList() {
 		
 	});
 
+};
+
+/*
+*	Calc Hrs Worked
+*
+*	@params {allShifts}
+*	@return int
+*/
+function calcHrsWorked(allShifts) {
+	//define local variables
+	var self = this;
+	var hrsWorked = 0;
+
+	//iterate through all shifts
+	Object.keys(allShifts).forEach(function(shiftId) {
+
+		//console.log(shiftId, isNaN(shiftId));
+		//as long as it's not the sales category
+		if(!isNaN(shiftId)) {
+
+			//console.log(allShifts[shiftId]);
+
+			//add the values found
+			hrsWorked += self._calcDuration(allShifts[shiftId].clockedIn, allShifts[shiftId].clockedOut);
+		};
+
+	});
+
+	return hrsWorked;
 };
 
 //export the module

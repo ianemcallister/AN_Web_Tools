@@ -17,14 +17,24 @@ var headers = {
 
 var squareup = {
 	_distillDateTime : _distillDateTime,
+	_formatCardsDate: _formatCardsDate,
 	_unpackTxPages: _unpackTxPages,
 	_isAnotherPage: _isAnotherPage,
 	_collectMultiPages: _collectMultiPages,
 	_downloadDailySales: _downloadDailySales,
 	_dateFormatter: _dateFormatter,
 	_monthDayZeros: _monthDayZeros,
+	_findAhNutsId: _findAhNutsId,
+	_squareDateToFBCardDate: _squareDateToFBCardDate,
+	_parseTxType: _parseTxType,
+	_parseTxItems: _parseTxItems,
+	_condenseModsList: _condenseModsList,
+	parseDailyTxToTc: parseDailyTxToTc,
 	employeesList: employeesList,
 	downloadDailySales: downloadDailySales,
+	calcDailyGrossSales: calcDailyGrossSales,
+	calcDailyNetSales: calcDailyNetSales,
+	calcTips: calcTips,
 	aTest: aTest
 };
 
@@ -79,7 +89,26 @@ function _distillDateTime(aDate) {
 	returnObject.timeString = hour + "_" + minute + "_" + second;
 
 	return returnObject;
-}
+};
+
+/*	
+*	_format cards Date
+*
+*	@param {aDate}
+*	@return "yyyy-mm-dd"
+*/
+function _formatCardsDate(aDate) {
+	//define local variable
+	var self = this;
+	var theDate = new Date(aDate);
+
+	var year = aDate.getFullYear();
+
+	//add zeros when applicable
+	var monthDay = self._monthDayZeros(aDate);
+
+	return year + "_" + monthDay.end.month + "_" + monthDay.end.day;
+};
 
 function _unpackTxPages(pagedResults) {
 
@@ -319,6 +348,199 @@ function _monthDayZeros(theDate) {
 	return monthDay;
 };
 
+/*
+*	_find Ah-Nuts Id
+*
+*	Takes a square ID and runs the the FB emp list to pull out he ah-nuts id
+*/
+function _findAhNutsId(squareId, fbEmpList) {
+	//define local variables
+	var self = this;
+	var ahNutsID = undefined;
+
+	//run through each of the employees
+	Object.keys(fbEmpList).forEach(function(id) {
+
+		//console.log(squareId, fbEmpList[id].square_id, squareId == fbEmpList[id].square_id);
+		//if the squareID matches, save the id
+		if(squareId == fbEmpList[id].square_id) ahNutsID = id;
+	});
+
+	console.log('ahNutsID', ahNutsID, squareId);
+
+	return ahNutsID;
+};
+
+/*
+*	_square Date to FB Card Date
+*
+*	Takes a square date and turns it into a FB card date
+*
+*/
+function _squareDateToFBCardDate(squareDate) {
+
+	var dPieces = squareDate.split('-');
+
+	return dPieces[0] + "_" + dPieces[1] + "_" + dPieces[2];
+};
+
+/*
+*	Parse Tx Types
+*
+*	@params [tender]
+*	@return string
+*/
+function _parseTxType(tender) {
+	//define local variables
+	var self = this;
+	var typeString = '';
+
+	if(tender.length > 1) {
+
+		typeString = "Split - ";
+
+		tender.forEach(function(tx) {
+			typeString += (tx.type + ", ");
+		});
+
+	} else {
+		typeString = tender[0].type;
+	}
+
+	return typeString;
+};
+
+/*
+*	Parse Tx Items
+*
+*	@params [items]
+*	@return [smallItems]
+*/
+function _parseTxItems(items) {
+	//define local variables
+	var self = this;
+	var smallItems = [];
+
+	//iterate through each item
+	items.forEach(function(item) {
+
+		var theItem = {
+			name: item.name,
+			qty: item.quantity,
+			varName: item.item_variation_name,
+			mods: self._condenseModsList(item.modifiers)
+		};
+
+		smallItems.push(theItem);
+
+	});
+
+	return smallItems;	
+};
+
+/*
+*
+*
+*
+*
+*/
+function _condenseModsList(mods) {
+	//define local variables
+	var self = this;
+	var returnString = '';
+	var i = 1;
+	var noOf = mods.length;
+	
+	mods.forEach(function(modifier) {
+
+		returnString += modifier.name;
+
+		if(i < noOf) returnString += ", ";
+
+		i++;
+	});
+
+	return returnString;
+};
+
+/*
+*	Parse Daily Tx to Timecards
+*
+*	This accepts the firebase timecards object, employee information, and sales data
+*	then combines the sales data on with the assoicated timecard.
+*
+*	@param {fbTimecards}
+*	@param {fbEmpList}
+*	@param {sqrSalesData}
+*	@return {newTimecards}
+*/
+function parseDailyTxToTc(fbTimecards, fbEmpList, sqrSalesData, aDate) {
+	//define local variables
+	var self = this;
+	var cardsDate = self._formatCardsDate(aDate);
+	var newTimecards = fbTimecards;
+
+	//iterate through all square Tx dates
+	Object.keys(sqrSalesData).forEach(function(txDate) {
+
+		var txDateSplit = txDate.split('-');
+		var txYr = txDateSplit[0];
+		var txMo = txDateSplit[1];
+		var txDy = txDateSplit[2];
+		var salesDay = txYr + "_" + txMo + "_" + txDy;
+
+		//iterate through all squre TX times
+		Object.keys(sqrSalesData[txDate]).forEach(function(txTime) {
+
+			//define local variables
+			var empId = self._findAhNutsId(sqrSalesData[txDate][txTime].tender[0].employee_id, fbEmpList);
+			var fbCardDate = self._squareDateToFBCardDate(txDate);
+			var txTimeSplit = txTime.split('-');
+			var txHr = txTimeSplit[0];
+			var txMn = txTimeSplit[1];
+			var txSc = txTimeSplit[2];
+			var txTimeStamp = new Date(txYr, txMo, txDy, txHr, txMn, txSc);
+
+			//filter training earnings
+			if(empId == "323-788-4533IANMCA") {
+
+				if(newTimecards['training'] == undefined) newTimecards['training'] = {};
+
+				if(newTimecards['training'][salesDay] == undefined) newTimecards['training'][salesDay] = {};
+
+				if(newTimecards['training'][salesDay][txTime] == undefined) newTimecards['training'][salesDay][txTime] = '';
+
+			} else {	//if it was not in training, these are the sales
+
+				//create the timecard if need be
+				if(newTimecards[empId] == undefined) console.log(empId, "timecard not available ");
+
+				//
+				if(newTimecards[empId][salesDay] == undefined) console.log(salesDay, "day not available");
+
+				if(newTimecards[empId][salesDay]['sales'] == undefined) newTimecards[empId][salesDay]['sales'] = {};
+
+				console.log(sqrSalesData[txDate][txTime]);
+
+				newTimecards[empId][salesDay]['sales'][txTime] = {
+					tip: sqrSalesData[txDate][txTime].tip_money,
+					discount: sqrSalesData[txDate][txTime].discount_money,
+					refunded: sqrSalesData[txDate][txTime].refunded_money,
+					gross: sqrSalesData[txDate][txTime].gross_sales_money,
+					net: sqrSalesData[txDate][txTime].net_sales_money,
+					type: self._parseTxType(sqrSalesData[txDate][txTime].tender),
+					itemization: self._parseTxItems(sqrSalesData[txDate][txTime].itemizations)
+				};
+			}
+			
+
+		});
+
+	});
+
+	return newTimecards;
+};
+
 //Download Employees List
 function employeesList() {
 
@@ -380,6 +602,76 @@ function downloadDailySales(date, employees, devices) {
 
 	});
 
+};
+
+/*
+*
+*
+*
+*	@param {allSales}
+*	@return int
+*/
+function calcDailyGrossSales(allSales) {
+
+	//define local variables
+	var self = this;
+	var grossSales = 0;
+
+	Object.keys(allSales).forEach(function(timestamp) {
+
+		grossSales += parseInt(allSales[timestamp].gross);
+
+	});
+
+	//return the value
+	return grossSales;
+
+};
+
+/*
+*
+*
+*
+*
+*/
+function calcDailyNetSales(allSales) {
+	//define local variables
+	var self = this;	
+	var netSales = 0;
+
+	Object.keys(allSales).forEach(function(timestamp) {
+
+		//add the gross sales
+		netSales += parseInt(allSales[timestamp].gross);
+
+		//then subtract the refunds
+		netSales += parseInt(allSales[timestamp].refunded);
+
+		if(allSales[timestamp].refunded > 0) console.log('refund of', allSales[timestamp].refunded);
+
+	});
+
+
+	return netSales;
+};
+
+/*
+*	Calc Tips
+*
+*	@param {allSales}
+*	@return int
+*/
+function calcTips(allSales) {
+	//define local variables
+	var self = this;
+	var allTips = 0;
+
+	//iterate through all sales
+	Object.keys(allSales).forEach(function(sale) {
+		allTips += allSales[sale].tip;
+	});
+
+	return allTips;
 };
 
 function aTest() { return new Promise(function(resolve, reject) { resolve('testing square'); })}

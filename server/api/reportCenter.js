@@ -20,16 +20,22 @@ var reportCenter = {
 *	@param - model
 *	@return - theSubject
 */
-function _buildSubject(model) {
+function _buildSubject(model, wkDate) {
 
 	//define local variables
+	//console.log(wkDate);
+	var dateSplit = wkDate.split('_');
+	var dateYr = dateSplit[0];
+	var dateMo = dateSplit[1] - 1;
+	var dateDy = dateSplit[2];
 	var wkdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday","Saturday"];
 	var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 	var theSubject = "Your Ah-Nuts! Daily Sales Report for ";	
 
 	//set the date back one day
-	var yesterday = new Date(model.TheDate.getTime());
-	yesterday.setDate(model.TheDate.getDate() - 1);
+	var yesterday = new Date(dateYr, dateMo, dateDy);
+	//console.log(yesterday);
+	//yesterday.setDate(model.TheDate.getDate() - 1);
 
 	//add the day of the week
 	theSubject += wkdays[yesterday.getDay()] + ", ";
@@ -85,6 +91,16 @@ function _buildHTMLBody(model) {
 	//compile the template source into an HB template
 	var template = hb.compile(source);
 	
+	//register the helpers
+	//average hourly sales
+	hb.registerHelper("dollar_converter", function(number) {
+		return (number / 100).toFixed(2); 
+	});
+
+	hb.registerHelper("to_fixed", function(number) {
+		return number.toFixed(2); 
+	});
+
 	//add the data to the template
 	var data = model;
 	
@@ -104,14 +120,16 @@ function _buildHTMLBody(model) {
 *	@params - model
 *	@report - emailReport
 */
-function employeeDailySalesReport(model) {
+function employeeDailySalesReport(model, wkDate) {
 
 	//define local variables
 	var self = this;
 	var emailReport = { subject: "", msgBody: { plainText:"", htmlText:"" }};
 
+	//console.log('got this model', model);
+
 	//first define the subject
-	var subject = self._buildSubject(model);
+	var subject = self._buildSubject(model, wkDate);
 
 	//then define the plain text body
 	var plainText = self._buildTextBody(model);

@@ -1,42 +1,47 @@
 <div style='margin-left: 20px; margin-right: 20px'>
+	
+	<p>Hey {{name}},</p>
+
 	<!--Add the Header-->
-	<h1>You Rock!</h1>
+	<h1 style='margin:auto; width: 100%; text-align: center;'>You Rock!</h1>
 	
 	<!--Give them the background details-->
 	<p>
 		Yesterday we recorded the following hours and sales for you
 		<ul>
-			<li><strong>Scheduled Clock-In:</strong> {{}}</li>
-			<li><strong>Scheduled Clock-Out:</strong> {{}}</li>
-			<li><strong>Actual Clock-In:</strong> {{}}</li>
-			<li><strong>Actual Clock-Out:</strong> {{}}</li>
-			<li><strong>Total Hours Worked:</strong> {{}}</li>
-			<li><strong>Total Sales Hours Worked:</strong> {{}}</li>
-			<li><strong>Total Shift Sales:</strong> {{}}</li>
+			<li><strong>Total Hours Worked:</strong> {{to_fixed total_shift_hours}}</li>
+			<li><strong>Total Shift Sales:</strong> ${{dollar_converter net_sales}}</li>
 		</ul>
 		With these numbers we calculated your earnings as follows:
 	</p>
 
 	<!--Display their sales per hour yesterday-->
 	<div>
-		<div style='margin:auto; width: 30%; text-align: center;'>
-			<h1 style='color: green; margin-bottom: -15px;'>${{Average_Sales_Per_Hour}} / hr</h1> <br>
+		<div style='margin:auto; width: 70%; text-align: center;'>
+			<h1 style='color: green; margin-bottom: -15px;'>${{dollar_converter average_sales_per_hour}} / hr</h1> <br>
 			Your Average Sales Per Hour Yesterday
 		</div>
 	</div>
 
 	<!--Display their Average Hourly Earnings-->
 	<div>
-		<div style='margin:auto; width: 30%; text-align: center;'>
-			<h1 style='color: green; margin-bottom: -15px;'>${{Average_Hourly_Earnings}} / hr</h1> <br>
+		<div style='margin:auto; width: 70%; text-align: center;'>
+			<h1 style='color: green; margin-bottom: -15px;'>${{dollar_converter average_hrly_earnings}} / hr</h1> <br>
 			Your Hourly Rate Yesterday
 		</div>
 	</div>
 
+	<!--Dipslay their Tips-->
+	<div>
+		<div style='margin:auto; width: 70%; text-align: center;'>
+			<h1 style='color: green; margin-bottom: -15px;'>${{dollar_converter days_tips}} </h1> <br>
+			Your Credit Card Tips from Yesterday
+	</div>
+
 	<!--Display their Total Shift Earnings-->
 	<div>
-		<div style='margin:auto; width: 30%; text-align: center;'>
-			<h1 style='color: green; margin-bottom: -15px;'>${{Total_Shift_Earnings}} / hr</h1> <br>
+		<div style='margin:auto; width: 70%; text-align: center;'>
+			<h1 style='color: green; margin-bottom: -15px;'>${{dollar_converter total_shift_earnings}}</h1> <br>
 			Yesterday You Earned
 		</div>
 	</div>

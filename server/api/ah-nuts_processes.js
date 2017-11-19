@@ -18,9 +18,13 @@ var ahNuts = {
 	admin: "ian@ah-nuts.com",
 	_calcShiftHrs: _calcShiftHrs,
 	_calcShiftSales: _calcShiftSales,
+	_defineDate: _defineDate,
 	dailyEarningsReportEmails: dailyEarningsReportEmails,
 	updateEmployeeList: updateEmployeeList,
-	addShiftsToEmployeeTimecards: addShiftsToEmployeeTimecards
+	addShiftsToEmployeeTimecards: addShiftsToEmployeeTimecards,
+	addSalesToEmployeeTimecards: addSalesToEmployeeTimecards,
+	processTCAndSalesData: processTCAndSalesData,
+	distributeDailySales: distributeDailySales
 };
 
 /*
@@ -105,6 +109,31 @@ function _calcShiftSales(employeeId, allSales) {
 	//return the shift sales
 	return totalShiftSales;
 };
+
+/*
+*	_defineDate
+*
+*	This function formats a date as needed.
+*/
+function _defineDate(aDate) {
+
+	//if no date is provided, default to the current date
+	if(aDate == undefined) aDate = new Date()
+	else {
+		var passedDate = aDate;
+		var splitDate = aDate.split('-');
+		var passedYear = splitDate[0];
+		var passedMonth = splitDate[1] - 1;
+		var passedDay = splitDate[2];
+		var currentTime = new Date();
+		//first set the date
+		aDate = new Date(passedYear, passedMonth, passedDay, currentTime.getHours(), currentTime.getMinutes());
+		//then make sure the times are updated
+	};
+
+	return aDate;
+};
+
 
 /*
 *	DAILY EARNINGS REPORT EMAILS
@@ -363,19 +392,8 @@ function addShiftsToEmployeeTimecards(aDate) {
 	//define local variales
 	var self = this;
 
-	//if no date is provided, default to the current date
-	if(aDate == undefined) aDate = new Date()
-	else {
-		var passedDate = aDate;
-		var splitDate = aDate.split('-');
-		var passedYear = splitDate[0];
-		var passedMonth = splitDate[1] - 1;
-		var passedDay = splitDate[2];
-		var currentTime = new Date();
-		//first set the date
-		aDate = new Date(passedYear, passedMonth, passedDay, currentTime.getHours(), currentTime.getMinutes());
-		//then make sure the times are updated
-	};
+	//format the date
+	aDate = self._defineDate(aDate);
 
 	//return async work
 	return new Promise(function(resolve, reject) {
@@ -387,9 +405,6 @@ function addShiftsToEmployeeTimecards(aDate) {
 		])
 		.then(function success(requiredTimecardData) {
 
-			//console.log('got this employee list', requiredTimecardData[0]);
-			//console.log('got these timecards', requiredTimecardData[1].data);
-
 			//upon success, parse the timesheet
 			var newTimecards = sling.parseTimecards(requiredTimecardData[2].data, requiredTimecardData[1], requiredTimecardData[0], aDate);
 
@@ -399,6 +414,246 @@ function addShiftsToEmployeeTimecards(aDate) {
 				resolve(s);
 			}).catch(function error(e) {
 				reject(e);
+			});
+
+		}).catch(function error(e) {
+			//if there was an error pass it back
+			reject(e);
+		});
+
+	});
+
+};
+
+/*
+*	ADD SALES TO EMPLOYEE TIMECARDS
+*
+*	This function adds the sales for a particular day to the timecard for that day.
+*/
+function addSalesToEmployeeTimecards(aDate) {
+
+	//define local variales
+	var self = this;
+
+	//format the date
+	aDate = self._defineDate(aDate);
+
+	//return async work
+	return new Promise(function(resolve, reject) {
+	
+		Promise.all([
+			fb.downloadTimecards(),
+			fb.downloadEmployeesList(),
+			square.downloadDailySales(aDate)
+		])
+		.then(function success(requiredTimecardData) {
+
+			//upon success, parse the timesheet
+			var newTimecards = square.parseDailyTxToTc(requiredTimecardData[0], requiredTimecardData[1], requiredTimecardData[2], aDate);
+			
+			console.log(newTimecards);
+			//when the newTimecards come back, save them
+			fb._write('timecards', newTimecards)
+			.then(function success(s) {
+				resolve(s);
+			}).catch(function error(e) {
+				reject(e);
+			});
+
+		}).catch(function error(e) {
+			//if there was an error pass it back
+			reject(e);
+		});
+
+	});
+
+};
+
+/*
+*
+*
+*
+*	Total_Shift_Hours - Aquired from Sling API	
+*	Total_Shift_Sales - Aquired from Square API	
+*	Base_Pay_Rate - Aquired from Ah-Nuts Database
+*	Commission_Factor (2,752) - Aquired from Ah-Nuts Databse
+*	Average_Sales_Per_Hour = Total_Shift_Sales / Total_Shift_Hours
+*	Shift_Commission_Multiplier = Average_Sales_Per_Hour / Commission_Factor
+*	Hourly_Commission_Rate = Shift_Commission_Multiplier * Average_Sales_Per_Hour
+*	Average_Hourly_Earnings = Hourly_Commission_Rate + Base_Pay_Rate
+*	Total_Shift_Earnings = Average_Hourly_Earnings * Total_Shift_Hours
+*/
+function processTCAndSalesData() {
+	//define local variales
+	var self = this;
+
+	//return async work
+	return new Promise(function(resolve, reject) {
+	
+		Promise.all([
+			fb.downloadTimecards(),
+			fb.downloadEmployeesList()//,
+			//square.downloadDailySales(aDate)
+		])
+		.then(function success(requiredTimecardData) {
+
+			//define local variables
+			var newTimecards = requiredTimecardData[0];
+			var empList = requiredTimecardData[1];
+
+			//iterate through each timecard
+			Object.keys(newTimecards).forEach(function(employee) {
+
+				//iterate through each work date
+				Object.keys(newTimecards[employee]).forEach(function(wkDate) {
+
+					//notify us of progress
+					//console.log(employee, wkDate);
+
+					if(employee != "templates" && employee != "training") {
+						//1. Base_Pay_Rate - Aquired from Ah-Nuts Database
+						//	 Commission_Factor (2,752) - Aquired from Ah-Nuts Databse
+						newTimecards[employee][wkDate]['base_pay_rate'] = empList[employee].deal.hourly_rate;
+						newTimecards[employee][wkDate]['commission_factor'] = empList[employee].deal.commission_factor;
+
+						//2. Total_Shift_Hours - Aquired from Sling API
+						newTimecards[employee][wkDate]['total_shift_hours'] = sling.calcHrsWorked(newTimecards[employee][wkDate]);
+					
+
+						//3. if sales data is available calcuate the gross sales, net sales
+						if(newTimecards[employee][wkDate].sales != undefined) {
+							//gross sales
+							newTimecards[employee][wkDate]['gross_sales'] = square.calcDailyGrossSales(newTimecards[employee][wkDate].sales);
+
+							//net sales
+							newTimecards[employee][wkDate]['net_sales'] = square.calcDailyNetSales(newTimecards[employee][wkDate].sales);
+						
+							//tips
+							newTimecards[employee][wkDate]['days_tips'] = square.calcTips(newTimecards[employee][wkDate].sales);
+
+							//4. Average_Sales_Per_Hour = Total_Shift_Sales / Total_Shift_Hours
+							newTimecards[employee][wkDate]['average_sales_per_hour'] = newTimecards[employee][wkDate]['net_sales'] / newTimecards[employee][wkDate]['total_shift_hours'] ;
+
+							//5. Shift_Commission_Multiplier = Average_Sales_Per_Hour / Commission_Factor
+							newTimecards[employee][wkDate]['shift_commission_multiplier'] = (newTimecards[employee][wkDate]['average_sales_per_hour'] / 100) / newTimecards[employee][wkDate]['commission_factor'];
+
+							//6. Hourly_Commission_Rate = Shift_Commission_Multiplier * Average_Sales_Per_Hour
+							newTimecards[employee][wkDate]['hrly_commission_rate'] = newTimecards[employee][wkDate]['shift_commission_multiplier'] * newTimecards[employee][wkDate]['average_sales_per_hour'];
+
+							//7. Average_Hourly_Earnings = Hourly_Commission_Rate + Base_Pay_Rate
+							newTimecards[employee][wkDate]['average_hrly_earnings'] = newTimecards[employee][wkDate]['hrly_commission_rate'] + newTimecards[employee][wkDate]['base_pay_rate'];
+
+							//8. Total_Shift_Earnings = Average_Hourly_Earnings * Total_Shift_Hours
+							newTimecards[employee][wkDate]['total_hrly_earnings'] = newTimecards[employee][wkDate]['average_hrly_earnings'] * newTimecards[employee][wkDate]['total_shift_hours'];
+							
+							//9. Total Shift Earnings
+							newTimecards[employee][wkDate]['total_shift_earnings'] = newTimecards[employee][wkDate]['total_hrly_earnings'] + newTimecards[employee][wkDate]['days_tips'];
+
+						} else {
+							//if there is no sales data
+							//1. Average_Hourly_Earnings = base_pay_rate
+							newTimecards[employee][wkDate]['average_hrly_earnings'] = newTimecards[employee][wkDate]['base_pay_rate'];
+
+							//2. net_sales
+							newTimecards[employee][wkDate]['net_sales'] = 0;
+
+							//3. average_sales_per_hour
+							newTimecards[employee][wkDate]['average_sales_per_hour'] = 0;
+
+							//4. days_tips
+							newTimecards[employee][wkDate]['days_tips'] = 0;
+
+							//5. total_shift_earnings
+							newTimecards[employee][wkDate]['total_shift_earnings'] = newTimecards[employee][wkDate]['average_hrly_earnings'] * newTimecards[employee][wkDate]['total_shift_hours'];
+						};
+
+					};
+
+				});
+
+			});
+
+			console.log(newTimecards);
+
+			//when the newTimecards come back, save them
+			fb._write('timecards', newTimecards)
+			.then(function success(s) {
+				resolve(s);
+			}).catch(function error(e) {
+				reject(e);
+			});
+
+		}).catch(function error(e) {
+			//if there was an error pass it back
+			reject(e);
+		});
+
+	});
+
+};
+
+/*
+*	Distribute Daily Sales
+*
+*	This function takes the
+*
+*/
+function distributeDailySales(aDate) {
+	//define local variales
+	var self = this;
+
+	//format the date
+	var aDateSplit = aDate.split('-');
+	var dateYr = aDateSplit[0];
+	var dateMo = aDateSplit[1];
+	var dateDy = aDateSplit[2];
+	aDate = dateYr + "_" + dateMo + "_" + dateDy;
+
+	//return async work
+	return new Promise(function(resolve, reject) {
+	
+		Promise.all([
+			fb.downloadTimecards(),
+			fb.downloadEmployeesList()//,
+			//square.downloadDailySales(aDate)
+		])
+		.then(function success(requiredTimecardData) {
+
+			//split the promises apart
+			var allTimecards = requiredTimecardData[0];
+			var empList = requiredTimecardData[1];
+
+			//iterate through each of the timecards by employee first
+			Object.keys(allTimecards).forEach(function(employee) {
+
+				console.log(employee);
+				if(employee != 'training' && employee != 'templates') {
+					
+					//then iterate through the days
+					Object.keys(allTimecards[employee]).forEach(function(wkDate) {
+
+						//only access the desired day
+						if(wkDate == aDate) {
+
+							//add the employee name to the model
+							if(empList[employee] != undefined) {
+								allTimecards[employee][wkDate]['name'] = empList[employee].name.first
+							};
+
+							//1. convert the report model into an email object
+							var employeeEmail = rc.employeeDailySalesReport(allTimecards[employee][wkDate], wkDate);
+
+							console.log(employeeEmail);
+
+							//console.log(employee, empList[employee].contact.email, empList[employee].supervisors);
+							//2. send the email object to the employee
+							mc.send(empList[employee].contact.email, 'ian@ah-nuts.com', empList[employee].supervisors, employeeEmail.subject, employeeEmail.msgBody);
+
+						};
+
+					});
+				}
+
 			});
 
 		}).catch(function error(e) {

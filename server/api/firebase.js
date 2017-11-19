@@ -24,7 +24,8 @@ var firebase = {
 	_read: _read,
   _write: _write,
   downloadEmployeesList: downloadEmployeesList,
-  downloadTimecards: downloadTimecards
+  downloadTimecards: downloadTimecards,
+  downloadLocations: downloadLocations
 };
 
 //read from the database
@@ -108,6 +109,30 @@ function downloadTimecards() {
 
     //read employees list
     self._read('timecards')
+    .then(function success(s) {
+      resolve(s);
+    }).catch(function error(e) {
+      reject(e);
+    });
+
+  });
+
+};
+
+/*
+*   download Employees List
+*
+*/
+function downloadLocations() {
+
+  //define local variables
+  var self = this;
+
+  //return async work
+  return new Promise(function(resolve, reject) {
+
+    //read employees list
+    self._read('locations')
     .then(function success(s) {
       resolve(s);
     }).catch(function error(e) {
